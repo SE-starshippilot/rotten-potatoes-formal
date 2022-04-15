@@ -1,0 +1,14 @@
+{
+  "name": "rotten-potatoes",
+  "version": "1.0.0",
+  "description": "CSC3170 group project",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "warin",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7"
+  }
+}
