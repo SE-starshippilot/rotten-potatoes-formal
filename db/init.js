@@ -1,5 +1,4 @@
-const query = require('./db')
-const config = require('./config')
+const query = require('./query')
 
 const sqlDropTables = `
     drop table if exists users
@@ -16,7 +15,10 @@ const init = async (reset) => {
     try {
         if (reset) await query(sqlDropTables)
         await query(sqlCreateTableUsers)
-        await query(`insert into users(name) values('zsf'), ('zby'), ('haha')`)
+        for (let i = 0; i < 15; i++) {
+            let name = 'zsf' + i
+            await query(`insert into users(name) value('${name}')`)
+        }
     } catch(e) {
         console.log(e)
     }

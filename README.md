@@ -38,10 +38,14 @@ Simply log into the mysql on your machine and run sql: `create database rotten_p
 
 ## Router
 
-* /
-    * /index.html
-* /api
-    * /user
-        * /:id
+* static files
+    * `get:/index.html` or `get:/`:
+    serve the html
 
-Example: after successfully running the server, try visit "localhost:3000/api/user/1" and you will get "{"id":1,"name":"zsf"}"
+* user
+    * `post:/api/user`: 
+    request: `{name: 'zsf'}`
+    * `delete:/api/user/:id`
+    * `put:/api/user/:id`: 
+    request: `{name: 'zsf'}`
+    * `get:/`
