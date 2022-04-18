@@ -1,9 +1,6 @@
-const express = require('express')
 const query = require('../db/query')
 
-const router = express.Router()
-
-router.post('/', async (req, res) => {
+const addUser = async (req, res) => {
     try {
         let name = req.body.name
         await query(`insert into users(name) value('${name}')`)
@@ -16,9 +13,9 @@ router.post('/', async (req, res) => {
             status: 1,
         })
     }
-})
+}
 
-router.delete('/:id', async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         let id = req.params.id
         await query(`delete from users where id=${id}`)
@@ -31,9 +28,9 @@ router.delete('/:id', async (req, res) => {
             status: 1,
         })
     }
-})
+}
 
-router.put('/:id', async (req, res) => {
+const modifyUser = async (req, res) => {
     try {
         let id = req.params.id
         let name = req.body.name
@@ -47,9 +44,9 @@ router.put('/:id', async (req, res) => {
             status: 1,
         })
     }
-})
+}
 
-router.get('/', async (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
         let limit = req.query.perPage
         let offset = (req.query.page - 1) * req.query.perPage
@@ -69,6 +66,11 @@ router.get('/', async (req, res) => {
             status: 1,
         })
     }
-})
+}
 
-module.exports = router
+module.exports = {
+    addUser,
+    deleteUser,
+    modifyUser,
+    getAllUsers
+}

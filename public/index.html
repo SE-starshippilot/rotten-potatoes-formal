@@ -33,8 +33,8 @@
         let amis = amisRequire('amis/embed');
 		const match = amisRequire('path-to-regexp').match;
 		const history = History.createHashHistory();
-
-         const app = {
+    
+    const app = {
 			"type": "app",
 			"brandName": "Rotten Potatoes",
 			"pages": [
@@ -44,6 +44,82 @@
 				},
 				{
 					"children": [
+            {
+              "url": "login",
+              "visible": false,
+              "schema": {
+                "type": "form",
+                "title": "login",
+                "api": "post:/api/login",
+                onFinished: ret => {
+                  localStorage.setItem("token", ret.token)
+                },
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "name",
+                    "label": "Name",
+                  },
+                  {
+                    "type": "input-password",
+                    "name": "password",
+                    "label": "Password"
+                  }
+                ],
+                "actions": [
+                  {
+                    "label": "No account? Register!",
+                    "type": "button",
+                    "level": "link",
+                    onClick: () => {
+                      history.push('/register')
+                    }
+                  },
+                  {
+                    "type": "submit",
+                    "label": "login"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "register",
+              "visible": false,
+              "schema": {
+                "type": "form",
+                "title": "register",
+                "api": "post:/api/register",
+                onFinished: ret => {
+                  history.push('/login')
+                },
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "name",
+                    "label": "Name",
+                  },
+                  {
+                    "type": "input-password",
+                    "name": "password",
+                    "label": "Password"
+                  }
+                ],
+                "actions": [
+                  {
+                    "label": "Have an account? Login!",
+                    "type": "button",
+                    "level": "link",
+                    onClick: () => {
+                      history.push('/login')
+                    }
+                  },
+                  {
+                    "type": "submit",
+                    "label": "register"
+                  }
+                ]
+              }
+            },
 						{
 							"label": "user",
 							"url": "user",
@@ -219,6 +295,18 @@
 			  location: history.location
 			},
 			{
+        requestAdaptor(api) {
+          return {
+            ...api,
+            "headers": {
+              "authorization": localStorage.getItem("token")
+            }
+          }
+        },
+        responseAdaptor(payload, response) {
+          if (response.status === 401) history.push('/login')
+          return response
+        },
 			  // watchRouteChange: fn => {
 			  //   return history.listen(fn);
 			  // },

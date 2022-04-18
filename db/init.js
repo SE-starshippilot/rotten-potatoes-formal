@@ -7,7 +7,8 @@ const sqlDropTables = `
 const sqlCreateTableUsers = `
     create table if not exists users(
         id int auto_increment primary key,
-        name varchar(20) not null unique
+        name varchar(20) not null unique,
+        password varchar(20) not null
     )engine=innodb default charset=utf8
 `
 
@@ -17,7 +18,7 @@ const init = async (reset) => {
         await query(sqlCreateTableUsers)
         for (let i = 0; i < 15; i++) {
             let name = 'zsf' + i
-            await query(`insert into users(name) value('${name}')`)
+            await query(`insert into users(name, password) value('${name}', '${i}')`)
         }
     } catch(e) {
         console.log(e)

@@ -8,6 +8,7 @@
   "author": "warin",
   "dependencies": {
     "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "path": "^0.12.7"
   }
