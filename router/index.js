@@ -1,6 +1,6 @@
 const express = require('express')
 const { login, register, auth} = require('../services/auth')
-const { addUser, deleteUser, modifyUser, getAllUsers } = require('../services/user')
+const { getUserInfo, changeUserName, changeUserPassword } = require('../services/user')
 
 const router = express.Router()
 
@@ -9,9 +9,8 @@ router.post('/register', register)
 
 router.use(auth)
 
-router.post('/user/', addUser)
-router.delete('/user/:id', deleteUser)
-router.put('/user/:id', modifyUser)
-router.get('/user/', getAllUsers)
+router.get('/user/info', getUserInfo)
+router.post('/user/change-name', changeUserName)
+router.post('/user/change-password', changeUserPassword)
 
 module.exports = router

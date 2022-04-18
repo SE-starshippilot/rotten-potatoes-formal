@@ -11,13 +11,14 @@ const login = async(req, res) => {
         res.json({
             status: 0,
             data: {
-                token: signToken({ ...user[0] }, '1h')
+                token: signToken({ user_id: user[0].id }, '1h')
             }
         })
     } catch(e) {
         console.log(e)
         res.json({
             status: 1,
+            msg: e
         })
     }
 }
@@ -37,15 +38,17 @@ const register = async(req, res) => {
         console.log(e)
         res.json({
             status: 1,
+            msg: e
         })
     }
 }
 
-const auth = async (req, res, next) => {
+const auth = async(req, res, next) => {
     try {
         let token = req.headers['authorization']
         if (!token) throw 'no token attached'
-        req.user = await verifyToken(token)
+        let user = await verifyToken(token)
+        req.user_id = user.user_id
         next()
     } catch(e) {
         res.json({

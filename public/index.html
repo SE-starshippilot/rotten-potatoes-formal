@@ -33,7 +33,7 @@
         let amis = amisRequire('amis/embed');
 		const match = amisRequire('path-to-regexp').match;
 		const history = History.createHashHistory();
-    
+
     const app = {
 			"type": "app",
 			"brandName": "Rotten Potatoes",
@@ -121,85 +121,6 @@
               }
             },
 						{
-							"label": "user",
-							"url": "user",
-							"schema": {
-								"type": "page",
-								"title": "user",
-								"body": [
-									{
-										"type": "crud",
-										"api": "get:/api/user",
-										"syncLocation": false,
-										"columns": [
-											{
-												"name": "id",
-												"label": "ID"
-											},
-											{
-												"name": "name",
-												"label": "Name"
-											},
-											{
-												"type": "operation",
-												"label": "operation",
-												"buttons": [
-													{
-														"label": "modify",
-														"type": "button",
-														"actionType": "drawer",
-														"drawer": {
-															"title": "modify",
-															"body": {
-																"type": "form",
-																"api": "put:/api/user/${id}",
-																"body": [
-																	{
-																		"type": "input-text",
-																		"name": "name",
-																		"label": "Name"
-																	}
-																]
-															}
-														}
-													},
-													{
-														"label": "delete",
-														"type": "button",
-														"level": "danger",
-														"actionType": "ajax",
-														"confirmText": "confirm delete?",
-														"api": "delete:/api/user/${id}"
-													}
-												]
-											  }
-										]
-									},
-									{
-										"label": "add",
-										"type": "button",
-										"actionType": "dialog",
-										"level": "primary",
-										"className": "m-b-sm",
-										"dialog": {
-											"title": "add",
-											"body": {
-												"type": "form",
-												"api": "post:/api/user",
-												"body": [
-													{
-													"type": "input-text",
-													"name": "name",
-													"label": "Name"
-													}
-												]
-											}
-										}
-									}
-								]
-							}
-						},
-						{
 							"label": "movie",
 							"url": "movie",
 							"schema": {
@@ -222,7 +143,76 @@
 								"type": "page",
 								"title": "comment"
 							}
-						}
+						},
+            {
+							"label": "me",
+							"url": "me",
+							"schema": {
+                "type": "page",
+                "title": "me",
+                "initApi": "get:/api/user/info",
+                "body": [
+                  {
+                    "type": "wrapper",
+                    "body": "Name: ${name}"
+                  },
+                  {
+                    "type": "button-group",
+                    "buttons": [
+                      {
+                        "label": "change name",
+                        "type": "button",
+                        "actionType": "dialog",
+                        "dialog": {
+                          "title": "change name",
+                          "body": {
+                            "type": "form",
+                            "api": "post:/api/user/change-name",
+                            onFinished: () => {
+                              window.location.reload()
+                            },
+                            "body": [
+                              {
+                                "type": "input-text",
+                                "name": "new_name",
+                                "label": "New Name",
+                                "required": true
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "label": "change password",
+                        "type": "button",
+                        "actionType": "dialog",
+                        "dialog": {
+                          "title": "change password",
+                          "body": {
+                            "type": "form",
+                            "api": "post:/api/user/change-password",
+                            "body": [
+                              {
+                                "type": "input-password",
+                                "name": "old_password",
+                                "label": "Old",
+                                "required": true,
+                              },
+                              {
+                                "type": "input-password",
+                                "name": "new_password",
+                                "label": "New",
+                                "required": true,
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+						},
 					]
 				}
 			],
@@ -292,10 +282,12 @@
 			'#root',
 			app,
 			{
-			  location: history.location
+			  location: history.location,
+        locale: 'en-US'
 			},
 			{
         requestAdaptor(api) {
+          console.log(api)
           return {
             ...api,
             "headers": {
@@ -304,6 +296,7 @@
           }
         },
         responseAdaptor(payload, response) {
+          console.log(response)
           if (response.status === 401) history.push('/login')
           return response
         },

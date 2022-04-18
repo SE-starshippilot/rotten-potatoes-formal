@@ -36,16 +36,7 @@ Simply log into the mysql on your machine and run sql: `create database rotten_p
 * Run the server: `npm start`
 * The server will be running at: "localhost:3000" (visit this url in your browser)
 
-## Router
-
-* static files
-    * `get:/index.html` or `get:/`:
-    serve the html
-
-* user
-    * `post:/api/user`: 
-    request: `{name: 'zsf'}`
-    * `delete:/api/user/:id`
-    * `put:/api/user/:id`: 
-    request: `{name: 'zsf'}`
-    * `get:/`
+## Learn
+Technology stack used in this project:
+* Frontend: [amis](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index)
+* Backend: [express](https://expressjs.com)
