@@ -146,7 +146,34 @@ const app = {
                 },
                 {
                   type: "html",
-                  html: "<h2>Introduction</h2><p>${introduction}</p>"
+                  html: "<h2>Introduction</h2>"
+                },
+                {
+                  type: "wrapper",
+                  body: "${introduction}"
+                },
+                {
+                  type: "divider"
+                },
+                {
+                  type: "html",
+                  html: "<h2>Actors</h2>"
+                },
+                {
+                  type: "cards",
+                  source: "${actors}",
+                  card: {
+                    className: "flex items-center",
+                    header: {
+                      avatar: "${photo_url}",
+                    },
+                    body: "${name}",
+                    itemAction: {
+                      type: "button",
+                      actionType: "link",
+                      url: "/actor/${id}"
+                    }
+                  }
                 }
               ]
             }
@@ -209,7 +236,34 @@ const app = {
                 },
                 {
                   type: "html",
-                  html: "<h2>Introduction</h2><p>${introduction}</p>"
+                  html: "<h2>Introduction</h2>"
+                },
+                {
+                  type: "wrapper",
+                  body: "${introduction}"
+                },
+                {
+                  type: "divider"
+                },
+                {
+                  type: "html",
+                  html: "<h2>Movies</h2>"
+                },
+                {
+                  type: "cards",
+                  source: "${movies}",
+                  card: {
+                    className: "flex items-center",
+                    header: {
+                      avatar: "${cover_url}",
+                    },
+                    body: "${name}",
+                    itemAction: {
+                      type: "button",
+                      actionType: "link",
+                      url: "/movie/${id}"
+                    }
+                  }
                 }
               ]
             }

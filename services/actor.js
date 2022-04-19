@@ -24,10 +24,12 @@ const listActors = async(req, res) => {
 
 const getActorDetail = async(req, res) => {
     try {
-        let actor = await query(`select * from actors where id=${req.params.id}`)
+        let actor_id = req.params.id
+        let [ actor ] = await query(`select * from actors where id=${actor_id}`)
+        actor.movies = await query(`select m.id, m.name, m.cover_url from movies as m inner join characters as c on m.id=c.movie_id where c.actor_id=${actor_id}`)
         res.json({
             status: 0,
-            data: actor[0]
+            data: actor
         })
     } catch(e) {
         console.log(e)

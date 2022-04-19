@@ -47,11 +47,14 @@ Technology stack used in this project:
 * login/register/personal center
 * movie list and detail
 * actor list and detail
+* show actors of a movie under the movie's detail page
+* show movies that an actor performed under the actor's detail page
 
 2. ToDo: 
 * comment list
 * show comments on a movie under the movie's detail page
-* show actors of a movie under the movie's detail page
-* show movies that an actor performed under the actor's detail page
 * user detail page
 * show comments that a user commented under the user's detail page
+
+3. Problem:
+* actors of a movie/movies of an actor under detail page not on the same line
