@@ -35,8 +35,23 @@ Simply log into the mysql on your machine and run sql: `create database rotten_p
 * Install dependencies: `npm install`
 * Run the server: `npm start`
 * The server will be running at: "localhost:3000" (visit this url in your browser)
+* Login the app with default user with name "root" and password "123"
 
 ## Learn
 Technology stack used in this project:
 * Frontend: [amis](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index)
 * Backend: [express](https://expressjs.com)
+
+## Progress
+1. Done:
+* login/register/personal center
+* movie list and detail
+* actor list and detail
+
+2. ToDo: 
+* comment list
+* show comments on a movie under the movie's detail page
+* show actors of a movie under the movie's detail page
+* show movies that an actor performed under the actor's detail page
+* user detail page
+* show comments that a user commented under the user's detail page

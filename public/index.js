@@ -94,7 +94,62 @@ const app = {
           url: "movie",
           schema: {
             type: "page",
-            title: "movie"
+            title: "movie",
+            body: {
+              type: "crud",
+              api: "get:/api/movie/list",
+              syncLocation: false,
+              mode: "cards",
+              placeholder: "no movie",
+              card: {
+                className: "flex items-center",
+                header: {
+                  avatar: "${cover_url}",
+                },
+                body: "${name}",
+                itemAction: {
+                  type: "button",
+                  actionType: "link",
+                  url: "/movie/${id}"
+                }
+              }
+            }
+          }
+        },
+        {
+          url: "/movie/:id",
+          visible: false,
+          schema: {
+            type: "page",
+            body: {
+              type: "service",
+              api: "get:/api/movie/detail/${params.id}",
+              body: [
+                {
+                  type: "wrapper",
+                  className: "flex",
+                  body: [
+                    {
+                      type: "image",
+                      src: "${cover_url}",
+                      thumbMode: "cover"
+                    },
+                    {
+                      type: "html",
+                      className: "ml-8",
+                      html: "<h1>${name}</h1>"
+                    }
+                  ]
+                },
+                {
+                  type: "divider"
+                },
+                {
+                  type: "html",
+                  html: "<h2>Introduction</h2><p>${introduction}</p>"
+                }
+              ]
+            }
           }
         },
         {
@@ -102,7 +157,62 @@ const app = {
           url: "actor",
           schema: {
             type: "page",
-            title: "actor"
+            title: "actor",
+            body: {
+              type: "crud",
+              api: "get:/api/actor/list",
+              syncLocation: false,
+              mode: "cards",
+              placeholder: "no actor",
+              card: {
+                className: "flex items-center",
+                header: {
+                  avatar: "${photo_url}",
+                },
+                body: "${name}",
+                itemAction: {
+                  type: "button",
+                  actionType: "link",
+                  url: "/actor/${id}"
+                }
+              }
+            }
+          }
+        },
+        {
+          url: "/actor/:id",
+          visible: false,
+          schema: {
+            type: "page",
+            body: {
+              type: "service",
+              api: "get:/api/actor/detail/${params.id}",
+              body: [
+                {
+                  type: "wrapper",
+                  className: "flex",
+                  body: [
+                    {
+                      type: "image",
+                      src: "${photo_url}",
+                      thumbMode: "cover"
+                    },
+                    {
+                      type: "html",
+                      className: "ml-8",
+                      html: "<h1>${name}</h1>"
+                    }
+                  ]
+                },
+                {
+                  type: "divider"
+                },
+                {
+                  type: "html",
+                  html: "<h2>Introduction</h2><p>${introduction}</p>"
+                }
+              ]
+            }
           }
         },
         {
@@ -119,67 +229,70 @@ const app = {
           schema: {
             type: "page",
             title: "me",
-            initApi: "get:/api/user/info",
-            body: [
-              {
-                type: "wrapper",
-                body: "Name: ${name}"
-              },
-              {
-                type: "button-group",
-                buttons: [
-                  {
-                    label: "change name",
-                    type: "button",
-                    actionType: "dialog",
-                    dialog: {
-                      title: "change name",
-                      body: {
-                        type: "form",
-                        api: "post:/api/user/change-name",
-                        onFinished: () => {
-                          window.location.reload()
-                        },
-                        body: [
-                          {
-                            type: "input-text",
-                            name: "new_name",
-                            label: "New Name",
-                            required: true
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    label: "change password",
-                    type: "button",
-                    actionType: "dialog",
-                    dialog: {
-                      title: "change password",
-                      body: {
-                        type: "form",
-                        api: "post:/api/user/change-password",
-                        body: [
-                          {
-                            type: "input-password",
-                            name: "old_password",
-                            label: "Old",
-                            required: true
+            body: {
+              type: "service",
+              api: "get:/api/user/info",
+              body: [
+                {
+                  type: "wrapper",
+                  body: "Name: ${name}"
+                },
+                {
+                  type: "button-group",
+                  buttons: [
+                    {
+                      label: "change name",
+                      type: "button",
+                      actionType: "dialog",
+                      dialog: {
+                        title: "change name",
+                        body: {
+                          type: "form",
+                          api: "post:/api/user/change-name",
+                          onFinished: () => {
+                            window.location.reload()
                           },
-                          {
-                            type: "input-password",
-                            name: "new_password",
-                            label: "New",
-                            required: true
-                          }
-                        ]
+                          body: [
+                            {
+                              type: "input-text",
+                              name: "new_name",
+                              label: "New Name",
+                              required: true
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      label: "change password",
+                      type: "button",
+                      actionType: "dialog",
+                      dialog: {
+                        title: "change password",
+                        body: {
+                          type: "form",
+                          api: "post:/api/user/change-password",
+                          body: [
+                            {
+                              type: "input-password",
+                              name: "old_password",
+                              label: "Old",
+                              required: true
+                            },
+                            {
+                              type: "input-password",
+                              name: "new_password",
+                              label: "New",
+                              required: true
+                            }
+                          ]
+                        }
                       }
                     }
-                  }
-                ]
-              }
-            ]
+                  ]
+                }
+              ]
+            }
           }
         }
       ]
