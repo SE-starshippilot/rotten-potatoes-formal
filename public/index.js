@@ -163,11 +163,12 @@ const app = {
                   type: "cards",
                   source: "${actors}",
                   card: {
-                    className: "flex items-center",
                     header: {
+                      className: "flex flex-col items-center",
                       avatar: "${photo_url}",
+                      title: "${name}",
+                      subTitle: "act ${character_name}"
                     },
-                    body: "${name}",
                     itemAction: {
                       type: "button",
                       actionType: "link",
@@ -253,11 +254,12 @@ const app = {
                   type: "cards",
                   source: "${movies}",
                   card: {
-                    className: "flex items-center",
                     header: {
+                      className: "flex flex-col items-center",
                       avatar: "${cover_url}",
+                      title: "${name}",
+                      subTitle: "act ${character_name}"
                     },
-                    body: "${name}",
                     itemAction: {
                       type: "button",
                       actionType: "link",

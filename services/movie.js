@@ -26,7 +26,7 @@ const getMovieDetail = async(req, res) => {
     try {
         let movie_id = req.params.id
         let [ movie ] = await query(`select * from movies where id=${movie_id}`)
-        movie.actors = await query(`select a.id, a.name, a.photo_url as photo_url from actors as a inner join characters as c on a.id=c.actor_id where c.movie_id=${movie_id}`)
+        movie.actors = await query(`select a.id, a.name, a.photo_url, c.character_name from actors as a inner join characters as c on a.id=c.actor_id where c.movie_id=${movie_id}`)
         res.json({
             status: 0,
             data: movie
