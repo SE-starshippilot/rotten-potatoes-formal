@@ -56,13 +56,25 @@ Technology stack used in this project:
 
 2. ToDos: 
 * **important**: collect data!!!
-* distinguish various cast members: director, actor, ...
-* comment on cast members (not necessary)
+* character list page
+* distinguish various types of actors (movie_type): director, actor, ...
+* distinguish various types of movies (actor_type): action, horror, history, ...
+* comment on actors
+* like, dislike comment
+* sort
+    * movies: by release_date, average rate
+    * actors: by birth_date (i.e. age), experience (number of movies acted)
+    * comments: by comment_date, like, dislike
+* filter
+    * movies: by movie_type, which decade (80s, 90s)
+    * actors: by actor_type, which decade (80s, 90s)
+* judge a user's preferences (e.g. prefer horror movies)
+* recommendation system
 * pagination on comment list page
-* no prompt message/wrong prompt message
-* release_date of movie and birth_date of actor
+* release_date, average rate of movie and birth_date of actor not shown in frontend yet
 
 3. Problems:
+* no prompt message/wrong prompt message after submitting a form
 * CSS problem: actors of a movie/movies of an actor under detail page not on the same line
 * CSS problem: instead of ugly "go to user homepage", better to go to homepage once click on user's avatar
 * ugly code problem: should get rid of all these catch
