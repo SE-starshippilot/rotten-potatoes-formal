@@ -27,12 +27,14 @@ const app = {
               {
                 type: "input-text",
                 name: "name",
-                label: "Name"
+                label: "Name",
+                required: true
               },
               {
                 type: "input-password",
                 name: "password",
-                label: "Password"
+                label: "Password",
+                required: true
               }
             ],
             actions: [
@@ -65,12 +67,14 @@ const app = {
               {
                 type: "input-text",
                 name: "name",
-                label: "Name"
+                label: "Name",
+                required: true
               },
               {
                 type: "input-password",
                 name: "password",
-                label: "Password"
+                label: "Password",
+                required: true
               }
             ],
             actions: [
@@ -117,7 +121,7 @@ const app = {
           }
         },
         {
-          url: "/movie/:id",
+          url: "movie/:id",
           visible: false,
           schema: {
             type: "page",
@@ -127,18 +131,55 @@ const app = {
               body: [
                 {
                   type: "wrapper",
-                  className: "flex",
+                  className: "flex flex-row justify-between items-center",
                   body: [
                     {
-                      type: "image",
-                      src: "${cover_url}",
-                      thumbMode: "cover"
+                      type: "wrapper",
+                      className: "flex flex-row justify-between items-center",
+                      body: [
+                        {
+                          type: "image",
+                          src: "${cover_url}",
+                          thumbMode: "cover",
+                          enlargeAble: true
+                        },
+                        {
+                          type: "html",
+                          className: "ml-8",
+                          html: "<h1>${name}</h1>"
+                        },
+                      ]
                     },
                     {
-                      type: "html",
-                      className: "ml-8",
-                      html: "<h1>${name}</h1>"
-                    }
+                      label: "add comment",
+                      type: "button",
+                      actionType: "dialog",
+                      dialog: {
+                        title: "add comment",
+                        body: {
+                          type: "form",
+                          api: "post:/api/comment/add-to-movie/${params.id}",
+                          onFinished: () => {
+                            window.location.reload()
+                          },
+                          body: [
+                            {
+                              type: "input-rating",
+                              name: "rate",
+                              label: "Rate",
+                              count: 5,
+                              required: true
+                            },
+                            {
+                              type: "input-text",
+                              name: "content",
+                              label: "Comment",
+                              required: true
+                            }
+                          ]
+                        }
+                      }
+                    },
                   ]
                 },
                 {
@@ -175,6 +216,54 @@ const app = {
                       url: "/actor/${id}"
                     }
                   }
+                },
+                {
+                  type: "divider"
+                },
+                {
+                  type: "html",
+                  html: "<h2>Comments</h2>"
+                },
+                {
+                  type: "each",
+                  source: "${comments}",
+                  items: {
+                    type: "panel",
+                    title: {
+                      type: "wrapper",
+                      className: "flex justify-between items-center",
+                      body: [
+                        {
+                          type: "avatar",
+                          src: "${avatar_url}",
+                        },
+                        {
+                          type: "wrapper",
+                          body: "${name}"
+                        },
+                        {
+                          type: "wrapper",
+                          body: "${comment_time}"
+                        },
+                        {
+                          type: "action",
+                          label: "go to user homepage",
+                          actionType: "link",
+                          link: "/user/${id}"
+                        }
+                      ]
+                    },
+                    body: [
+                      {
+                        type: "wrapper",
+                        body: "Rate: ${rate}"
+                      },
+                      {
+                        type: "wrapper",
+                        body: "Comment: ${content}"
+                      }
+                    ]
+                  }
                 }
               ]
             }
@@ -208,7 +297,7 @@ const app = {
           }
         },
         {
-          url: "/actor/:id",
+          url: "actor/:id",
           visible: false,
           schema: {
             type: "page",
@@ -223,7 +312,8 @@ const app = {
                     {
                       type: "image",
                       src: "${photo_url}",
-                      thumbMode: "cover"
+                      thumbMode: "cover",
+                      enlargeAble: true
                     },
                     {
                       type: "html",
@@ -276,7 +366,84 @@ const app = {
           url: "comment",
           schema: {
             type: "page",
-            title: "comment"
+            title: "comment",
+            body: {
+              type: "service",
+              api: "get:/api/comment/list",
+              body: {
+                type: "each",
+                source: "${items}",
+                items: {
+                  type: "panel",
+                  title: {
+                    type: "wrapper",
+                    className: "flex justify-between items-center",
+                    body: [
+                      {
+                        type: "wrapper",
+                        className: "flex flex-col items-center",
+                        body: [
+                          {
+                            type: "avatar",
+                            src: "${avatar_url}"
+                          },
+                          {
+                            type: "wrapper",
+                            body: "${user_name}"
+                          }
+                        ]
+                      },
+                      {
+                        type: "wrapper",
+                        className: "flex flex-col items-center",
+                        body: [
+                          {
+                            type: "avatar",
+                            src: "${cover_url}"
+                          },
+                          {
+                            type: "wrapper",
+                            body: "${movie_name}"
+                          }
+                        ]
+                      },
+                      {
+                        type: "wrapper",
+                        body: "${comment_time}"
+                      },
+                      {
+                        type: "wrapper",
+                        className: "flex flex-col items-center",
+                        body: [
+                          {
+                            type: "action",
+                            label: "go to user homepage",
+                            actionType: "link",
+                            link: "/user/${user_id}"
+                          },
+                          {
+                            type: "action",
+                            label: "go to movie detail page",
+                            actionType: "link",
+                            link: "/movie/${movie_id}"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  body: [
+                    {
+                      type: "wrapper",
+                      body: "Rate: ${rate}"
+                    },
+                    {
+                      type: "wrapper",
+                      body: "Comment: ${content}"
+                    }
+                  ]
+                }
+              }
+            }
           }
         },
         {
@@ -287,15 +454,44 @@ const app = {
             title: "me",
             body: {
               type: "service",
-              api: "get:/api/user/info",
+              api: "get:/api/user/me/info",
               body: [
                 {
+                  type: "image",
+                  src: "${avatar_url}",
+                  thumbMode: "cover",
+                  enlargeAble: true
+                },
+                {
                   type: "wrapper",
-                  body: "Name: ${name}"
+                  className: "text-2xl font-bold",
+                  body: "${name}"
                 },
                 {
                   type: "button-group",
                   buttons: [
+                    {
+                      label: "change avatar",
+                      type: "button",
+                      actionType: "dialog",
+                      dialog: {
+                        title: "change avatar",
+                        body: {
+                          type: "form",
+                          api: "post:/api/user/me/change-avatar",
+                          onFinished: () => {
+                            window.location.reload()
+                          },
+                          body: {
+                            type: "input-file",
+                            label: "avatar",
+                            name: "avatar",
+                            accept: ".png,.jpg,.jpeg",
+                            asBlob: true
+                          }
+                        }
+                      }
+                    },
                     {
                       label: "change name",
                       type: "button",
@@ -304,7 +500,7 @@ const app = {
                         title: "change name",
                         body: {
                           type: "form",
-                          api: "post:/api/user/change-name",
+                          api: "put:/api/user/me/change-name",
                           onFinished: () => {
                             window.location.reload()
                           },
@@ -327,7 +523,7 @@ const app = {
                         title: "change password",
                         body: {
                           type: "form",
-                          api: "post:/api/user/change-password",
+                          api: "put:/api/user/me/change-password",
                           body: [
                             {
                               type: "input-password",
@@ -346,6 +542,126 @@ const app = {
                       }
                     }
                   ]
+                },
+                {
+                  type: "divider"
+                },
+                {
+                  type: "html",
+                  html: "<h2>Comments</h2>"
+                },
+                {
+                  type: "each",
+                  source: "${comments}",
+                  items: {
+                    type: "panel",
+                    title: {
+                      type: "wrapper",
+                      className: "flex justify-between items-center",
+                      body: [
+                        {
+                          type: "avatar",
+                          src: "${cover_url}",
+                        },
+                        {
+                          type: "wrapper",
+                          body: "${name}"
+                        },
+                        {
+                          type: "wrapper",
+                          body: "${comment_time}"
+                        },
+                        {
+                          type: "action",
+                          label: "go to movie detail page",
+                          actionType: "link",
+                          link: "/movie/${id}"
+                        }
+                      ]
+                    },
+                    body: [
+                      {
+                        type: "wrapper",
+                        body: "Rate: ${rate}"
+                      },
+                      {
+                        type: "wrapper",
+                        body: "Comment: ${content}"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          url: "user/:id",
+          visible: false,
+          schema: {
+            type: "page",
+            body: {
+              type: "service",
+              api: "get:/api/user/info/${params.id}",
+              body: [
+                {
+                  type: "image",
+                  src: "${avatar_url}",
+                  thumbMode: "cover",
+                  enlargeAble: true
+                },
+                {
+                  type: "wrapper",
+                  className: "text-2xl font-bold",
+                  body: "${name}"
+                },
+                {
+                  type: "divider"
+                },
+                {
+                  type: "html",
+                  html: "<h2>Comments</h2>"
+                },
+                {
+                  type: "each",
+                  source: "${comments}",
+                  items: {
+                    type: "panel",
+                    title: {
+                      type: "wrapper",
+                      className: "flex justify-between items-center",
+                      body: [
+                        {
+                          type: "avatar",
+                          src: "${cover_url}",
+                        },
+                        {
+                          type: "wrapper",
+                          body: "${name}"
+                        },
+                        {
+                          type: "wrapper",
+                          body: "${comment_time}"
+                        },
+                        {
+                          type: "action",
+                          label: "go to movie detail page",
+                          actionType: "link",
+                          link: "/movie/${id}"
+                        }
+                      ]
+                    },
+                    body: [
+                      {
+                        type: "wrapper",
+                        body: "Rate: ${rate}"
+                      },
+                      {
+                        type: "wrapper",
+                        body: "Comment: ${content}"
+                      }
+                    ]
+                  }
                 }
               ]
             }

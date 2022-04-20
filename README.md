@@ -43,18 +43,34 @@ Technology stack used in this project:
 * Backend: [express](https://expressjs.com)
 
 ## Progress
-1. Done:
+1. Dones:
 * login/register/personal center
 * movie list and detail
 * actor list and detail
 * show actors of a movie under the movie's detail page
 * show movies that an actor performed under the actor's detail page
-
-2. ToDo: 
 * comment list
 * show comments on a movie under the movie's detail page
 * user detail page
 * show comments that a user commented under the user's detail page
 
-3. Problem:
-* actors of a movie/movies of an actor under detail page not on the same line
+2. ToDos: 
+* **important**: collect data!!!
+* distinguish various cast members: director, actor, ...
+* comment on cast members (not necessary)
+* pagination on comment list page
+* no prompt message/wrong prompt message
+* release_date of movie and birth_date of actor
+
+3. Problems:
+* CSS problem: actors of a movie/movies of an actor under detail page not on the same line
+* CSS problem: instead of ugly "go to user homepage", better to go to homepage once click on user's avatar
+* ugly code problem: should get rid of all these catch
+```js
+} catch(e) {
+    console.log(e)
+    res.json({
+        status: 1,
+    })
+}
+```

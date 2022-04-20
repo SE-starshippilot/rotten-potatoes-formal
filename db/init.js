@@ -28,6 +28,7 @@ const sqlCreateTableUsers = `
     create table if not exists users(
         id int auto_increment primary key,
         name varchar(20) not null unique,
+        avatar_url varchar(255),
         password varchar(20) not null
     )engine=innodb default charset=utf8
 `
@@ -48,6 +49,7 @@ const sqlCreateTableComments = `
         id int auto_increment primary key,
         rate int not null,
         content varchar(255) not null,
+        comment_time datetime not null,
         movie_id int not null,
         user_id int not null,
         foreign key(movie_id) references movies(id),
@@ -69,11 +71,16 @@ const init = async (reset) => {
             await query(`insert into movies(name, cover_url, introduction) value('${movie}', 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg3.027art.cn%2Fimg%2F2021%2F05%2F16%2F1621145716158417.jpg&refer=http%3A%2F%2Fimg3.027art.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652967625&t=48b256519cf76e1ae0eba5f4881b201c', '《赌神》是1989年上映的一部香港赌片。该片是由香港导演王晶执导，周润发、刘德华、张敏、王祖贤等领衔主演的电影。该片讲述了因赌术精湛闻名于世界的赌神高进。 由于意外，高进误入小刀设下的陷井，头部受重伤而失去记忆。高进手下与外敌勾结，企图取代高进的地位并谋夺其家产。一场世界瞩目的赌王大战在公海拉开了帷幕。')`)
             await query(`insert into actors(name, photo_url, introduction, birth_date) value('${actor}', 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fs8.rr.itc.cn%2Fr%2FwapChange%2F20158_8_12%2Fa0210z9400985560405.jpg&refer=http%3A%2F%2Fs8.rr.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652972251&t=787b5e24ea6e1a98824311cff5cafb81', '周润发（Chow Yun Fat），1955年5月18日出生于香港南丫岛，籍贯广东省江门市开平市，华语影视男演员、摄影家。', '1955-05-18')`)
         }
-        await query(`insert into users(name, password) value('root', '123')`)
+        await query(`insert into users(name, avatar_url, password) value('root', 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp9.itc.cn%2Fimages01%2F20200519%2F95c44952f3d44967a331abc7155a9130.jpeg&refer=http%3A%2F%2Fp9.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653045129&t=a7c4b68c89d966ffc780cedff8fc701e', '123')`)
         for (let i = 1; i <= 21; i++) {
             for (let j = 1; j <= 21; j++) {
                 await query(`insert into characters(character_name, movie_id, actor_id) value('高进', ${i}, ${j})`)
             }
+        }
+        for (let i = 1; i <= 100; i++) {
+            let comment = '好电影' + i
+            let movie_id = i % 21 + 1
+            await query(`insert into comments(rate, content, comment_time, movie_id, user_id) value(5, '${comment}', now(), ${movie_id}, 1)`)
         }
     } catch(e) {
         console.log(e)

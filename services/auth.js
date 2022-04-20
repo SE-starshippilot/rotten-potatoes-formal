@@ -11,7 +11,8 @@ const login = async(req, res) => {
         res.json({
             status: 0,
             data: {
-                token: signToken({ user_id: user[0].id }, '1h')
+                token: signToken({ user_id: user[0].id }, '1h'),
+                msg: 'login successfully'
             }
         })
     } catch(e) {
@@ -32,7 +33,8 @@ const register = async(req, res) => {
         }
         await query(`insert into users(name, password) value('${name}', '${password}')`)
         res.json({
-            status: 0
+            status: 0,
+            msg: 'register successfully'
         })
     } catch(e) {
         console.log(e)
