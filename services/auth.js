@@ -16,8 +16,8 @@ const login = async(req, res, next) => {
             status: 0,
             data: {
                 token: signToken({ user_id: user[0].id }, '1h'),
-                msg: 'login successfully'
-            }
+            },
+            msg: 'login successfully'
         })
     } catch(e) {
         next(e)

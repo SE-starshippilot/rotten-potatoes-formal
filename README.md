@@ -53,6 +53,7 @@ Technology stack used in this project:
 * show comments on a movie under the movie's detail page
 * user detail page
 * show comments that a user commented under the user's detail page
+* release_date, average rate of movie and birth_date of actor
 
 2. ToDos: 
 * **important**: collect data!!!
@@ -71,7 +72,6 @@ Technology stack used in this project:
 * judge a user's preferences (e.g. prefer horror movies)
 * recommendation system
 * pagination on comment list page
-* release_date, average rate of movie and birth_date of actor not shown in frontend yet
 
 3. Problems:
 * no prompt message/wrong prompt message after submitting a form

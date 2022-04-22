@@ -4,151 +4,153 @@ const match = amisRequire('path-to-regexp').match;
 const history = History.createHashHistory();
 
 const comments_component = (under_user) => ({
-  type: "each",
-  source: "${comments}",
+  type: 'each',
+  source: '${comments}',
   items: {
-    type: "panel",
+    type: 'panel',
     title: {
-      type: "wrapper",
-      className: "flex justify-between items-center",
+      type: 'wrapper',
+      className: 'flex justify-between items-center',
       body: [
         {
-          type: "avatar",
-          src: under_user ? "${cover_url}" : "${avatar_url}",
+          type: 'avatar',
+          src: under_user ? '${cover_url}' : '${avatar_url}',
         },
         {
-          type: "wrapper",
-          body: under_user ? "${name}" : "${name}"
+          type: 'wrapper',
+          body: under_user ? '${name}' : '${name}'
         },
         {
-          type: "wrapper",
-          body: "${comment_time}"
+          type: 'wrapper',
+          body: '${comment_time}'
         },
         {
-          type: "action",
-          label: under_user ? "go to movie detail page" : "go to user homepage",
-          actionType: "link",
-          link: under_user ? "/movie/${id}" : "/user/${id}"
+          type: 'action',
+          label: under_user ? 'go to movie detail page' : 'go to user homepage',
+          actionType: 'link',
+          link: under_user ? '/movie/${id}' : '/user/${id}'
         }
       ]
     },
     body: [
       {
-        type: "wrapper",
-        body: "Rate: ${rate}"
+        type: 'wrapper',
+        body: 'Rate: ${rate}'
       },
       {
-        type: "wrapper",
-        body: "Comment: ${content}"
+        type: 'wrapper',
+        body: 'Comment: ${content}'
       }
     ]
   }
 });
 
 const login = {
-  url: "login",
+  url: 'login',
   visible: false,
   schema: {
-    type: "form",
-    title: "login",
-    api: "post:/api/login",
+    type: 'form',
+    title: 'Login',
+    api: 'post:/api/login',
     onFinished: ret => {
-      localStorage.setItem("token", ret.token)
+      localStorage.setItem('token', ret.token)
+      history.push('/')
     },
     body: [
       {
-        type: "input-text",
-        name: "name",
-        label: "Name",
+        type: 'input-text',
+        name: 'name',
+        label: 'Name',
         required: true
       },
       {
-        type: "input-password",
-        name: "password",
-        label: "Password",
+        type: 'input-password',
+        name: 'password',
+        label: 'Password',
         required: true
       }
     ],
     actions: [
       {
-        label: "No account? Register!",
-        type: "button",
-        level: "link",
+        label: 'No account? Register!',
+        type: 'button',
+        level: 'link',
         onClick: () => {
           history.push('/register')
         }
       },
       {
-        type: "submit",
-        label: "login"
+        type: 'submit',
+        label: 'login'
       }
     ]
   }
 };
 
 const register = {
-  url: "register",
+  url: 'register',
   visible: false,
   schema: {
-    type: "form",
-    title: "register",
-    api: "post:/api/register",
+    type: 'form',
+    title: 'Register',
+    api: 'post:/api/register',
     onFinished: () => {
       history.push('/login')
     },
     body: [
       {
-        type: "input-text",
-        name: "name",
-        label: "Name",
+        type: 'input-text',
+        name: 'name',
+        label: 'Name',
         required: true
       },
       {
-        type: "input-password",
-        name: "password",
-        label: "Password",
+        type: 'input-password',
+        name: 'password',
+        label: 'Password',
         required: true
       }
     ],
     actions: [
       {
-        label: "Have an account? Login!",
-        type: "button",
-        level: "link",
+        label: 'Have an account? Login!',
+        type: 'button',
+        level: 'link',
         onClick: () => {
           history.push('/login')
         }
       },
       {
-        type: "submit",
-        label: "register"
+        type: 'submit',
+        label: 'register'
       }
     ]
   }
 };
 
 const movies = {
-  label: "movie",
-  url: "movie",
+  label: 'Movie',
+  icon: 'fas fa-film',
+  url: 'movie',
   schema: {
-    type: "page",
-    title: "movie",
+    type: 'page',
+    title: 'Movie',
     body: {
-      type: "crud",
-      api: "get:/api/movie/list",
+      type: 'crud',
+      api: 'get:/api/movie/list',
       syncLocation: false,
-      mode: "cards",
-      placeholder: "no movie",
+      mode: 'cards',
+      placeholder: 'no movie',
       card: {
-        className: "flex items-center",
+        className: 'flex items-center',
         header: {
-          avatar: "${cover_url}",
+          avatar: '${cover_url}',
         },
-        body: "${name}",
+        body: '${name}',
         itemAction: {
-          type: "button",
-          actionType: "link",
-          url: "/movie/${id}"
+          type: 'button',
+          actionType: 'link',
+          url: '/movie/${id}'
         }
       }
     }
@@ -156,59 +158,72 @@ const movies = {
 };
 
 const movie = {
-  url: "movie/:id",
+  url: 'movie/:id',
   visible: false,
   schema: {
-    type: "page",
+    type: 'page',
     body: {
-      type: "service",
-      api: "get:/api/movie/detail/${params.id}",
+      type: 'service',
+      api: 'get:/api/movie/detail/${params.id}',
       body: [
         {
-          type: "wrapper",
-          className: "flex flex-row justify-between items-center",
+          type: 'wrapper',
+          className: 'flex flex-row justify-between items-center',
           body: [
             {
-              type: "wrapper",
-              className: "flex flex-row justify-between items-center",
+              type: 'wrapper',
+              className: 'flex flex-row justify-between items-center',
               body: [
                 {
-                  type: "image",
-                  src: "${cover_url}",
-                  thumbMode: "cover",
+                  type: 'image',
+                  src: '${cover_url}',
+                  thumbMode: 'cover',
                   enlargeAble: true
                 },
                 {
-                  type: "html",
-                  className: "ml-8",
-                  html: "<h1>${name}</h1>"
-                },
+                  type: 'wrapper',
+                  className: 'ml-8',
+                  body: [
+                    {
+                      type: 'html',
+                      html: '<h1>${name}</h1>'
+                    },
+                    {
+                      type: 'html',
+                      html: '<h3>rate: ${rate}</h3>'
+                    },
+                    {
+                      type: 'html',
+                      html: '<h3>release: ${release_date}</h3>'
+                    }
+                  ]
+                }
               ]
             },
             {
-              label: "add comment",
-              type: "button",
-              actionType: "dialog",
+              label: 'add comment',
+              type: 'button',
+              actionType: 'dialog',
               dialog: {
-                title: "add comment",
+                title: 'add comment',
                 body: {
-                  type: "form",
-                  api: "post:/api/comment/add-to-movie/${params.id}",
+                  type: 'form',
+                  api: 'post:/api/comment/add-to-movie/${params.id}',
                   onFinished: () => {
                     window.location.reload()
                   },
                   body: [
                     {
-                      type: "input-rating",
-                      name: "rate",
-                      label: "Rate",
+                      type: 'input-rating',
+                      name: 'rate',
+                      label: 'Rate',
                       count: 5,
                       required: true
                     },
                     {
-                      type: "input-text",
-                      name: "content",
-                      label: "Comment",
+                      type: 'input-text',
+                      name: 'content',
+                      label: 'Comment',
                       required: true
                     }
                   ]
@@ -218,46 +233,46 @@ const movie = {
           ]
         },
         {
-          type: "divider"
+          type: 'divider'
         },
         {
-          type: "html",
-          html: "<h2>Introduction</h2>"
+          type: 'html',
+          html: '<h2>Introduction</h2>'
         },
         {
-          type: "wrapper",
-          body: "${introduction}"
+          type: 'wrapper',
+          body: '${introduction}'
         },
         {
-          type: "divider"
+          type: 'divider'
         },
         {
-          type: "html",
-          html: "<h2>Actors</h2>"
+          type: 'html',
+          html: '<h2>Actors</h2>'
         },
         {
-          type: "cards",
-          source: "${actors}",
+          type: 'cards',
+          source: '${actors}',
           card: {
             header: {
-              className: "flex flex-col items-center",
-              avatar: "${photo_url}",
-              title: "${name}",
-              subTitle: "act ${character_name}"
+              className: 'flex flex-col items-center',
+              avatar: '${photo_url}',
+              title: '${name}',
+              subTitle: 'act ${character_name}'
             },
             itemAction: {
-              type: "button",
-              actionType: "link",
-              url: "/actor/${id}"
+              type: 'button',
+              actionType: 'link',
+              url: '/actor/${id}'
             }
           }
         },
         {
-          type: "divider"
+          type: 'divider'
         },
         {
-          type: "html",
-          html: "<h2>Comments</h2>"
+          type: 'html',
+          html: '<h2>Comments</h2>'
         },
         comments_component(under_user = false)
       ]
@@ -266,27 +281,28 @@ const movie = {
 };
 
 const actors = {
-  label: "actor",
-  url: "actor",
+  label: 'Actor',
+  url: 'actor',
+  icon: 'fas fa-male',
   schema: {
-    type: "page",
-    title: "actor",
+    type: 'page',
+    title: 'Actor',
     body: {
-      type: "crud",
-      api: "get:/api/actor/list",
+      type: 'crud',
+      api: 'get:/api/actor/list',
       syncLocation: false,
-      mode: "cards",
-      placeholder: "no actor",
+      mode: 'cards',
+      placeholder: 'no actor',
       card: {
-        className: "flex items-center",
+        className: 'flex items-center',
         header: {
-          avatar: "${photo_url}",
+          avatar: '${photo_url}',
         },
-        body: "${name}",
+        body: '${name}',
         itemAction: {
-          type: "button",
-          actionType: "link",
-          url: "/actor/${id}"
+          type: 'button',
+          actionType: 'link',
+          url: '/actor/${id}'
         }
       }
     }
@@ -294,63 +310,72 @@ const actors = {
 };
 
 const actor = {
-  url: "actor/:id",
+  url: 'actor/:id',
   visible: false,
   schema: {
-    type: "page",
+    type: 'page',
     body: {
-      type: "service",
-      api: "get:/api/actor/detail/${params.id}",
+      type: 'service',
+      api: 'get:/api/actor/detail/${params.id}',
       body: [
         {
-          type: "wrapper",
-          className: "flex",
+          type: 'wrapper',
+          className: 'flex',
           body: [
             {
-              type: "image",
-              src: "${photo_url}",
-              thumbMode: "cover",
+              type: 'image',
+              src: '${photo_url}',
+              thumbMode: 'cover',
               enlargeAble: true
             },
             {
-              type: "html",
-              className: "ml-8",
-              html: "<h1>${name}</h1>"
+              type: 'wrapper',
+              className: 'ml-8',
+              body: [
+                {
+                  type: 'html',
+                  html: '<h1>${name}</h1>'
+                },
+                {
+                  type: 'html',
+                  html: '<h3>birthday: ${birth_date}</h3>'
+                }
+              ]
             }
           ]
         },
         {
-          type: "divider"
+          type: 'divider'
         },
         {
-          type: "html",
-          html: "<h2>Introduction</h2>"
+          type: 'html',
+          html: '<h2>Introduction</h2>'
         },
         {
-          type: "wrapper",
-          body: "${introduction}"
+          type: 'wrapper',
+          body: '${introduction}'
         },
         {
-          type: "divider"
+          type: 'divider'
         },
         {
-          type: "html",
-          html: "<h2>Movies</h2>"
+          type: 'html',
+          html: '<h2>Movies</h2>'
         },
         {
-          type: "cards",
-          source: "${movies}",
+          type: 'cards',
+          source: '${movies}',
           card: {
             header: {
-              className: "flex flex-col items-center",
-              avatar: "${cover_url}",
-              title: "${name}",
-              subTitle: "act ${character_name}"
+              className: 'flex flex-col items-center',
+              avatar: '${cover_url}',
+              title: '${name}',
+              subTitle: 'act ${character_name}'
             },
             itemAction: {
-              type: "button",
-              actionType: "link",
-              url: "/movie/${id}"
+              type: 'button',
+              actionType: 'link',
+              url: '/movie/${id}'
             }
           }
         }
@@ -360,70 +385,71 @@ const actor = {
 };
 
 const comments = {
-  label: "comment",
-  url: "comment",
+  label: 'Comment',
+  url: 'comment',
+  icon: 'fas fa-comment-dots',
   schema: {
-    type: "page",
-    title: "comment",
+    type: 'page',
+    title: 'Comment',
     body: {
-      type: "service",
-      api: "get:/api/comment/list",
+      type: 'service',
+      api: 'get:/api/comment/list',
       body: {
-        type: "each",
-        source: "${items}",
+        type: 'each',
+        source: '${items}',
         items: {
-          type: "panel",
+          type: 'panel',
           title: {
-            type: "wrapper",
-            className: "flex justify-between items-center",
+            type: 'wrapper',
+            className: 'flex justify-between items-center',
             body: [
               {
-                type: "wrapper",
-                className: "flex flex-col items-center",
+                type: 'wrapper',
+                className: 'flex flex-col items-center',
                 body: [
                   {
-                    type: "avatar",
-                    src: "${avatar_url}"
+                    type: 'avatar',
+                    src: '${avatar_url}'
                   },
                   {
-                    type: "wrapper",
-                    body: "${user_name}"
+                    type: 'wrapper',
+                    body: '${user_name}'
                   }
                 ]
               },
               {
-                type: "wrapper",
-                className: "flex flex-col items-center",
+                type: 'wrapper',
+                className: 'flex flex-col items-center',
                 body: [
                   {
-                    type: "avatar",
-                    src: "${cover_url}"
+                    type: 'avatar',
+                    src: '${cover_url}'
                   },
                   {
-                    type: "wrapper",
-                    body: "${movie_name}"
+                    type: 'wrapper',
+                    body: '${movie_name}'
                   }
                 ]
               },
               {
-                type: "wrapper",
-                body: "${comment_time}"
+                type: 'wrapper',
+                body: '${comment_time}'
               },
               {
-                type: "wrapper",
-                className: "flex flex-col items-center",
+                type: 'wrapper',
+                className: 'flex flex-col items-center',
                 body: [
                   {
-                    type: "action",
-                    label: "go to user homepage",
-                    actionType: "link",
-                    link: "/user/${user_id}"
+                    type: 'action',
+                    label: 'go to user homepage',
+                    actionType: 'link',
+                    link: '/user/${user_id}'
                   },
                   {
-                    type: "action",
-                    label: "go to movie detail page",
-                    actionType: "link",
-                    link: "/movie/${movie_id}"
+                    type: 'action',
+                    label: 'go to movie detail page',
+                    actionType: 'link',
+                    link: '/movie/${movie_id}'
                   }
                 ]
               }
@@ -431,12 +457,12 @@ const comments = {
           },
           body: [
             {
-              type: "wrapper",
-              body: "Rate: ${rate}"
+              type: 'wrapper',
+              body: 'Rate: ${rate}'
             },
             {
-              type: "wrapper",
-              body: "Comment: ${content}"
+              type: 'wrapper',
+              body: 'Comment: ${content}'
             }
           ]
         }
@@ -446,68 +472,69 @@ const comments = {
 };
 
 const me = {
-  label: "me",
-  url: "me",
+  label: 'Me',
+  url: 'me',
+  icon: 'fas fa-user-circle',
   schema: {
-    type: "page",
-    title: "me",
+    type: 'page',
+    title: 'Me',
     body: {
-      type: "service",
-      api: "get:/api/user/me/info",
+      type: 'service',
+      api: 'get:/api/user/me/info',
       body: [
         {
-          type: "image",
-          src: "${avatar_url}",
-          thumbMode: "cover",
+          type: 'image',
+          src: '${avatar_url}',
+          thumbMode: 'cover',
           enlargeAble: true
         },
         {
-          type: "wrapper",
-          className: "text-2xl font-bold",
-          body: "${name}"
+          type: 'wrapper',
+          className: 'text-2xl font-bold',
+          body: '${name}'
         },
         {
-          type: "button-group",
+          type: 'button-group',
           buttons: [
             {
-              label: "change avatar",
-              type: "button",
-              actionType: "dialog",
+              label: 'change avatar',
+              type: 'button',
+              actionType: 'dialog',
               dialog: {
-                title: "change avatar",
+                title: 'change avatar',
                 body: {
-                  type: "form",
-                  api: "post:/api/user/me/change-avatar",
+                  type: 'form',
+                  api: 'post:/api/user/me/change-avatar',
                   onFinished: () => {
                     window.location.reload()
                   },
                   body: {
-                    type: "input-file",
-                    label: "avatar",
-                    name: "avatar",
-                    accept: ".png,.jpg,.jpeg",
+                    type: 'input-file',
+                    label: 'avatar',
+                    name: 'avatar',
+                    accept: '.png,.jpg,.jpeg',
                     asBlob: true
                   }
                 }
               }
             },
             {
-              label: "change name",
-              type: "button",
-              actionType: "dialog",
+              label: 'change name',
+              type: 'button',
+              actionType: 'dialog',
               dialog: {
-                title: "change name",
+                title: 'change name',
                 body: {
-                  type: "form",
-                  api: "put:/api/user/me/change-name",
+                  type: 'form',
+                  api: 'put:/api/user/me/change-name',
                   onFinished: () => {
                     window.location.reload()
                   },
                   body: [
                     {
-                      type: "input-text",
-                      name: "new_name",
-                      label: "New Name",
+                      type: 'input-text',
+                      name: 'new_name',
+                      label: 'New Name',
                       required: true
                     }
                   ]
@@ -515,25 +542,25 @@ const me = {
               }
             },
             {
-              label: "change password",
-              type: "button",
-              actionType: "dialog",
+              label: 'change password',
+              type: 'button',
+              actionType: 'dialog',
               dialog: {
-                title: "change password",
+                title: 'change password',
                 body: {
-                  type: "form",
-                  api: "put:/api/user/me/change-password",
+                  type: 'form',
+                  api: 'put:/api/user/me/change-password',
                   body: [
                     {
-                      type: "input-password",
-                      name: "old_password",
-                      label: "Old",
+                      type: 'input-password',
+                      name: 'old_password',
+                      label: 'Old',
                       required: true
                     },
                     {
-                      type: "input-password",
-                      name: "new_password",
-                      label: "New",
+                      type: 'input-password',
+                      name: 'new_password',
+                      label: 'New',
                       required: true
                     }
                   ]
@@ -541,21 +568,21 @@ const me = {
               }
             },
             {
-              label: "log out",
-              type: "button",
+              label: 'log out',
+              type: 'button',
               onClick: () => {
-                localStorage.removeItem("token")
-                history.push("/login")
+                localStorage.removeItem('token')
+                history.push('/login')
               }
             }
           ]
         },
         {
-          type: "divider"
+          type: 'divider'
         },
         {
-          type: "html",
-          html: "<h2>Comments</h2>"
+          type: 'html',
+          html: '<h2>Comments</h2>'
         },
         comments_component(under_user = true)
       ]
@@ -564,31 +591,31 @@ const me = {
 };
 
 const user = {
-  url: "user/:id",
+  url: 'user/:id',
   visible: false,
   schema: {
-    type: "page",
+    type: 'page',
     body: {
-      type: "service",
-      api: "get:/api/user/info/${params.id}",
+      type: 'service',
+      api: 'get:/api/user/info/${params.id}',
       body: [
         {
-          type: "image",
-          src: "${avatar_url}",
-          thumbMode: "cover",
+          type: 'image',
+          src: '${avatar_url}',
+          thumbMode: 'cover',
           enlargeAble: true
         },
         {
-          type: "wrapper",
-          className: "text-2xl font-bold",
-          body: "${name}"
+          type: 'wrapper',
+          className: 'text-2xl font-bold',
+          body: '${name}'
         },
         {
-          type: "divider"
+          type: 'divider'
         },
         {
-          type: "html",
-          html: "<h2>Comments</h2>"
+          type: 'html',
+          html: '<h2>Comments</h2>'
         },
         comments_component(under_user = true)
       ]
@@ -597,12 +624,12 @@ const user = {
 };
 
 const app = {
-  type: "app",
-  brandName: "Rotten Potatoes",
+  type: 'app',
+  brandName: 'Rotten Potatoes',
   pages: [
     {
-      url: "/",
-      redirect: "movie"
+      url: '/',
+      redirect: 'movie'
     },
     {
       children: [
@@ -693,7 +720,7 @@ app,
     return {
       ...api,
       headers: {
-        authorization: localStorage.getItem("token")
+        authorization: localStorage.getItem('token')
       }
     }
   },
