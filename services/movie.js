@@ -1,6 +1,6 @@
 const query = require('../db/query')
 
-const listMovies = async(req, res) => {
+const listMovies = async(req, res, next) => {
     try {
         let limit = req.query.perPage
         let offset = (req.query.page - 1) * req.query.perPage
@@ -15,14 +15,11 @@ const listMovies = async(req, res) => {
             }
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-        })
+        next(e)
     }
 }
 
-const getMovieDetail = async(req, res) => {
+const getMovieDetail = async(req, res, next) => {
     try {
         let movie_id = req.params.id
         let [ movie ] = await query(`select * from movies where id=${movie_id}`)
@@ -33,10 +30,7 @@ const getMovieDetail = async(req, res) => {
             data: movie
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1
-        })
+        next(e)
     }
 }
 

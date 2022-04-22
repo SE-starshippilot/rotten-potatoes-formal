@@ -77,12 +77,3 @@ Technology stack used in this project:
 * no prompt message/wrong prompt message after submitting a form
 * CSS problem: actors of a movie/movies of an actor under detail page not on the same line
 * CSS problem: instead of ugly "go to user homepage", better to go to homepage once click on user's avatar
-* ugly code problem: should get rid of all these catch
-```js
-} catch(e) {
-    console.log(e)
-    res.json({
-        status: 1,
-    })
-}
-```

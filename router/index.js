@@ -29,4 +29,12 @@ router.get('/actor/detail/:id', actor.getActorDetail)
 router.get('/comment/list', comment.listComments)
 router.post('/comment/add-to-movie/:id', comment.addCommentToMovie)
 
+router.use((e) => {
+    console.log(e)
+    res.json({
+        status: 1,
+        msg: 'internal server error'
+    })
+})
+
 module.exports = router

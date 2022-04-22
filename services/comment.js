@@ -1,6 +1,6 @@
 const query = require('../db/query')
 
-const listComments = async(req, res) => {
+const listComments = async(req, res, next) => {
     try {
         let comments = await query(`select m.name as movie_name, m.cover_url, c.movie_id, c.rate, c.content, c.comment_time, c.user_id, u.name as user_name, u.avatar_url from movies as m inner join comments as c on m.id=c.movie_id inner join users as u on u.id=c.user_id order by c.id`)
         res.json({
@@ -8,14 +8,11 @@ const listComments = async(req, res) => {
             data: comments
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-        })
+        next(e)
     }
 }
 
-const addCommentToMovie = async(req, res) => {
+const addCommentToMovie = async(req, res, next) => {
     try {
         let movie_id = req.params.id
         let { rate, content } = req.body
@@ -24,10 +21,7 @@ const addCommentToMovie = async(req, res) => {
             status: 0
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-        })
+        next(e)
     }
 }
 

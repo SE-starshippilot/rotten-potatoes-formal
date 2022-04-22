@@ -7,7 +7,7 @@ const userInfo = async(user_id) => {
     return user
 }
 
-const getUserInfo = async(req, res) => {
+const getUserInfo = async(req, res, next) => {
     try {
         let user_id = req.params.id
         let user = await userInfo(user_id)
@@ -16,15 +16,11 @@ const getUserInfo = async(req, res) => {
             data: user
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-            msg: e
-        })
+        next(e)
     }
 }
 
-const getMeInfo = async(req, res) => {
+const getMeInfo = async(req, res, next) => {
     try {
         let user = await userInfo(req.user_id)
         res.json({
@@ -32,15 +28,11 @@ const getMeInfo = async(req, res) => {
             data: user
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-            msg: e
-        })
+        next(e)
     }
 }
 
-const changeMeAvatar = async(req, res) => {
+const changeMeAvatar = async(req, res, next) => {
     try {
         let [ { avatar_url } ] = await query(`select avatar_url from users where id=${req.user_id}`)
         await query(`update users set avatar_url='images/${req.file.filename}' where id=${req.user_id}`)
@@ -49,20 +41,20 @@ const changeMeAvatar = async(req, res) => {
             status: 0
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-            msg: e
-        })
+        next(e)
     }
 }
 
-const changeMeName = async(req, res) => {
+const changeMeName = async(req, res, next) => {
     try {
         let { new_name } = req.body
         let user = await query(`select * from users where name='${new_name}'`)
         if (user.length >= 1) {
-            throw 'user name already exists'
+            res.json({
+                status: 1,
+                msg: 'user name already exists'
+            })
+            return
         }
         await query(`update users set name='${new_name}' where id=${req.user_id}`)
         res.json({
@@ -70,20 +62,20 @@ const changeMeName = async(req, res) => {
             msg: 'name changed successfully'
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-            msg: e
-        })
+        next(e)
     }
 }
 
-const changeMePassword = async(req, res) => {
+const changeMePassword = async(req, res, next) => {
     try {
         let { old_password, new_password } = req.body
         let [ { password } ] = await query(`select password from users where id='${req.user_id}'`)
         if (password !== old_password) {
-            throw 'wrong old password'
+            res.json({
+                status: 1,
+                msg: 'wrong old password'
+            })
+            return
         }
         await query(`update users set password='${new_password}' where id=${req.user_id}`)
         res.json({
@@ -91,11 +83,7 @@ const changeMePassword = async(req, res) => {
             msg: 'password changed successfully'
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-            msg: e
-        })
+        next(e)
     }
 }
 

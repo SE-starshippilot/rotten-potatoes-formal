@@ -1,6 +1,6 @@
 const query = require('../db/query')
 
-const listActors = async(req, res) => {
+const listActors = async(req, res, next) => {
     try {
         let limit = req.query.perPage
         let offset = (req.query.page - 1) * req.query.perPage
@@ -15,14 +15,11 @@ const listActors = async(req, res) => {
             }
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1,
-        })
+        next(e)
     }
 }
 
-const getActorDetail = async(req, res) => {
+const getActorDetail = async(req, res, next) => {
     try {
         let actor_id = req.params.id
         let [ actor ] = await query(`select * from actors where id=${actor_id}`)
@@ -32,10 +29,7 @@ const getActorDetail = async(req, res) => {
             data: actor
         })
     } catch(e) {
-        console.log(e)
-        res.json({
-            status: 1
-        })
+        next(e)
     }
 }
 
