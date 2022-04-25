@@ -1,0 +1,56 @@
+id,character_name,movie_id,actor_id
+1,Andy Dufresne,1,1
+2,Ellis Boyd 'Red' Redding,1,2
+3,Warden Norton,1,3
+4,Heywood,1,4
+5,Captain Hadley,1,5
+6,Don Vito Corleone,2,6
+7,Michael,2,7
+8,Sonny,2,8
+9,Kay Adams,2,9
+10,Clemenza,2,10
+11,Bruce Wayne,3,11
+12,Joker,3,12
+13,Harvey Dent,3,13
+14,Alfred,3,14
+15,Rachel,3,15
+16,Michael,4,7
+17,Vito Corleone,4,16
+18,Tom Hagen,4,17
+19,Kay,4,9
+20,Fredo Corleone,4,18
+21,Connie Corleone,4,19
+22,Hyman Roth,4,20
+23,Juror 8,5,21
+24,Juror 3,5,22
+25,Juror 1,5,23
+26,Juror 2,5,24
+27,Juror 4,5,25
+28,Oskar Schindler,6,26
+29,Amon Goeth,6,27
+30,Itzhak Stern,6,28
+31,Emilie Schindler,6,29
+32,Poldek Pfefferberg,6,30
+33,Frodo,7,31
+34,Aragorn,7,32
+35,Gandalf,7,33
+36,Legolas,7,34
+37,Elanor Gamgee,7,35
+38,Vincent Vega,8,36
+39,Mia Wallace,8,37
+40,Jules Winnfield,8,38
+41,Butch Coolidge,8,39
+42,Pumpkin,8,40
+43,Frodo,9,31
+44,Gandalf,9,33
+45,Legolas,9,34
+46,Boromir,9,41
+47,Voice of the Ring,9,42
+48,Sam,9,43
+49,Sauron,9,44
+50,Galadriel,9,45
+51,Blondie,10,46
+52,Tuco,10,47
+53,Sentenza,10,48
+54,Alcoholic Union Captain,10,49
+55,Father Pablo Ramirez,10,50

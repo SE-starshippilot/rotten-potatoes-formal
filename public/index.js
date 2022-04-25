@@ -22,7 +22,7 @@ const comments_component = (under_user) => ({
         },
         {
           type: 'wrapper',
-          body: '${comment_time}'
+          body: '${comment_date}'
         },
         {
           type: 'action',
@@ -194,7 +194,7 @@ const movie = {
                     },
                     {
                       type: 'html',
-                      html: '<h3>release: ${release_date}</h3>'
+                      html: '<h3>release: ${release_year}</h3>'
                     }
                   ]
                 }
@@ -258,7 +258,7 @@ const movie = {
               className: 'flex flex-col items-center',
               avatar: '${photo_url}',
               title: '${name}',
-              subTitle: 'act ${character_name}'
+              subTitle: '${character_name}'
             },
             itemAction: {
               type: 'button',
@@ -370,7 +370,7 @@ const actor = {
               className: 'flex flex-col items-center',
               avatar: '${cover_url}',
               title: '${name}',
-              subTitle: 'act ${character_name}'
+              subTitle: '${character_name}'
             },
             itemAction: {
               type: 'button',
@@ -433,7 +433,7 @@ const comments = {
               },
               {
                 type: 'wrapper',
-                body: '${comment_time}'
+                body: '${comment_date}'
               },
               {
                 type: 'wrapper',
