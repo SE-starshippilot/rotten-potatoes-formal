@@ -2,10 +2,12 @@ const query = require('../db/query')
 
 const listActors = async(req, res, next) => {
     try {
-        let limit = req.query.perPage
-        let offset = (req.query.page - 1) * req.query.perPage
-        let items = await query(`select id, name, photo_url from actors order by id limit ${limit} offset ${offset}`)
-        let total = await query(`select count(*) from actors`)
+        let perPage = Number(req.query.perPage)
+        let page = Number(req.query.page)
+        let limit = perPage
+        let offset = (page - 1) * perPage
+        let items = await query('select id, name, photo_url from actors order by id limit ? offset ?', limit, offset)
+        let total = await query('select count(*) from actors')
         total = total[0]['count(*)']
         res.json({
             status: 0,
@@ -21,9 +23,9 @@ const listActors = async(req, res, next) => {
 
 const getActorDetail = async(req, res, next) => {
     try {
-        let actor_id = req.params.id
-        let [ actor ] = await query(`select * from actors where id=${actor_id}`)
-        actor.movies = await query(`select m.id, m.name, m.cover_url, c.character_name from movies as m inner join characters as c on m.id=c.movie_id where c.actor_id=${actor_id}`)
+        let actor_id = Number(req.params.id)
+        let [ actor ] = await query('select * from actors where id=?', actor_id)
+        actor.movies = await query('select m.id, m.name, m.cover_url, c.character_name from movies as m inner join characters as c on m.id=c.movie_id where c.actor_id=?', actor_id)
         res.json({
             status: 0,
             data: actor

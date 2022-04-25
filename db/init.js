@@ -73,6 +73,8 @@ const init = async (reset) => {
         await query(`load data local infile 'data/characters.csv' into table characters fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
         await query(`load data local infile 'data/comments.csv' into table comments fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
         await query(`set global local_infile=0`)
+
+        await query(`insert into users(name, password) value('root', '123')`)
     } catch(e) {
         console.log(e)
     }

@@ -4,7 +4,7 @@ const { signToken, verifyToken } = require('../auth/auth')
 const login = async(req, res, next) => {
     try {
         let { name, password } = req.body
-        let user = await query(`select * from users where name='${name}'`)
+        let user = await query('select * from users where name=?', name)
         if (user.length < 1 || user[0].password != password) {
             res.json({
                 status: 1,
@@ -27,7 +27,7 @@ const login = async(req, res, next) => {
 const register = async(req, res, next) => {
     try {
         let { name, password } = req.body
-        let user = await query(`select * from users where name='${name}'`) 
+        let user = await query('select * from users where name=?', name) 
         if (user.length >= 1) {
             res.json({
                 status: 1,
@@ -35,7 +35,7 @@ const register = async(req, res, next) => {
             })
             return
         }
-        await query(`insert into users(name, password) value('${name}', '${password}')`)
+        await query('insert into users(name, password) value(?, ?)', name, password)
         res.json({
             status: 0,
             msg: 'register successfully'
