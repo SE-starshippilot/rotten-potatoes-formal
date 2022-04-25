@@ -46,6 +46,7 @@ Technology stack used in this project:
 Data in this project is scraped from [IMDb Top 250 Movies](https://www.imdb.com/chart/top/) by crawler written by:
 * [Requests](https://docs.python-requests.org/en/latest/)
 * [BeautifulSoup4](https://beautiful-soup-4.readthedocs.io/en/latest/)
+
 **if there is any infringement, please contact to delete**
 
 ## Progress
