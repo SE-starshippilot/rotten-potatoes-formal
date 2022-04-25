@@ -138,6 +138,7 @@ const movies = {
     body: {
       type: 'crud',
       api: 'get:/api/movie/list',
+      footerToolBar: ["switch-per-page", "pagination"],
       syncLocation: false,
       mode: 'cards',
       placeholder: 'no movie',
@@ -217,7 +218,7 @@ const movie = {
                       type: 'input-rating',
                       name: 'rate',
                       label: 'Rate',
-                      count: 5,
+                      count: 10,
                       required: true
                     },
                     {
@@ -395,76 +396,87 @@ const comments = {
       type: 'service',
       api: 'get:/api/comment/list',
       body: {
-        type: 'each',
-        source: '${items}',
-        items: {
-          type: 'panel',
-          title: {
-            type: 'wrapper',
-            className: 'flex justify-between items-center',
+        type: 'pagination-wrapper',
+        body: {
+          type: 'each',
+          source: '${items}',
+          items: {
+            type: 'panel',
+            title: {
+              type: 'wrapper',
+              className: 'flex justify-between items-center',
+              body: [
+                {
+                  type: 'wrapper',
+                  className: 'flex flex-col items-center',
+                  body: [
+                    {
+                      type: 'avatar',
+                      src: '${avatar_url}'
+                    },
+                    {
+                      type: 'wrapper',
+                      body: '${user_name}'
+                    }
+                  ]
+                },
+                {
+                  type: 'wrapper',
+                  className: 'flex flex-col items-center',
+                  body: [
+                    {
+                      type: 'avatar',
+                      src: '${cover_url}'
+                    },
+                    {
+                      type: 'wrapper',
+                      body: '${movie_name}'
+                    }
+                  ]
+                },
+                {
+                  type: 'wrapper',
+                  body: '${comment_date}'
+                },
+                {
+                  type: 'dropdown-button',
+                  label: 'go to ...',
+                  trigger: 'hover',
+                  hideCaret: true,
+                  buttons: [
+                    {
+                      type: 'action',
+                      size: 'xs',
+                      label: 'user homepage',
+                      actionType: 'link',
+                      link: '/user/${user_id}'
+                    },
+                    {
+                      type: 'action',
+                      size: 'xs',
+                      label: 'movie detail page',
+                      actionType: 'link',
+                      link: '/movie/${movie_id}'
+                    }
+                  ]
+                },
+                {
+                  type: 'wrapper',
+                  body: ''
+                }
+              ]
+            },
             body: [
               {
                 type: 'wrapper',
-                className: 'flex flex-col items-center',
-                body: [
-                  {
-                    type: 'avatar',
-                    src: '${avatar_url}'
-                  },
-                  {
-                    type: 'wrapper',
-                    body: '${user_name}'
-                  }
-                ]
+                body: 'Rate: ${rate}'
               },
               {
                 type: 'wrapper',
-                className: 'flex flex-col items-center',
-                body: [
-                  {
-                    type: 'avatar',
-                    src: '${cover_url}'
-                  },
-                  {
-                    type: 'wrapper',
-                    body: '${movie_name}'
-                  }
-                ]
-              },
-              {
-                type: 'wrapper',
-                body: '${comment_date}'
-              },
-              {
-                type: 'wrapper',
-                className: 'flex flex-col items-center',
-                body: [
-                  {
-                    type: 'action',
-                    label: 'go to user homepage',
-                    actionType: 'link',
-                    link: '/user/${user_id}'
-                  },
-                  {
-                    type: 'action',
-                    label: 'go to movie detail page',
-                    actionType: 'link',
-                    link: '/movie/${movie_id}'
-                  }
-                ]
+                body: 'Comment: ${content}'
               }
             ]
-          },
-          body: [
-            {
-              type: 'wrapper',
-              body: 'Rate: ${rate}'
-            },
-            {
-              type: 'wrapper',
-              body: 'Comment: ${content}'
-            }
-          ]
+          }
         }
       }
     }

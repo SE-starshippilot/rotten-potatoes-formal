@@ -25,7 +25,7 @@ users_data = []
 characters_data = []
 comments_data = []
 
-num_of_movies = 10
+num_of_movies = 100
 num_of_actors_per_movie = 5
 num_of_comments_per_movie = 5
 
