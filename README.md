@@ -42,6 +42,12 @@ Technology stack used in this project:
 * Frontend: [amis](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index)
 * Backend: [express](https://expressjs.com)
 
+## Data
+Data in this project is scraped from [IMDb Top 250 Movies](https://www.imdb.com/chart/top/) by crawler written by:
+* [Requests](https://docs.python-requests.org/en/latest/)
+* [BeautifulSoup4](https://beautiful-soup-4.readthedocs.io/en/latest/)
+**if there is any infringement, please contact to delete**
+
 ## Progress
 1. Dones:
 * login/register/personal center
@@ -54,9 +60,9 @@ Technology stack used in this project:
 * user detail page
 * show comments that a user commented under the user's detail page
 * release_date, average rate of movie and birth_date of actor
+* collect data: finished with python crawler
 
 2. ToDos: 
-* **important**: collect data!!!
 * character list page
 * distinguish various types of actors (movie_type): director, actor, ...
 * distinguish various types of movies (actor_type): action, horror, history, ...
@@ -71,7 +77,7 @@ Technology stack used in this project:
     * actors: by actor_type, which decade (80s, 90s)
 * judge a user's preferences (e.g. prefer horror movies)
 * recommendation system
-* pagination on comment list page
+* speed up crawler by async request
 
 3. Problems:
 * no prompt message/wrong prompt message after submitting a form
