@@ -20,6 +20,7 @@ router.post('/user/me/change-avatar', upload.single('avatar'), user.changeMeAvat
 router.put('/user/me/change-name', user.changeMeName)
 router.put('/user/me/change-password', user.changeMePassword)
 
+
 router.get('/movie/list', movie.listMovies)
 router.get('/movie/detail/:id', movie.getMovieDetail)
 
@@ -28,6 +29,7 @@ router.get('/actor/detail/:id', actor.getActorDetail)
 
 router.get('/comment/list', comment.listComments)
 router.post('/comment/add-to-movie/:id', comment.addCommentToMovie)
+router.delete('/user/me/delete-comment', comment.delete_comment)
 
 router.use((e) => {
     console.log(e)

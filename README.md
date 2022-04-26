@@ -1,7 +1,6 @@
 # Rotten Potatoes
 
 ## Intro
-
 This is CUHKSZ CSC3170 group project
 
 ## Group Members

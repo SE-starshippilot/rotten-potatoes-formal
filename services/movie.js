@@ -36,7 +36,25 @@ const getMovieDetail = async(req, res, next) => {
     }
 }
 
+
+
+const search_movie = async(req, res, next) => {
+    try {
+        let {movie_name} = req.body
+        await query(`select id, name, cover_url, release_year from movies where name like concat('${movie_name}', '%')`)
+        res.join({
+            status: 0,
+            msg: 'searching success'
+        }) 
+    }
+    catch(e){
+        next(e)
+    }
+}
+
+
 module.exports = {
     listMovies,
-    getMovieDetail
+    getMovieDetail,
+    search_movie
 }

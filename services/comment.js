@@ -25,7 +25,22 @@ const addCommentToMovie = async(req, res, next) => {
     }
 }
 
+const delete_comment = async(req, res, next) => {
+    try{
+        let {comment_id} = req.body
+        await query(`delete from comments where id ='${comment_id}'`)
+        res.json({
+            status: 0,
+            msg: 'delete comments sucessfullt'
+        })
+    }
+    catch(e){
+        next(e)
+    }
+}
+
 module.exports = {
     listComments,
-    addCommentToMovie
+    addCommentToMovie,
+    delete_comment
 }

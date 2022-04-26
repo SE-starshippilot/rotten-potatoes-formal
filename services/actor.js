@@ -33,7 +33,23 @@ const getActorDetail = async(req, res, next) => {
     }
 }
 
+
+const search_actor = async(req, res, next) => {
+    try {
+        let {actor_name} = req.body
+        await query(`select id, name, photo_url from actors where name like concat('${actor_name}', '%')`)
+        res.join({
+            status: 0,
+            msg: 'searching success'
+        }) 
+    }
+    catch(e){
+        next(e)
+    }
+}
+
 module.exports = {
     listActors,
-    getActorDetail
+    getActorDetail,
+    search_actor
 }
