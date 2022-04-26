@@ -1,12 +1,13 @@
+require('dotenv').config()
+
 const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
+const bodyParser = require('body-parser')
 const router = require('./router/index')
 const init = require('./db/init')
-const bodyParser = require('body-parser');
 
-let reset = true
-init(reset)
+init(reset = process.env.DB_RESET === 'true')
 
 const app = express()
 
@@ -18,4 +19,4 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/api', router)
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)

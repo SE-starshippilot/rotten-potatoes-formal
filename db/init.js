@@ -60,6 +60,7 @@ const sqlCreateTableComments = `
 const init = async (reset) => {
     try {
         if (reset) await query(sqlDropTables)
+
         await query(sqlCreateTableMovies)
         await query(sqlCreateTableActors)
         await query(sqlCreateTableUsers)
@@ -74,7 +75,8 @@ const init = async (reset) => {
         await query(`load data local infile 'data/comments.csv' into table comments fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
         await query(`set global local_infile=0`)
 
-        await query(`insert into users(name, password) value('root', '123')`)
+        let root = await query(`select * from users where name='root'`)
+        if (root.length === 0) await query(`insert into users(name, password) value('root', '123')`)
     } catch(e) {
         console.log(e)
     }
