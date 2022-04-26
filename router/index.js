@@ -35,7 +35,7 @@ router.get('/actor/search', actor.search_actor)
 
 router.get('/comment/list', comment.listComments)
 router.post('/comment/add-to-movie/:id', comment.addCommentToMovie)
-router.delete('/user/me/delete-comment', comment.delete_comment)
+router.delete('/comment/delete-comment/:id', comment.delete_comment)
 
 router.use((e) => {
     console.log(e)

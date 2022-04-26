@@ -1,7 +1,7 @@
 const query = require('./query')
 
 const sqlDropTables = `
-    drop table if exists movies, actors, users, characters, comments
+    drop table if exists characters, comments, movies, actors, users
 `
 
 const sqlCreateTableMovies = `

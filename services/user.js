@@ -5,9 +5,10 @@ const query = require('../db/query')
 
 const userInfo = async(user_id) => {
     let [ user ] = await query(`select avatar_url, name from users where id=${user_id}`)
-    user.comments = await query(`select m.id, m.name, m.cover_url, c.rate, c.content, c.comment_date from movies m inner join comments c on m.id=c.movie_id where c.user_id=${user_id}`)
+    user.comments = await query(`select m.id as movie_id, m.name as movie_name, m.cover_url, c.rate, c.content, c.comment_date, c.id as comment_id from movies m inner join comments c on m.id=c.movie_id where c.user_id=${user_id}`)
+
     return user
-}
+}  
 
 const getUserInfo = async(req, res, next) => {
     try {
