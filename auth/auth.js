@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
-const secret = require('./secret')
+
+const secret = process.env.SECRET_KEY
 
 const signToken = (payload, time) => {
     return jwt.sign(payload, secret, { expiresIn: time })
