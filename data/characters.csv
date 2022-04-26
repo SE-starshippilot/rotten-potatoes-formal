@@ -4,586 +4,1796 @@ id,character_name,movie_id,actor_id
 3,Warden Norton,1,3
 4,Heywood,1,4
 5,Captain Hadley,1,5
-6,Don Vito Corleone,2,6
-7,Michael,2,7
-8,Sonny,2,8
-9,Kay Adams,2,9
-10,Clemenza,2,10
-11,Bruce Wayne,3,11
-12,Joker,3,12
-13,Harvey Dent,3,13
-14,Alfred,3,14
-15,Rachel,3,15
-16,Michael,4,7
-17,Vito Corleone,4,16
-18,Tom Hagen,4,17
-19,Kay,4,9
-20,Fredo Corleone,4,18
-21,Connie Corleone,4,19
-22,Hyman Roth,4,20
-23,Juror 8,5,21
-24,Juror 3,5,22
-25,Juror 1,5,23
-26,Juror 2,5,24
-27,Juror 4,5,25
-28,Oskar Schindler,6,26
-29,Amon Goeth,6,27
-30,Itzhak Stern,6,28
-31,Emilie Schindler,6,29
-32,Poldek Pfefferberg,6,30
-33,Frodo,7,31
-34,Aragorn,7,32
-35,Gandalf,7,33
-36,Legolas,7,34
-37,Elanor Gamgee,7,35
-38,Vincent Vega,8,36
-39,Mia Wallace,8,37
-40,Jules Winnfield,8,38
-41,Butch Coolidge,8,39
-42,Pumpkin,8,40
-43,Frodo,9,31
-44,Gandalf,9,33
-45,Legolas,9,34
-46,Boromir,9,41
-47,Voice of the Ring,9,42
-48,Sam,9,43
-49,Sauron,9,44
-50,Galadriel,9,45
-51,Blondie,10,46
-52,Tuco,10,47
-53,Sentenza,10,48
-54,Alcoholic Union Captain,10,49
-55,Father Pablo Ramirez,10,50
-56,Forrest Gump,11,51
-57,Jenny Curran,11,52
-58,Lieutenant Dan Taylor,11,53
-59,Mrs. Gump,11,54
-60,Young Forrest,11,55
-61,Tyler Durden,12,56
-62,Narrator,12,57
-63,Robert Paulsen,12,58
-64,Richard Chesler (Regional Manager),12,59
-65,Intern at Hospital,12,60
-66,Cobb,13,61
-67,Arthur,13,62
-68,Ariadne,13,63
-69,Saito,13,64
-70,Eames,13,65
-71,Frodo,14,31
-72,Gandalf,14,33
-73,Aragorn,14,32
-74,Legolas,14,34
-75,Aldor,14,66
-76,Sam,14,43
-77,Madril,14,67
-78,Man Flesh Uruk,14,44
-79,Galadriel,14,45
-80,Pippin,14,68
-81,Sharku,14,69
-82,Wormtongue,14,70
-83,Luke Skywalker,15,71
-84,Han Solo,15,72
-85,Princess Leia,15,73
-86,Lando Calrissian,15,74
-87,C-3PO,15,75
-88,Neo,16,76
-89,Morpheus,16,77
-90,Trinity,16,78
-91,Agent Smith,16,79
-92,Oracle,16,80
-93,James Conway,17,16
-94,Henry Hill,17,81
-95,Tommy DeVito,17,82
-96,Karen Hill,17,83
-97,Paul Cicero,17,84
-98,Frankie Carbone,17,85
-99,R.P. McMurphy,18,86
-100,Nurse Ratched,18,87
-101,Ellis,18,88
-102,Col. Matterson,18,89
-103,Turkle,18,90
-104,Somerset,19,2
-105,Mills,19,56
-106,John Doe,19,91
-107,Dead Man at 1st Crime Scene,19,92
-108,Detective Taylor at First Murder,19,93
-109,Tracy,19,94
-110,Officer Davis,19,95
-111,Kikuchiyo,20,96
-112,Kambei Shimada,20,97
-113,Shino,20,98
-114,Farmer Manzo,20,99
-115,Shichiroji,20,100
-116,George Bailey,21,101
-117,Mary Hatch,21,102
-118,Mr. Potter,21,103
-119,Uncle Billy,21,104
-120,Clarence,21,105
-121,Clarice Starling,22,106
-122,Dr. Hannibal Lecter,22,107
-123,Ardelia Mapp,22,108
-124,Jack Crawford,22,109
-125,Dr. Frederick Chilton,22,110
-126,Buscapé - Rocket,23,111
-127,Zé Pequeno - Li'l Zé,23,112
-128,Dadinho - Li'l Dice,23,113
-129,Cabeleira - Shaggy,23,114
-130,Mané Galinha - Knockout Ned,23,115
-131,Captain Miller,24,51
-132,Private Ryan,24,116
-133,Sergeant Horvath,24,117
-134,Private Reiben,24,118
-135,Private Jackson,24,119
-136,Private Mellish,24,120
-137,Guido,25,121
-138,Dora,25,122
-139,Giosué,25,123
-140,Madre di Dora,25,124
-141,Dottor Lessing,25,125
-142,Paul Edgecomb,26,51
-143,John Coffey,26,126
-144,Brutus 'Brutal' Howell,26,127
-145,Jan Edgecomb,26,128
-146,Warden Hal Moores,26,129
-147,Eduard Delacroix,26,130
-148,Luke Skywalker,27,71
-149,Han Solo,27,72
-150,Princess Leia Organa,27,73
-151,Ben Obi-Wan Kenobi,27,131
-152,Grand Moff Tarkin,27,132
-153,C-3PO,27,75
-154,R2-D2,27,133
-155,Chewbacca,27,134
-156,Darth Vader,27,135
-157,Cooper,28,136
-158,Brand,28,137
-159,Murph,28,138
-160,Murph (10 Yrs.),28,139
-161,Murph (Older),28,140
-162,The Terminator,29,141
-163,Sarah Connor,29,142
-164,John Connor,29,143
-165,T-1000,29,144
-166,Dr. Silberman,29,145
-167,Marty McFly,30,146
-168,Dr. Emmett Brown,30,147
-169,Lorraine Baines,30,148
-170,George McFly,30,149
-171,Biff Tannen,30,150
-172,Chihiro,31,151
-173,Yubaba,31,152
-174,Haku,31,153
-175,Chihiro Ogino,31,154
-176,Aogaeru,31,155
-177,Norman Bates,32,156
-178,Marion Crane,32,157
-179,Lila Crane,32,158
-180,Sam Loomis,32,159
-181,Det. Milton Arbogast,32,23
-182,Sheriff Al Chambers,32,160
-183,Wladyslaw Szpilman,33,161
-184,Captain Wilm Hosenfeld,33,162
-185,Father,33,163
-186,Dorota,33,164
-187,Jurek,33,165
-188,Leon,34,166
-189,Stansfield,34,167
-190,Mathilda,34,168
-191,Tony,34,169
-192,Malky,34,170
-193,Ki Taek,35,171
-194,Dong Ik,35,172
-195,Yeon Kyo,35,173
-196,Ki Woo,35,174
-197,Ki Jung,35,175
-198,Simba,36,176
-199,Scar,36,177
-200,Mufasa,36,178
-201,Shenzi,36,179
-202,Zazu,36,180
-203,Derek,37,57
-204,Danny,37,143
-205,Doris,37,181
-206,Davina,37,182
-207,Seth,37,183
-208,Stacey,37,184
-209,Sweeney,37,185
-210,Maximus,38,186
-211,Commodus,38,187
-212,Lucilla,38,188
-213,Proximo,38,189
-214,Marcus Aurelius,38,190
-215,Verbal,39,91
-216,Keaton,39,191
-217,Dave Kujan,39,192
-218,McManus,39,193
-219,Fenster,39,194
-220,Hockney,39,195
-221,Billy,40,61
-222,Colin,40,116
-223,Costello,40,86
-224,Dignam,40,196
-225,Queenan,40,197
-226,Mr. French,40,198
-227,Madolyn,40,199
-228,Brown,40,200
-229,Alfred Borden,41,11
-230,Robert Angier,41,201
-231,Olivia Wenscombe,41,202
-232,Cutter,41,14
-233,Julia McCullough,41,203
-234,Sarah,41,204
-235,Jess,41,205
-236,Rick Blaine,42,206
-237,Ilsa Lund,42,207
-238,Victor Laszlo,42,208
-239,Captain Louis Renault,42,209
-240,Major Heinrich Strasser,42,210
-241,Andrew,43,211
-242,Fletcher,43,212
-243,Nicole,43,213
-244,Jim Neimann,43,214
-245,Ryan,43,215
-246,Philippe,44,216
-247,Driss,44,217
-248,Yvonne,44,218
-249,Magalie,44,219
-250,Bastien - dit le Plumeau,44,220
-251,A Factory Worker,45,221
-252,A Gamin,45,222
-253,Big Bill,45,223
-254,Mechanic,45,224
-255,Burglar,45,225
-256,Frank,46,21
-257,Harmonica,46,226
-258,Jill McBain,46,227
-259,Manuel 'Cheyenne' Gutiérrez,46,228
-260,Morton - Railroad Baron,46,229
-261,Sam,46,230
-262,Hanshiro Tsugumo,47,231
-263,Motome Chijiiwa,47,232
-264,Miho Tsugumo,47,233
-265,Hikokuro Omodaka,47,234
-266,Tango Inaba,47,235
-267,L.B. Jefferies,49,101
-268,Lisa Fremont,49,236
-269,Tom Doyle,49,237
-270,Stella,49,238
-271,Lars Thorwald,49,239
-272,Miss Lonelyhearts,49,240
-273,Ripley,50,241
-274,Dallas,50,242
-275,Kane,50,243
-276,Lambert,50,244
-277,Brett,50,245
-278,A Tramp,51,221
-279,A Blind Girl,51,246
-280,An Eccentric Millionaire,51,247
-281,The Millionaire's Butler,51,248
-282,A Prizefighter,51,225
-283,Street Sweeper,51,249
-284,Boxing Fight Referee,51,250
-285,Alfredo,52,251
-286,Spaccafico,52,252
-287,Maria Di Vita - Younger,52,253
-288,Anna,52,254
-289,Usher,52,255
-290,Leonard,53,256
-291,Natalie,53,78
-292,Teddy,53,257
-293,Burt,53,258
-294,Leonard's Wife,53,259
-295,Sammy Jankis,53,260
-296,Captain Benjamin L. Willard,54,197
-297,Colonel Walter E. Kurtz,54,6
-298,Lieutenant Colonel Bill Kilgore,54,17
-299,Jay 'Chef' Hicks,54,261
-300,Lance B. Johnson,54,262
-301,Tyrone 'Clean' Miller,54,77
-302,Chief Phillips,54,263
-303,Colonel Lucas,54,72
-304,Photojournalist,54,264
-305,General R. Corman,54,265
-306,Indy,55,72
-307,Marion,55,266
-308,Belloq,55,267
-309,Sallah,55,268
-310,Toht,55,269
-311,Brody,55,270
-312,Django,56,271
-313,Dr. King Schultz,56,272
-314,Calvin Candie,56,61
-315,Broomhilda von Shaft,56,273
-316,Stephen,56,38
-317,Billy Crash,56,274
-318,Leonide Moguy,56,275
-319,WALL·E,57,276
-320,EVE,57,277
-321,Captain,57,278
-322,Shelby Forthright,57,279
-323,John,57,280
-324,Hauptmann Gerd Wiesler,58,281
-325,Christa-Maria Sieland,58,282
-326,Georg Dreyman,58,283
-327,Oberstleutnant Anton Grubitz,58,284
-328,Albert Jerska,58,285
-329,Joe Gillis,59,286
-330,Norma Desmond,59,287
-331,Max Von Mayerling,59,288
-332,Betty Schaefer,59,289
-333,Sheldrake,59,290
-334,Col. Dax,60,291
-335,Cpl. Philippe Paris,60,292
-336,Gen. George Broulard,60,293
-337,Gen. Paul Mireau,60,294
-338,Lt. Roget,60,295
-339,Jack Torrance,61,86
-340,Wendy Torrance,61,296
-341,Danny Torrance,61,297
-342,Dick Hallorann,61,90
-343,Stuart Ullman,61,298
-344,Charles Grady,61,299
-345,Lloyd,61,300
-346,Hynkel - Dictator of Tomania,62,221
-347,Hannah,62,222
-348,Napaloni - Dictator of Bacteria,62,301
-349,Schultz,62,302
-350,Garbitsch,62,303
-351,Herring,62,304
-352,Madame Napaloni,62,305
-353,Leonard Vole,63,306
-354,Christine,63,307
-355,Sir Wilfrid Robarts,63,308
-356,Miss Plimsoll,63,309
-357,Brogan-Moore,63,310
-358,Tony Stark,64,311
-359,Thor,64,312
-360,Bruce Banner,64,313
-361,Steve Rogers,64,314
-362,Natasha Romanoff,64,202
-363,James Rhodes,64,315
-364,Ripley,65,241
-365,Corporal Hicks,65,316
-366,Newt,65,317
-367,Burke,65,214
-368,Bishop,65,318
-369,Private Hudson,65,319
-370,Lieutenant Gorman,65,320
-371,Lester Burnham,66,91
-372,Carolyn Burnham,66,321
-373,Jane Burnham,66,322
-374,Ricky Fitts,66,323
-375,Angela Hayes,66,324
-376,Buddy Kane,66,325
-377,Group Capt. Lionel Mandrake,67,326
-378,Gen. 'Buck' Turgidson,67,327
-379,Brig. Gen. Jack D. Ripper,67,328
-380,Col. 'Bat' Guano,67,329
-381,Maj. 'King' Kong,67,330
-382,Bruce Wayne,68,11
-383,Bane,68,65
-384,Selina,68,137
-385,Commissioner Gordon,68,167
-386,Blake,68,62
-387,Miranda,68,331
-388,Fox,68,2
-389,Alfred,68,14
-390,Foley,68,332
-391,Dr. Pavel,68,333
-392,Daggett,68,334
-393,Stryver,68,335
-394,Miles Morales,69,336
-395,Peter B. Parker,69,337
-396,Gwen Stacy,69,338
-397,Uncle Aaron,69,339
-398,Jefferson Davis,69,340
-399,Arthur Fleck,70,187
-400,Murray Franklin,70,16
-401,Sophie Dumond,70,341
-402,Penny Fleck,70,342
-403,Thomas Wayne,70,343
-404,Detective Burke,70,344
-405,Detective Garrity,70,345
-406,Dae-su Oh,71,346
-407,Woo-jin Lee,71,347
-408,Mi-do,71,348
-409,Mr. Han,71,349
-410,Park Cheol-woong,71,350
-411,William Wallace,72,351
-412,Princess Isabelle,72,352
-413,Longshanks - King Edward I,72,353
-414,Robert the Bruce,72,354
-415,Young William,72,355
-416,Antonio Salieri,73,356
-417,Wolfgang Amadeus Mozart,73,357
-418,Constanze Mozart,73,358
-419,Leopold Mozart,73,359
-420,Emanuel Schikaneder,73,360
-421,Woody,74,51
-422,Buzz Lightyear,74,361
-423,Mr. Potato Head,74,362
-424,Slinky Dog,74,363
-425,Rex,74,364
-426,Hamm,74,280
-427,Bo Peep,74,365
-428,Capt.-Lt. Henrich Lehmann-Willenbrock - Der Alte,75,366
-429,Lt. Werner - Correspondent,75,367
-430,2nd Lieutenant - 2WO,75,368
-431,Kriechbaum - Chief Quartermaster-Navigator,75,369
-432,Johann,75,370
-433,Miguel,76,371
-434,Héctor,76,372
-435,Ernesto de la Cruz,76,373
-436,Mamá Imelda,76,374
-437,Papá,76,375
-438,Lt. Aldo Raine,77,56
-439,Bridget von Hammersmark,77,376
-440,Sgt. Donny Donowitz,77,377
-441,Shosanna,77,378
-442,Col. Hans Landa,77,272
-443,Lt. Archie Hicox,77,379
-444,Fredrick Zoller,77,380
-445,San,78,381
-446,Ashitaka,78,382
-447,Jigo,78,383
-448,Lady Eboshi,78,384
-449,Gonza,78,385
-450,Noodles,79,16
-451,Max,79,386
-452,Deborah,79,387
-453,Jimmy O'Donnell,79,388
-454,Carol,79,389
-455,Joe,79,390
-456,Tony Stark,80,311
-457,Steve Rogers,80,314
-458,Bruce Banner,80,313
-459,Thor,80,312
-460,Natasha Romanoff,80,202
-461,Clint Barton,80,391
-462,James Rhodes,80,315
-463,Scott Lang,80,392
-464,Doctor Strange,80,393
-465,T'Challa,80,394
-466,Carol Danvers,80,395
-467,Sean,81,396
-468,Will,81,116
-469,Chuckie,81,397
-470,Lambeau,81,398
-471,Morgan,81,399
-472,Billy,81,400
-473,Sara Goldfarb,82,140
-474,Harry Goldfarb,82,401
-475,Marion Silver,82,402
-476,Tyrone C. Love,82,403
-477,Tappy Tibbons,82,404
-478,Ada,82,405
-479,Woody,83,51
-480,Buzz Lightyear,83,361
-481,Jessie,83,406
-482,Lotso,83,407
-483,Mr. Potato Head,83,362
-484,Ken,83,408
-485,Rex,83,364
-486,Hamm,83,280
-487,Mrs. Potato Head,83,409
-488,Andy,83,410
-489,Don Lockwood,84,411
-490,Cosmo Brown,84,412
-491,Kathy Selden,84,413
-492,Lina Lamont,84,414
-493,R.F. Simpson,84,415
-494,Taki Tachibana,85,416
-495,Mitsuha Miyamizu,85,417
-496,Katsuhiko Teshigawara,85,418
-497,Sayaka Natori,85,419
-498,Taki's Father,85,420
-499,Luke Skywalker,86,71
-500,Han Solo,86,72
-501,Princess Leia,86,73
-502,Lando Calrissian,86,74
-503,C-3PO,86,75
-504,Chewbacca,86,134
-505,Anakin Skywalker,86,421
-506,The Emperor,86,422
-507,Yoda,86,423
-508,Darth Vader,86,178
-509,Darth Vader,86,135
-510,Ben 'Obi-Wan' Kenobi,86,131
-511,R2-D2,86,133
-512,Moff Jerjerrod,86,424
-513,Admiral Piett,86,425
-514,Ranchoddas Shamaldas Chanchad (Rancho),87,426
-515,Farhan Qureshi,87,427
-516,Mona Sahastrabuddhe,87,428
-517,Raju Rastogi,87,429
-518,Pia,87,430
-519,Dr. Dave Bowman,88,431
-520,Dr. Frank Poole,88,432
-521,Dr. Heywood R. Floyd,88,433
-522,Moon-Watcher,88,434
-523,Dr. Andrei Smyslov,88,435
-524,Mr. White,89,436
-525,Mr. Orange,89,40
-526,Mr. Blonde,89,437
-527,Nice Guy Eddie,89,438
-528,Mr. Pink,89,439
-529,Joe Cabot,89,440
-530,Joel Barish,90,441
-531,Clementine Kruczynski,90,442
-532,Dr. Mierzwiak,90,443
-533,Patrick,90,31
-534,Frank,90,444
-535,Stan,90,313
-536,Carrie,90,445
-537,Kingo Gondo,91,96
-538,Aoki - the Chauffeur,91,446
-539,Chief Detective Tokura,91,231
-540,Reiko Gondo,91,447
-541,Kawanishi - Gondo's Secretary,91,448
-542,Chief Detective 'Bos'n' Taguchi,91,449
-543,Detective Nakao,91,450
-544,Kane,92,451
-545,Jedediah Leland,92,452
-546,Susan Alexander Kane,92,453
-547,Mary Kane,92,454
-548,Emily Monroe Norton Kane,92,455
-549,Peter Parker,93,456
-550,MJ,93,457
-551,Doctor Strange,93,393
-552,Ned Leeds,93,458
-553,Happy Hogan,93,459
-554,Max Dillon,93,271
-555,Norman Osborn,93,460
-556,Zain,94,461
-557,Lawrence,95,462
-558,Prince Faisal,95,131
-559,Auda Abu Tayi,95,463
-560,General Allenby,95,464
-561,Sherif Ali,95,465
-562,Turkish Bey,95,466
-563,Hans Beckert,96,467
-564,Elsie Beckmann,96,468
-565,Inspector Karl Lohmann,96,469
-566,Inspector Groeber,96,470
-567,Schränker,96,471
-568,Roger Thornhill,97,472
-569,Eve Kendall,97,473
-570,Phillip Vandamm,97,474
-571,Clara Thornhill,97,475
-572,The Professor,97,476
-573,Lucas,98,477
-574,Theo,98,478
-575,Klara,98,479
-576,Grethe,98,480
-577,Nadja,98,481
-578,John 'Scottie' Ferguson,99,101
-579,Madeleine Elster,99,482
-580,Marjorie 'Midge' Wood,99,483
-581,Gavin Elster,99,484
-582,Coroner,99,485
-583,Scottie's Doctor,99,486
-584,Amélie Poulain,100,487
-585,Nino Quincampoix,100,488
-586,Raphaël Poulain,100,489
-587,Lucien,100,490
-588,Georgette,100,491
+6,Tommy,1,6
+7,Bogs Diamond,1,7
+8,Brooks Hatlen,1,8
+9,1946 D.A.,1,9
+10,Skeet,1,10
+11,Jigger,1,11
+12,Floyd,1,12
+13,Snooze,1,13
+14,Ernie,1,14
+15,Guard Mert,1,15
+16,Guard Trout,1,16
+17,Don Vito Corleone,2,17
+18,Michael,2,18
+19,Sonny,2,19
+20,Kay Adams,2,20
+21,Clemenza,2,21
+22,Tom Hagen,2,22
+23,Capt. McCluskey,2,23
+24,Jack Woltz,2,24
+25,Barzini,2,25
+26,Sollozzo,2,26
+27,Tessio,2,27
+28,Connie,2,28
+29,Carlo,2,29
+30,Fredo,2,30
+31,Cuneo,2,31
+32,Johnny Fontane,2,32
+33,Mama Corleone,2,33
+34,Luca Brasi,2,34
+35,Bruce Wayne,3,35
+36,Joker,3,36
+37,Harvey Dent,3,37
+38,Alfred,3,38
+39,Rachel,3,39
+40,Gordon,3,40
+41,Lucius Fox,3,2
+42,Ramirez,3,41
+43,Wuertz,3,42
+44,Scarecrow,3,43
+45,Lau,3,44
+46,Mayor,3,45
+47,Maroni,3,46
+48,Chechen,3,47
+49,Engel,3,48
+50,Stephens,3,49
+51,Loeb,3,50
+52,Reese,3,51
+53,Michael,4,18
+54,Vito Corleone,4,52
+55,Tom Hagen,4,22
+56,Kay,4,20
+57,Fredo Corleone,4,30
+58,Connie Corleone,4,28
+59,Hyman Roth,4,53
+60,Frankie Pentangeli,4,54
+61,Sen. Pat Geary,4,55
+62,Al Neri,4,56
+63,Fanucci,4,57
+64,Rocco Lampone,4,58
+65,Young Clemenza,4,59
+66,Genco,4,60
+67,Young Mama Corleone,4,61
+68,Mama Corleone,4,33
+69,Deanna Corleone,4,62
+70,Signor Roberto,4,63
+71,Juror 8,5,64
+72,Juror 3,5,65
+73,Juror 1,5,66
+74,Juror 2,5,67
+75,Juror 4,5,68
+76,Juror 5,5,69
+77,Juror 6,5,70
+78,Juror 7,5,71
+79,Juror 10,5,72
+80,Juror 11,5,73
+81,Juror 12,5,74
+82,Judge,5,31
+83,Court Clerk,5,75
+84,Oskar Schindler,6,76
+85,Amon Goeth,6,77
+86,Itzhak Stern,6,78
+87,Emilie Schindler,6,79
+88,Poldek Pfefferberg,6,80
+89,Helen Hirsch,6,81
+90,Wiktoria Klonowska,6,82
+91,Wilek Chilowicz,6,83
+92,Marcel Goldberg,6,84
+93,Ingrid,6,85
+94,Julian Scherner,6,86
+95,Rolf Czurda,6,87
+96,Herman Toffel,6,88
+97,Albert Hujar,6,89
+98,Chaja Dresner,6,90
+99,Frodo,7,91
+100,Aragorn,7,92
+101,Gandalf,7,93
+102,Legolas,7,94
+103,Elanor Gamgee,7,95
+104,Sam,7,96
+105,Madril,7,97
+106,Boromir,7,98
+107,Galadriel,7,99
+108,Pippin,7,100
+109,Damrod,7,101
+110,Celeborn,7,102
+111,Theoden,7,103
+112,Vincent Vega,8,104
+113,Mia Wallace,8,105
+114,Jules Winnfield,8,106
+115,Butch Coolidge,8,107
+116,Pumpkin,8,108
+117,Honey Bunny,8,109
+118,Marvin,8,110
+119,Brett,8,111
+120,Roger,8,112
+121,Marsellus Wallace,8,113
+122,Paul,8,114
+123,Trudi,8,115
+124,Jody,8,116
+125,Lance,8,117
+126,Phillip Morris Page,8,118
+127,Frodo,9,91
+128,Gandalf,9,93
+129,Legolas,9,94
+130,Boromir,9,98
+131,Voice of the Ring,9,119
+132,Sam,9,96
+133,Sauron,9,120
+134,Galadriel,9,99
+135,Pippin,9,100
+136,Celeborn,9,102
+137,Gil-galad,9,121
+138,Bilbo,9,122
+139,Saruman,9,123
+140,Lurtz,9,124
+141,Gollum,9,125
+142,Blondie,10,126
+143,Tuco,10,127
+144,Sentenza,10,128
+145,Alcoholic Union Captain,10,129
+146,Father Pablo Ramirez,10,130
+147,Maria,10,131
+148,Sheriff,10,132
+149,Jackson,10,133
+150,Member of Angel Eyes' Gang,10,134
+151,Stevens,10,135
+152,Member of Angel Eyes' Gang,10,136
+153,Forrest Gump,11,137
+154,Jenny Curran,11,138
+155,Lieutenant Dan Taylor,11,139
+156,Mrs. Gump,11,140
+157,Young Forrest,11,141
+158,Principal,11,142
+159,Young Elvis Presley,11,143
+160,School Bus Driver,11,144
+161,Tyler Durden,12,145
+162,Narrator,12,146
+163,Robert Paulsen,12,147
+164,Richard Chesler (Regional Manager),12,148
+165,Intern at Hospital,12,149
+166,Thomas at Remaining Men Together,12,150
+167,Group Leader - Remaining Men Together,12,151
+168,Weeping Woman - Onward and Upward,12,152
+169,Leader - Partners in Positivity,12,153
+170,Marla Singer,12,154
+171,Speaker - Free and Clear,12,155
+172,Federated Motor Co. Inspector Bird,12,156
+173,Airport Security Officer,12,157
+174,Doorman at Pearson Towers,12,158
+175,Cobb,13,159
+176,Arthur,13,160
+177,Ariadne,13,161
+178,Saito,13,162
+179,Eames,13,163
+180,Yusuf,13,164
+181,Robert Fischer,13,43
+182,Browning,13,165
+183,Mal,13,166
+184,Maurice Fischer,13,167
+185,Miles,13,38
+186,Nash,13,168
+187,Phillipa (5 Years Old),13,169
+188,Japanese Security Guard,13,170
+189,Frodo,14,91
+190,Gandalf,14,93
+191,Aragorn,14,92
+192,Legolas,14,94
+193,Aldor,14,171
+194,Sam,14,96
+195,Madril,14,97
+196,Man Flesh Uruk,14,120
+197,Galadriel,14,99
+198,Pippin,14,100
+199,Sharku,14,172
+200,Wormtongue,14,173
+201,Haleth,14,174
+202,Theoden,14,103
+203,Gamling,14,175
+204,Saruman,14,123
+205,Luke Skywalker,15,176
+206,Han Solo,15,177
+207,Princess Leia,15,178
+208,Lando Calrissian,15,179
+209,C-3PO,15,180
+210,Darth Vader,15,181
+211,Chewbacca,15,182
+212,R2-D2,15,183
+213,Yoda,15,184
+214,Ben (Obi-Wan) Kenobi,15,185
+215,Boba Fett,15,186
+216,"Lobot, Lando's Aide",15,187
+217,Chief Ugnaught,15,188
+218,Emperor,15,189
+219,Admiral Piett,15,190
+220,General Veers,15,191
+221,Admiral Ozzel,15,192
+222,Neo,16,193
+223,Morpheus,16,194
+224,Trinity,16,195
+225,Agent Smith,16,196
+226,Oracle,16,197
+227,Cypher,16,198
+228,Tank,16,199
+229,Apoc,16,200
+230,Mouse,16,201
+231,Switch,16,202
+232,Dozer,16,203
+233,Agent Brown,16,204
+234,Agent Jones,16,205
+235,Dujour (White Rabbit Girl),16,206
+236,Spoon Boy,16,207
+237,James Conway,17,52
+238,Henry Hill,17,208
+239,Tommy DeVito,17,209
+240,Karen Hill,17,210
+241,Paul Cicero,17,211
+242,Frankie Carbone,17,60
+243,Sonny Bunz,17,212
+244,Frenchy,17,213
+245,Billy Batts,17,214
+246,Morris Kessler,17,215
+247,Henny Youngman,17,216
+248,Janice Rossi,17,217
+249,Tommy's Mother,17,218
+250,Vinnie,17,219
+251,Sandy,17,220
+252,R.P. McMurphy,18,221
+253,Nurse Ratched,18,222
+254,Ellis,18,223
+255,Col. Matterson,18,224
+256,Turkle,18,225
+257,Warren,18,226
+258,Martini,18,227
+259,Bancini,18,228
+260,Washington,18,229
+261,Cheswick,18,230
+262,Taber,18,231
+263,Somerset,19,2
+264,Mills,19,145
+265,John Doe,19,232
+266,Dead Man at 1st Crime Scene,19,233
+267,Detective Taylor at First Murder,19,234
+268,Tracy,19,235
+269,Officer Davis,19,236
+270,Dr. Santiago,19,237
+271,Police Captain,19,238
+272,Workman at Door of Somerset's Office,19,239
+273,Talbot,19,240
+274,Kikuchiyo,20,241
+275,Kambei Shimada,20,242
+276,Shino,20,243
+277,Farmer Manzo,20,244
+278,Shichiroji,20,245
+279,Heihachi,20,246
+280,Kyuzo,20,247
+281,Farmer Yohei,20,248
+282,Gorobei Katayama,20,249
+283,Farmer Rikichi,20,250
+284,Old Man Gisaku,20,251
+285,Thief,20,252
+286,Bandit Scout,20,253
+287,George Bailey,21,254
+288,Mary Hatch,21,255
+289,Mr. Potter,21,256
+290,Uncle Billy,21,257
+291,Clarence,21,258
+292,Mrs. Bailey,21,259
+293,Ernie,21,260
+294,Bert,21,261
+295,Violet Beck,21,262
+296,Mr. Gower,21,263
+297,Sam Wainwright,21,264
+298,Harry Bailey,21,265
+299,Pa Bailey,21,266
+300,Cousin Tilly,21,267
+301,Ruth Dakin,21,268
+302,Mrs. Hatch,21,269
+303,Clarice Starling,22,270
+304,Dr. Hannibal Lecter,22,271
+305,Ardelia Mapp,22,272
+306,Jack Crawford,22,273
+307,Dr. Frederick Chilton,22,274
+308,Barney,22,275
+309,Friendly Psychopath,22,276
+310,Miggs,22,277
+311,Catherine Martin,22,278
+312,Jame Gumb,22,279
+313,Buscapé - Rocket,23,280
+314,Zé Pequeno - Li'l Zé,23,281
+315,Dadinho - Li'l Dice,23,282
+316,Cabeleira - Shaggy,23,283
+317,Mané Galinha - Knockout Ned,23,284
+318,Angélica,23,285
+319,Captain Miller,24,137
+320,Private Ryan,24,286
+321,Sergeant Horvath,24,287
+322,Private Reiben,24,288
+323,Private Jackson,24,289
+324,Private Mellish,24,290
+325,Private Caparzo,24,291
+326,T,24,292
+327,Corporal Upham,24,293
+328,Captain Hamill,24,294
+329,Sergeant Hill,24,295
+330,Lieutenant Colonel Anderson,24,296
+331,Corporal Henderson,24,297
+332,Toynbe,24,298
+333,Parker,24,299
+334,Guido,25,300
+335,Dora,25,301
+336,Giosué,25,302
+337,Madre di Dora,25,303
+338,Dottor Lessing,25,304
+339,Guicciardini,25,305
+340,Rodolfo,25,306
+341,Paul Edgecomb,26,137
+342,John Coffey,26,307
+343,Brutus 'Brutal' Howell,26,308
+344,Jan Edgecomb,26,309
+345,Warden Hal Moores,26,310
+346,Eduard Delacroix,26,311
+347,Arlen Bitterbuck,26,312
+348,Percy Wetmore,26,313
+349,'Wild Bill' Wharton,26,314
+350,Dean Stanton,26,289
+351,Harry Terwilliger,26,9
+352,Melinda Moores,26,315
+353,Toot-Toot,26,316
+354,Old Paul Edgecomb,26,317
+355,Elaine Connelly,26,318
+356,Klaus Detterick,26,4
+357,Luke Skywalker,27,176
+358,Han Solo,27,177
+359,Princess Leia Organa,27,178
+360,Ben Obi-Wan Kenobi,27,185
+361,Grand Moff Tarkin,27,319
+362,C-3PO,27,180
+363,R2-D2,27,183
+364,Chewbacca,27,182
+365,Darth Vader,27,181
+366,Uncle Owen,27,320
+367,Aunt Beru,27,321
+368,Chief Jawa,27,188
+369,General Dodonna,27,322
+370,General Willard,27,323
+371,Red Leader,27,324
+372,Red Two (Wedge),27,325
+373,Red Three (Biggs),27,326
+374,Red Four (John D.),27,327
+375,Cooper,28,328
+376,Brand,28,329
+377,Murph,28,330
+378,Murph (10 Yrs.),28,331
+379,Murph (Older),28,332
+380,Donald,28,333
+381,Tom (15 Yrs.),28,334
+382,School Principal,28,335
+383,Ms. Hanley,28,336
+384,Boots,28,337
+385,TARS,28,338
+386,Doyle,28,339
+387,Williams,28,340
+388,Professor Brand,28,38
+389,Romilly,28,341
+390,CASE,28,342
+391,Tom,28,343
+392,The Terminator,29,344
+393,Sarah Connor,29,345
+394,John Connor,29,346
+395,T-1000,29,347
+396,Dr. Silberman,29,348
+397,Miles Dyson,29,349
+398,Tarissa Dyson,29,350
+399,Enrique Salceda,29,351
+400,Tim,29,352
+401,Janelle Voight,29,353
+402,Todd Voight,29,354
+403,Cigar Biker,29,355
+404,Lloyd,29,356
+405,Old John Connor,29,357
+406,Marty McFly,30,358
+407,Dr. Emmett Brown,30,231
+408,Lorraine Baines,30,359
+409,George McFly,30,360
+410,Biff Tannen,30,361
+411,Jennifer Parker,30,362
+412,Dave McFly,30,363
+413,Linda McFly,30,364
+414,Sam Baines,30,365
+415,Stella Baines,30,366
+416,Mr. Strickland,30,367
+417,Skinhead,30,368
+418,3-D,30,369
+419,Match,30,370
+420,Marvin Berry,30,371
+421,Goldie Wilson,30,372
+422,Chihiro,31,373
+423,Yubaba,31,374
+424,Haku,31,375
+425,Chihiro Ogino,31,376
+426,Aogaeru,31,377
+427,Bô,31,378
+428,Bandai-gaeru,31,379
+429,Kamajî,31,380
+430,Norman Bates,32,381
+431,Marion Crane,32,382
+432,Lila Crane,32,383
+433,Sam Loomis,32,384
+434,Det. Milton Arbogast,32,66
+435,Sheriff Al Chambers,32,385
+436,Dr. Fred Richman,32,386
+437,Tom Cassidy,32,264
+438,Caroline,32,387
+439,George Lowery,32,388
+440,Mrs. Chambers,32,389
+441,California Charlie,32,390
+442,Highway Patrol Officer,32,391
+443,Deputy District Attorney Alan Deats,32,392
+444,Wladyslaw Szpilman,33,393
+445,Captain Wilm Hosenfeld,33,394
+446,Father,33,395
+447,Dorota,33,396
+448,Jurek,33,397
+449,Henryk,33,398
+450,Mother,33,399
+451,SS Slapping Father,33,400
+452,Mr. Lipa,33,401
+453,Schutzpolizei,33,402
+454,Leon,34,403
+455,Stansfield,34,40
+456,Mathilda,34,404
+457,Tony,34,405
+458,Malky,34,406
+459,Mathilda's Father,34,407
+460,Mathilda's Mother,34,408
+461,Mathilda's Sister,34,409
+462,Fatman,34,410
+463,Blond Babe,34,411
+464,Ki Taek,35,412
+465,Dong Ik,35,413
+466,Yeon Kyo,35,414
+467,Ki Woo,35,415
+468,Ki Jung,35,416
+469,Da Song,35,417
+470,Driver Yoon,35,418
+471,Simba,36,419
+472,Scar,36,420
+473,Mufasa,36,421
+474,Shenzi,36,422
+475,Zazu,36,423
+476,Young Nala,36,424
+477,Ed,36,425
+478,Rafiki,36,426
+479,Nala,36,427
+480,Timon,36,428
+481,Banzai,36,429
+482,Pumbaa,36,430
+483,Sarabi,36,431
+484,Young Simba,36,432
+485,Lion Roars,36,433
+486,Additional Voices,36,434
+487,Derek,37,146
+488,Danny,37,346
+489,Doris,37,435
+490,Davina,37,436
+491,Seth,37,437
+492,Stacey,37,438
+493,Sweeney,37,439
+494,Murray,37,440
+495,Cameron,37,441
+496,Dennis,37,442
+497,Lamont,37,443
+498,Rasmussen,37,444
+499,Lawrence,37,445
+500,Mitch McCormick,37,446
+501,Chris,37,447
+502,Jason,37,448
+503,Maximus,38,449
+504,Commodus,38,450
+505,Lucilla,38,451
+506,Proximo,38,452
+507,Marcus Aurelius,38,453
+508,Gracchus,38,454
+509,Juba,38,455
+510,Falco,38,456
+511,Gaius,38,457
+512,Quintus,38,458
+513,Hagen,38,459
+514,Lucius,38,460
+515,Cassius,38,461
+516,Cicero,38,462
+517,Tigris,38,463
+518,Slave Trader,38,464
+519,Verbal,39,232
+520,Keaton,39,465
+521,Dave Kujan,39,466
+522,McManus,39,467
+523,Fenster,39,468
+524,Hockney,39,469
+525,Kobayashi,39,167
+526,Edie Finneran,39,470
+527,Jack Baer,39,471
+528,Jeff Rabin,39,472
+529,Smuggler,39,473
+530,Renault,39,474
+531,Dr. Plummer,39,475
+532,Dr. Walters,39,476
+533,Billy,40,159
+534,Colin,40,286
+535,Costello,40,221
+536,Dignam,40,477
+537,Queenan,40,478
+538,Mr. French,40,479
+539,Madolyn,40,480
+540,Brown,40,481
+541,Ellerby,40,482
+542,Cousin Sean,40,483
+543,Barrigan,40,484
+544,Fitzy,40,485
+545,Delahunt,40,7
+546,Lazio (FBI),40,486
+547,Gwen,40,487
+548,Realtor,40,488
+549,Alfred Borden,41,35
+550,Robert Angier,41,489
+551,Olivia Wenscombe,41,490
+552,Cutter,41,38
+553,Julia McCullough,41,491
+554,Sarah,41,492
+555,Jess,41,493
+556,Tesla,41,494
+557,Alley,41,125
+558,Judge,41,495
+559,Prosecutor,41,496
+560,Defender,41,497
+561,Captain,41,498
+562,Owens,41,499
+563,Sullen Warder,41,500
+564,Milton,41,501
+565,Rick Blaine,42,502
+566,Ilsa Lund,42,503
+567,Victor Laszlo,42,504
+568,Captain Louis Renault,42,505
+569,Major Heinrich Strasser,42,506
+570,Signor Ferrari,42,507
+571,Ugarte,42,508
+572,Carl,42,509
+573,Yvonne,42,510
+574,Sam,42,511
+575,Annina Brandel,42,512
+576,Berger,42,513
+577,Sascha,42,514
+578,Pickpocket,42,515
+579,Andrew,43,516
+580,Fletcher,43,517
+581,Nicole,43,518
+582,Jim Neimann,43,519
+583,Ryan,43,520
+584,Uncle Frank,43,521
+585,Dorm Neighbor,43,522
+586,Travis,43,523
+587,Bassist (Nassau),43,524
+588,Philippe,44,525
+589,Driss,44,526
+590,Yvonne,44,527
+591,Magalie,44,528
+592,Bastien - dit le Plumeau,44,529
+593,A Factory Worker,45,530
+594,A Gamin,45,531
+595,Big Bill,45,532
+596,Mechanic,45,533
+597,Burglar,45,534
+598,Gamin's Father,45,535
+599,President of the Electro Steel Corp.,45,536
+600,Prison Cellmate,45,537
+601,Minister's Wife,45,538
+602,J. Widdecombe Billows,45,539
+603,Juvenile Officer,45,540
+604,Sheriff Couler,45,541
+605,Cafe Head Waiter,45,542
+606,Turbine Operator,45,543
+607,Frank,46,64
+608,Harmonica,46,544
+609,Jill McBain,46,545
+610,Manuel 'Cheyenne' Gutiérrez,46,546
+611,Morton - Railroad Baron,46,547
+612,Sam,46,548
+613,Stony - Member of Frank's Gang,46,549
+614,Snaky - Member of Frank's Gang,46,550
+615,Sheriff - Auctioneer,46,551
+616,Brett McBain,46,552
+617,Barman,46,553
+618,Member of Frank's Gang Playing Poker,46,554
+619,Member of Frank's Gang Smoking Pipe at Auction,46,555
+620,Member of Frank's Gang on Train,46,556
+621,Hanshiro Tsugumo,47,557
+622,Motome Chijiiwa,47,558
+623,Miho Tsugumo,47,559
+624,Hikokuro Omodaka,47,560
+625,Tango Inaba,47,561
+626,Hayato Yazaki,47,562
+627,Masakazu,47,563
+628,Jinai Chijiiwa,47,249
+629,Retainer,47,564
+630,Seibei,47,565
+631,Ii Clan Retainer,47,566
+632,General,47,567
+633,L.B. Jefferies,49,254
+634,Lisa Fremont,49,568
+635,Tom Doyle,49,569
+636,Stella,49,570
+637,Lars Thorwald,49,571
+638,Miss Lonelyhearts,49,572
+639,Songwriter,49,573
+640,Miss Torso,49,574
+641,Woman on Fire Escape,49,575
+642,Man on Fire Escape,49,576
+643,Miss Hearing Aid,49,577
+644,Emma Thorwald,49,578
+645,Dancer with Miss Torso,49,579
+646,Man with Miss Torso,49,580
+647,Ripley,50,581
+648,Dallas,50,582
+649,Kane,50,583
+650,Lambert,50,584
+651,Brett,50,316
+652,Ash,50,122
+653,Parker,50,585
+654,Alien,50,586
+655,Mother,50,587
+656,Alien,50,588
+657,A Tramp,51,530
+658,A Blind Girl,51,589
+659,An Eccentric Millionaire,51,590
+660,The Millionaire's Butler,51,536
+661,A Prizefighter,51,534
+662,Street Sweeper,51,591
+663,Boxing Fight Referee,51,592
+664,Nightclub Patron,51,593
+665,Bald Party Guest,51,594
+666,Alfredo,52,595
+667,Spaccafico,52,596
+668,Maria Di Vita - Younger,52,597
+669,Anna,52,598
+670,Usher,52,599
+671,Salvatore 'Totò' Di Vita - Teenager,52,600
+672,Maria Di Vita - Older,52,601
+673,Elena Mendola,52,602
+674,Father Adelfio,52,63
+675,Salvatore 'Totò' Di Vita - Child,52,603
+676,Blacksmith,52,604
+677,Village Idiot,52,605
+678,Peppino's Father,52,606
+679,Salvatore 'Totò' Di Vita - Adult,52,607
+680,Leonard,53,608
+681,Natalie,53,195
+682,Teddy,53,198
+683,Burt,53,609
+684,Leonard's Wife,53,610
+685,Sammy Jankis,53,611
+686,Mrs. Jankis,53,612
+687,Doctor,53,613
+688,Dodd,53,614
+689,Tattooist,53,615
+690,Jimmy,53,616
+691,Captain Benjamin L. Willard,54,478
+692,Colonel Walter E. Kurtz,54,17
+693,Lieutenant Colonel Bill Kilgore,54,22
+694,Jay 'Chef' Hicks,54,617
+695,Lance B. Johnson,54,618
+696,Tyrone 'Clean' Miller,54,194
+697,Chief Phillips,54,619
+698,Colonel Lucas,54,177
+699,Photojournalist,54,620
+700,General R. Corman,54,55
+701,"Jerry, Civilian",54,621
+702,Lieutenant Richard M. Colby,54,273
+703,Kilgore's Gunner,54,622
+704,Mike from San Diego,54,623
+705,Supply Sergeant,54,624
+706,Indy,55,177
+707,Marion,55,625
+708,Belloq,55,626
+709,Sallah,55,627
+710,Toht,55,628
+711,Brody,55,629
+712,Satipo,55,630
+713,Dietrich,55,631
+714,Gobler,55,632
+715,Barranca,55,633
+716,Col. Musgrove,55,634
+717,Major Eaton,55,635
+718,Australian Climber,55,636
+719,2nd. Nazi,55,637
+720,Mean Mongolian,55,638
+721,Django,56,639
+722,Dr. King Schultz,56,640
+723,Calvin Candie,56,159
+724,Broomhilda von Shaft,56,641
+725,Stephen,56,106
+726,Billy Crash,56,642
+727,Leonide Moguy,56,643
+728,Butch Pooch,56,644
+729,Mr. Stonesipher,56,645
+730,Lara Lee Candie-Fitzwilly,56,646
+731,D'Artagnan,56,647
+732,Big Daddy,56,648
+733,WALL·E,57,649
+734,EVE,57,650
+735,Captain,57,651
+736,Shelby Forthright,57,652
+737,John,57,653
+738,Mary,57,654
+739,Ship's Computer,57,581
+740,Steward Bots,57,655
+741,Forthright's Advisor,57,656
+742,Axiom Passenger #3,57,657
+743,Lifeguard Bot,57,658
+744,Axiom Passenger #12,57,659
+745,Axiom Passenger #7,57,372
+746,Axiom Passenger #9,57,661
+747,Axiom Passenger #5,57,662
+748,Hauptmann Gerd Wiesler,58,663
+749,Christa-Maria Sieland,58,664
+750,Georg Dreyman,58,665
+751,Oberstleutnant Anton Grubitz,58,666
+752,Albert Jerska,58,667
+753,Karl Wallner,58,668
+754,Udo,58,669
+755,Gregor Hessenstein,58,670
+756,Frau Meineke,58,671
+757,Schriftexperte,58,672
+758,Einsatzleiter in Uniform,58,673
+759,Einsatzleiter Meyer,58,674
+760,Nowack,58,675
+761,Joe Gillis,59,676
+762,Norma Desmond,59,677
+763,Max Von Mayerling,59,678
+764,Betty Schaefer,59,679
+765,Sheldrake,59,680
+766,Morino,59,681
+767,Artie Green,59,682
+768,Undertaker,59,683
+769,1st Finance Man,59,684
+770,Cecil B. DeMille,59,685
+771,Hedda Hopper,59,686
+772,Buster Keaton,59,687
+773,Anna Q. Nilsson,59,688
+774,H. B. Warner,59,263
+775,Cop Who Drags Joe's Body from Pool,59,689
+776,Col. Dax,60,690
+777,Cpl. Philippe Paris,60,691
+778,Gen. George Broulard,60,692
+779,Gen. Paul Mireau,60,693
+780,Lt. Roget,60,694
+781,Maj. Saint-Auban,60,695
+782,Pvt. Pierre Arnaud,60,696
+783,German Singer,60,697
+784,Proprietor of Cafe,60,698
+785,Narrator of Opening Sequence,60,699
+786,Father Dupree,60,700
+787,Sgt. Boulanger,60,701
+788,Pvt. Maurice Ferol,60,702
+789,Jack Torrance,61,221
+790,Wendy Torrance,61,703
+791,Danny Torrance,61,704
+792,Dick Hallorann,61,225
+793,Stuart Ullman,61,705
+794,Charles Grady,61,706
+795,Lloyd,61,696
+796,Doctor,61,707
+797,Durkin,61,708
+798,Watson,61,709
+799,Forest Ranger 2,61,710
+800,Hynkel - Dictator of Tomania,62,530
+801,Hannah,62,531
+802,Napaloni - Dictator of Bacteria,62,711
+803,Schultz,62,712
+804,Garbitsch,62,713
+805,Herring,62,714
+806,Madame Napaloni,62,715
+807,Bacterian Ambassador,62,716
+808,Mr. Jaeckel,62,717
+809,Mrs. Jaeckel,62,718
+810,Mr. Mann,62,719
+811,Barber's Customer,62,533
+812,Storm Trooper Stealing Fruit,62,534
+813,Tomanian Storm Trooper,62,720
+814,Tomanian Commandant at Osterlich,62,721
+815,Leonard Vole,63,722
+816,Christine,63,723
+817,Sir Wilfrid Robarts,63,724
+818,Miss Plimsoll,63,725
+819,Brogan-Moore,63,726
+820,Mayhew,63,713
+821,Carter,63,727
+822,Mr. Myers,63,728
+823,Mrs. Emily Jane French,63,729
+824,Janet MacKenzie,63,730
+825,Judge,63,731
+826,Inspector Hearne,63,732
+827,Diana,63,733
+828,Courtroom Spectator,63,592
+829,Tony Stark,64,734
+830,Thor,64,735
+831,Bruce Banner,64,736
+832,Steve Rogers,64,737
+833,Natasha Romanoff,64,490
+834,James Rhodes,64,738
+835,Doctor Strange,64,739
+836,Peter Parker,64,740
+837,T'Challa,64,741
+838,Gamora,64,742
+839,Nebula,64,743
+840,Loki,64,744
+841,Vision,64,745
+842,Wanda Maximoff,64,746
+843,Sam Wilson,64,747
+844,Bucky Barnes,64,748
+845,Heimdall,64,749
+846,Okoye,64,750
+847,Ripley,65,581
+848,Corporal Hicks,65,751
+849,Newt,65,752
+850,Burke,65,519
+851,Bishop,65,753
+852,Private Hudson,65,754
+853,Lieutenant Gorman,65,755
+854,Private Vasquez,65,353
+855,Sergeant Apone,65,756
+856,Private Drake,65,7
+857,Private Frost,65,757
+858,Private Spunkmeyer,65,758
+859,Van Leuwen,65,759
+860,Lester Burnham,66,232
+861,Carolyn Burnham,66,760
+862,Jane Burnham,66,761
+863,Ricky Fitts,66,339
+864,Angela Hayes,66,762
+865,Buddy Kane,66,763
+866,Barbara Fitts,66,764
+867,Colonel Fitts,66,765
+868,Jim Olmeyer,66,766
+869,Jim Berkley,66,767
+870,Brad,66,768
+871,Sale House Woman #1,66,769
+872,Sale House Man #1,66,770
+873,Sale House Man #3,66,771
+874,Sale House Women #4,66,772
+875,Group Capt. Lionel Mandrake,67,773
+876,Gen. 'Buck' Turgidson,67,774
+877,Brig. Gen. Jack D. Ripper,67,23
+878,Col. 'Bat' Guano,67,551
+879,Maj. 'King' Kong,67,775
+880,Russian Ambassador Alexi de Sadesky,67,776
+881,Lt. Lothar Zogg,67,421
+882,Miss Scott,67,777
+883,Mr. Staines,67,778
+884,Adm. Randolph,67,779
+885,Lt. Kivel,67,780
+886,Capt. 'Ace' Owens,67,781
+887,Burpelson AFB Defense Team Member,67,782
+888,Burpelson AFB Defense Team Member,67,783
+889,Gen. Faceman,67,784
+890,Bruce Wayne,68,35
+891,Bane,68,163
+892,Selina,68,329
+893,Commissioner Gordon,68,40
+894,Blake,68,160
+895,Miranda,68,166
+896,Fox,68,2
+897,Alfred,68,38
+898,Foley,68,785
+899,Dr. Pavel,68,786
+900,Daggett,68,787
+901,Stryver,68,788
+902,Captain Jones,68,789
+903,CIA Op,68,790
+904,Mayor,68,45
+905,Congressman,68,791
+906,Miles Morales,69,792
+907,Peter B. Parker,69,793
+908,Gwen Stacy,69,794
+909,Uncle Aaron,69,795
+910,Jefferson Davis,69,796
+911,Aunt May,69,797
+912,Rio Morales,69,798
+913,Mary Jane,69,799
+914,Spider-Ham,69,800
+915,Peni Parker,69,801
+916,Spider-Man Noir,69,802
+917,Doc Ock,69,803
+918,Wilson Fisk,69,804
+919,Peter Parker,69,805
+920,Miss Calleros,69,806
+921,Interesting Person #1,69,807
+922,Interesting Person #2,69,808
+923,Arthur Fleck,70,450
+924,Murray Franklin,70,52
+925,Sophie Dumond,70,809
+926,Penny Fleck,70,810
+927,Thomas Wayne,70,791
+928,Detective Burke,70,811
+929,Detective Garrity,70,812
+930,Hoyt Vaughn,70,813
+931,Gene Ufland,70,814
+932,Dr. Sally,70,815
+933,Barry O'Donnell,70,816
+934,Alfred Pennyworth,70,817
+935,Dae-su Oh,71,818
+936,Woo-jin Lee,71,819
+937,Mi-do,71,820
+938,Mr. Han,71,821
+939,Park Cheol-woong,71,822
+940,Yoo Hyung-ja,71,823
+941,Lee Soo-ah,71,824
+942,Young Woo-Jin,71,825
+943,William Wallace,72,826
+944,Princess Isabelle,72,827
+945,Longshanks - King Edward I,72,828
+946,Robert the Bruce,72,829
+947,Young William,72,830
+948,Malcolm Wallace,72,831
+949,John Wallace,72,832
+950,Campbell,72,833
+951,MacClannough,72,834
+952,Young Hamish,72,835
+953,Priest No. 1,72,836
+954,Young Murron,72,837
+955,Argyle Wallace,72,838
+956,Phillip,72,839
+957,Antonio Salieri,73,840
+958,Wolfgang Amadeus Mozart,73,841
+959,Constanze Mozart,73,842
+960,Leopold Mozart,73,843
+961,Emanuel Schikaneder,73,844
+962,Katerina Cavalieri,73,845
+963,Emperor Joseph II,73,846
+964,Count Orsini-Rosenberg,73,847
+965,Michael Schlumberg (2002 Director's Cut),73,848
+966,Parody Commendatore,73,183
+967,Woody,74,137
+968,Buzz Lightyear,74,849
+969,Mr. Potato Head,74,850
+970,Slinky Dog,74,851
+971,Rex,74,852
+972,Hamm,74,653
+973,Bo Peep,74,853
+974,Andy,74,854
+975,Sid,74,855
+976,Mrs. Davis,74,856
+977,Sergeant,74,238
+978,TV Announcer,74,857
+979,Shark,74,858
+980,Wounded Soldier,74,859
+981,Local Announcer,74,860
+982,Capt.-Lt. Henrich Lehmann-Willenbrock - Der Alte,75,861
+983,Lt. Werner - Correspondent,75,862
+984,2nd Lieutenant - 2WO,75,863
+985,Kriechbaum - Chief Quartermaster-Navigator,75,864
+986,Johann,75,865
+987,Hinrich,75,866
+988,Chief Bosun,75,867
+989,Ario,75,868
+990,Pilgrim,75,869
+991,Frenssen,75,870
+992,Preacher,75,871
+993,Schwalle,75,872
+994,Miguel,76,873
+995,Héctor,76,874
+996,Ernesto de la Cruz,76,875
+997,Mamá Imelda,76,876
+998,Papá,76,877
+999,Papá Julio,76,878
+1000,Tío Oscar,76,879
+1001,Clerk,76,880
+1002,Plaza Mariachi,76,881
+1003,Frida Kahlo,76,882
+1004,Tía Rosita,76,883
+1005,Chicharrón,76,884
+1006,Tía Victoria,76,885
+1007,Lt. Aldo Raine,77,145
+1008,Bridget von Hammersmark,77,886
+1009,Sgt. Donny Donowitz,77,887
+1010,Shosanna,77,888
+1011,Col. Hans Landa,77,640
+1012,Lt. Archie Hicox,77,889
+1013,Fredrick Zoller,77,890
+1014,Sgt. Hugo Stiglitz,77,891
+1015,Cpl. Wilhelm Wicki,77,892
+1016,Marcel,77,893
+1017,Pfc. Smithson Utivich,77,894
+1018,Pfc. Omar Ulmer,77,895
+1019,Major Hellstrom,77,896
+1020,Perrier LaPadite,77,897
+1021,Joseph Goebbels,77,898
+1022,Hitler,77,899
+1023,General Ed Fenech,77,900
+1024,Francesca Mondino,77,901
+1025,San,78,902
+1026,Ashitaka,78,903
+1027,Jigo,78,904
+1028,Lady Eboshi,78,905
+1029,Gonza,78,906
+1030,San,78,907
+1031,Kohroku,78,908
+1032,Toki,78,909
+1033,Moro,78,910
+1034,Okkoto,78,911
+1035,Additional Voices,78,912
+1036,Kaya,78,913
+1037,Hii-sama,78,914
+1038,Additional Voices,78,915
+1039,Noodles,79,52
+1040,Max,79,916
+1041,Deborah,79,917
+1042,Jimmy O'Donnell,79,918
+1043,Carol,79,919
+1044,Joe,79,920
+1045,Frankie,79,209
+1046,Police Chief Aiello,79,405
+1047,Cockeye,79,921
+1048,Eve,79,922
+1049,Fat Moe,79,923
+1050,Sharkey,79,924
+1051,Chicken Joe,79,56
+1052,Tony Stark,80,734
+1053,Steve Rogers,80,737
+1054,Bruce Banner,80,736
+1055,Thor,80,735
+1056,Natasha Romanoff,80,490
+1057,Clint Barton,80,925
+1058,James Rhodes,80,738
+1059,Scott Lang,80,926
+1060,Doctor Strange,80,739
+1061,T'Challa,80,741
+1062,Carol Danvers,80,927
+1063,Peter Parker,80,740
+1064,Nebula,80,743
+1065,Gamora,80,742
+1066,Hope Van Dyne,80,928
+1067,Valkyrie,80,929
+1068,Frigga,80,930
+1069,Wanda Maximoff,80,746
+1070,Sean,81,931
+1071,Will,81,286
+1072,Chuckie,81,932
+1073,Lambeau,81,933
+1074,Morgan,81,343
+1075,Billy,81,934
+1076,M.I.T. Student,81,935
+1077,Sara Goldfarb,82,332
+1078,Harry Goldfarb,82,936
+1079,Marion Silver,82,937
+1080,Tyrone C. Love,82,938
+1081,Tappy Tibbons,82,939
+1082,Ada,82,940
+1083,Mrs. Pearlman,82,941
+1084,Mr. Rabinowitz,82,942
+1085,Mailman,82,943
+1086,Arnold The Shrink,82,944
+1087,Woody,83,137
+1088,Buzz Lightyear,83,849
+1089,Jessie,83,945
+1090,Lotso,83,946
+1091,Mr. Potato Head,83,850
+1092,Ken,83,947
+1093,Rex,83,852
+1094,Hamm,83,653
+1095,Mrs. Potato Head,83,948
+1096,Andy,83,854
+1097,Barbie,83,949
+1098,Bonnie,83,950
+1099,Andy's Mom,83,856
+1100,Slinky Dog,83,951
+1101,Chatter Telephone,83,655
+1102,Chuckles,83,952
+1103,Molly,83,953
+1104,Don Lockwood,84,954
+1105,Cosmo Brown,84,955
+1106,Kathy Selden,84,956
+1107,Lina Lamont,84,957
+1108,R.F. Simpson,84,958
+1109,Dancer,84,959
+1110,Roscoe Dexter,84,960
+1111,Zelda Zanders,84,961
+1112,Teresa - a Lady-in-Waiting,84,962
+1113,Taki Tachibana,85,378
+1114,Mitsuha Miyamizu,85,963
+1115,Katsuhiko Teshigawara,85,964
+1116,Sayaka Natori,85,965
+1117,Taki's Father,85,966
+1118,Luke Skywalker,86,176
+1119,Han Solo,86,177
+1120,Princess Leia,86,178
+1121,Lando Calrissian,86,179
+1122,C-3PO,86,180
+1123,Chewbacca,86,182
+1124,Anakin Skywalker,86,967
+1125,The Emperor,86,968
+1126,Yoda,86,184
+1127,Darth Vader,86,421
+1128,Darth Vader,86,181
+1129,Ben 'Obi-Wan' Kenobi,86,185
+1130,R2-D2,86,183
+1131,Moff Jerjerrod,86,969
+1132,Admiral Piett,86,190
+1133,Bib Fortuna,86,970
+1134,Wedge,86,325
+1135,Admiral Ackbar,86,971
+1136,Ranchoddas Shamaldas Chanchad (Rancho),87,972
+1137,Farhan Qureshi,87,973
+1138,Mona Sahastrabuddhe,87,974
+1139,Raju Rastogi,87,975
+1140,Pia,87,976
+1141,Viru Sahastrabudhhe,87,977
+1142,Millimeter - MM,87,978
+1143,Mr. Qureshi,87,979
+1144,Ranchoddas Shyamaldas Chanchad,87,980
+1145,Shamaldas Chanchad,87,981
+1146,Dr. Dave Bowman,88,982
+1147,Dr. Frank Poole,88,983
+1148,Dr. Heywood R. Floyd,88,984
+1149,Moon-Watcher,88,985
+1150,Dr. Andrei Smyslov,88,986
+1151,Elena,88,987
+1152,Dr. Ralph Halvorsen,88,988
+1153,Dr. Bill Michaels,88,989
+1154,HAL 9000,88,990
+1155,Astronaut,88,991
+1156,Aries-1B Lunar Shuttle Captain,88,992
+1157,Astronaut,88,780
+1158,Poole's Father,88,993
+1159,Poole's Mother,88,994
+1160,Stewardess,88,995
+1161,Stewardess,88,996
+1162,Antonius Block,89,997
+1163,"Jöns, squire",89,998
+1164,Death,89,999
+1165,Jof,89,1000
+1166,Mia,89,1001
+1167,"Lisa, Blacksmith's Wife",89,1002
+1168,Witch,89,1003
+1169,"Karin, Block's Wife",89,1004
+1170,Girl,89,1005
+1171,Raval,89,1006
+1172,The Monk,89,1007
+1173,Blacksmith Plog,89,1008
+1174,"Albertus Pictor, Church Painter",89,1009
+1175,Jonas Skat,89,1010
+1176,Merchant at the Inn,89,1011
+1177,Desmond Doss,90,1012
+1178,Captain Glover,90,1013
+1179,Smitty Ryker,90,1014
+1180,Dorothy Schutte,90,1015
+1181,Lucky Ford,90,1016
+1182,Tom Doss,90,196
+1183,Bertha Doss,90,1017
+1184,Harold 'Hal' Doss,90,1018
+1185,"Salgado (segment ""Pasternak"")",91,1019
+1186,"Isabel (segment ""Pasternak"")",91,1020
+1187,"Profesora Leguizamón (segment ""Pasternak"")",91,1021
+1188,"Cocinera (segment ""Las ratas"")",91,1022
+1189,"Moza (segment ""Las ratas"")",91,1023
+1190,"Diego (segment ""El más fuerte"")",91,1024
+1191,Jesper,92,1025
+1192,Klaus,92,517
+1193,Alva,92,1026
+1194,Mr. Ellingboe,92,1027
+1195,Mogens,92,1028
+1196,Mrs. Krum,92,945
+1197,Ellingboe Girl 3,92,1029
+1198,Ellingboe Boy 1,92,1030
+1199,Krum Girl 1,92,1031
+1200,The Dude,93,1032
+1201,Walter Sobchak,93,1033
+1202,Maude Lebowski,93,1034
+1203,Theodore Donald 'Donny' Kerabatsos,93,1035
+1204,The Big Lebowski,93,1036
+1205,Brandt,93,1037
+1206,Bunny Lebowski,93,1038
+1207,Treehorn Thug #1,93,1039
+1208,Treehorn Thug #2,93,1040
+1209,"Nihilist #1, Uli Kunkel",93,1041
+1210,Nihilist #2,93,1042
+1211,Nihilist #3,93,1043
+1212,Dude's Landlord,93,1044
+1213,Jesus Quintana,93,1045
+1214,Maude's Thug #1,93,1046
+1215,Hiccup,94,1047
+1216,Stoick,94,1048
+1217,Fishlegs,94,1049
+1218,Gobber,94,1050
+1219,Astrid,94,1051
+1220,Snotlout,94,1052
+1221,Tuffnut,94,1053
+1222,Ruffnut,94,1054
+1223,Ack,94,1055
+1224,Phlegma the Fierce,94,1056
+1225,Spitelout,94,1057
+1226,Max Rockatansky,95,163
+1227,Imperator Furiosa,95,1058
+1228,Nux,95,1059
+1229,Toast the Knowing,95,799
+1230,Immortan Joe,95,1060
+1231,Slit,95,1061
+1232,Rictus Erectus,95,1062
+1233,The Splendid Angharad,95,1063
+1234,Capable,95,1064
+1235,The Dag,95,1065
+1236,Cheedo the Fragile,95,1066
+1237,The People Eater,95,1067
+1238,The Bullet Farmer,95,1068
+1239,The Organic Mechanic,95,1069
+1240,The Valkyrie,95,1070
+1241,Keeper of the Seeds,95,1071
+1242,Sarbojaya Ray,96,1072
+1243,"Prasanna, school teacher",96,1073
+1244,Mary Daisy Dinkle,97,1074
+1245,Max Jerry Horovitz,97,1037
+1246,Damien Popodopolous,97,1075
+1247,Narrator,97,1076
+1248,911 Operator,97,1077
+1249,Dr. Bernard Hazelhof,97,1078
+1250,Brody,98,1079
+1251,Quint,98,1080
+1252,Hooper,98,1081
+1253,Ellen Brody,98,1082
+1254,Vaughn,98,1083
+1255,Meadows,98,1084
+1256,Hendricks,98,1085
+1257,Chrissie,98,1086
+1258,Michael Brody,98,1087
+1259,Mrs. Kintner,98,1088
+1260,Medical Examiner,98,1089
+1261,Interviewer,98,1090
+1262,Jeanne d'Arc,99,1091
+1263,Évêque Pierre Cauchon (Bishop Pierre Cauchon),99,1092
+1264,Jean d'Estivet,99,1093
+1265,Nicolas Loyseleur,99,1094
+1266,Jean Massieu,99,1095
+1267,Jean Lemaître,99,1096
+1268,Juge (Judge),99,1097
+1269,Jean Lemaître,99,1098
+1270,Mike,100,1099
+1271,Sullivan,100,1033
+1272,Boo,100,1100
+1273,Randall,100,1035
+1274,Waternoose,100,1101
+1275,Celia,100,1102
+1276,Roz,100,1103
+1277,Yeti,100,653
+1278,Fungus,100,184
+1279,Needleman,100,1104
+1280,Floor Manager,100,1105
+1281,Flint,100,309
+1282,Bile,100,1106
+1283,Additional Voices,100,858
+1284,Schmidt,100,656
+1285,News Anchor,100,1107
+1286,Additional Voices,100,1108
+1287,Paul Rusesabagina,101,738
+1288,Tatiana Rusesabagina,101,1109
+1289,Jack Daglish,101,450
+1290,George Rutaganda,101,1110
+1291,Colonel Oliver,101,1111
+1292,General Bizimungu,101,1112
+1293,Thomas Mirama,101,445
+1294,Fedens,101,1113
+1295,Shukichi Hirayama,102,1114
+1296,Tomi Hirayama,102,1115
+1297,Koichi Hirayama,102,1116
+1298,Noriko Hirayama,102,1117
+1299,Shige Kaneko,102,1118
+1300,Fumiko Hirayama - his wife,102,1119
+1301,Kyôko Hirayama,102,1120
+1302,Sanpei Numata,102,252
+1303,Kurazo Kaneko,102,1121
+1304,Yone Hattori,102,1122
+1305,Rinka no saikun,102,1123
+1306,Tetsudou-shokuin,102,1124
+1307,John Keating,103,931
+1308,Neil Perry,103,1125
+1309,Todd Anderson,103,1126
+1310,Knox Overstreet,103,1127
+1311,Richard Cameron,103,1128
+1312,Steven Meeks,103,1129
+1313,Gerard Pitts,103,1130
+1314,Mr. Nolan,103,1131
+1315,Mr. Perry,103,1132
+1316,Dr. Hager,103,1133
+1317,Joe Danburry,103,1134
+1318,Ginny Danburry,103,1135
+1319,Chris,104,1136
+1320,Sgt. Barnes,104,165
+1321,Sgt. Elias,104,1137
+1322,King,104,911
+1323,Big Harold,104,1138
+1324,Rhah,104,1139
+1325,Bunny,104,1140
+1326,Sgt. O'Neill,104,1141
+1327,Lt. Wolfe,104,1142
+1328,Francis,104,1143
+1329,Lerner,104,1144
+1330,Crawford,104,1145
+1331,Tex,104,1146
+1332,Sal,104,1147
+1333,Warren,104,1148
+1334,Rocky,105,1149
+1335,Adrian,105,28
+1336,Paulie,105,920
+1337,Apollo,105,1150
+1338,Mickey,105,1151
+1339,Jergens,105,1152
+1340,Gazzo,105,1153
+1341,Mike,105,1154
+1342,Fight Announcer,105,1155
+1343,Cut Man,105,1156
+1344,Ice Rink Attendant,105,1157
+1345,Marie,105,1158
+1346,TV Commentator,105,1159
+1347,Dipper,105,1160
+1348,Bartender,105,1161
+1349,Club Fight Announcer,105,1162
+1350,Carroll Shelby,106,286
+1351,Ken Miles,106,35
+1352,Lee Iacocca,106,1163
+1353,Mollie Miles,106,1164
+1354,Leo Beebe,106,1165
+1355,Peter Miles,106,1166
+1356,Henry Ford II,106,1167
+1357,Enzo Ferrari,106,1168
+1358,Phil Remington,106,1169
+1359,Roy Lunn,106,1170
+1360,Charlie Agapiou,106,1171
+1361,Franco Gozzi,106,1172
+1362,Ford Executive - Ian,106,1173
+1363,Aeronutronics Chief Engineer,106,1174
+1364,Gordie Lachance,107,1175
+1365,Chris Chambers,107,1176
+1366,Teddy Duchamp,107,1177
+1367,Vern Tessio,107,1178
+1368,Ace Merrill,107,1179
+1369,Billy Tessio,107,369
+1370,Charlie Hogan,107,1180
+1371,Eyeball Chambers,107,1181
+1372,Mr. Lachance,107,1182
+1373,Mrs. Lachance,107,366
+1374,Mr. Quidacioluo,107,1183
+1375,Mayor Grundy,107,1184
+1376,The Writer,107,1081
+1377,Denny Lachance,107,1185
+1378,Terminator,108,344
+1379,Sarah Connor,108,345
+1380,Kyle Reese,108,751
+1381,Traxler,108,1186
+1382,Vukovich,108,753
+1383,Matt,108,1187
+1384,Ginger,108,1188
+1385,Silberman,108,348
+1386,Pawn Shop Clerk,108,1189
+1387,Nancy,108,1190
+1388,Future Terminator,108,1191
+1389,Punk Leader,108,754
+1390,Punk,108,1192
+1391,Niki Lauda,109,890
+1392,James Hunt,109,735
+1393,Suzy Miller,109,1193
+1394,Marlene Lauda,109,1194
+1395,Clay Regazzoni,109,1195
+1396,Louis Stanley,109,1196
+1397,Nurse Gemma,109,1197
+1398,Alastair Caldwell,109,1198
+1399,Lord Hesketh,109,1199
+1400,Stirling Moss,109,1200
+1401,Anthony 'Bubbles' Horsley,109,1201
+1402,Teddy Mayer,109,1202
+1403,John Hogan,109,1203
+1404,Lauda's Mechanic,109,1204
+1405,Mike Rezendes,110,736
+1406,Walter 'Robby' Robinson,110,947
+1407,Sacha Pfeiffer,110,1205
+1408,Marty Baron,110,804
+1409,Ben Bradlee Jr.,110,1206
+1410,Matt Carroll,110,1207
+1411,Mitchell Garabedian,110,1208
+1412,Barbara,110,1209
+1413,Jim Sullivan,110,1210
+1414,Eric Macleish,110,903
+1415,Chris McCandless,111,1211
+1416,Wayne Westerberg,111,1212
+1417,Jan Burres,111,1213
+1418,Billie McCandless,111,1214
+1419,Walt McCandless,111,1215
+1420,Carine McCandless,111,1216
+1421,Tracy Tatro,111,1217
+1422,Ron Franz,111,1218
+1423,Kevin,111,1219
+1424,Diana Christensen,112,1220
+1425,Max Schumacher,112,676
+1426,Howard Beale,112,1221
+1427,Frank Hackett,112,22
+1428,Nelson Chaney,112,1222
+1429,Arthur Jensen,112,946
+1430,Great Ahmed Kahn,112,1223
+1431,TV Director,112,1224
+1432,Harry Hunter,112,1225
+1433,Mary Ann Gifford,112,1226
+1434,Joe Donnelly,112,1227
+1435,Walter C. Amundsen,112,1228
+1436,Barbara Schlesinger,112,1229
+1437,Bill Herron,112,1230
+1438,Dorothy Gale,113,1231
+1439,Professor Marvel,113,1232
+1440,'Hunk',113,1233
+1441,'Zeke',113,1234
+1442,'Hickory',113,1235
+1443,Glinda,113,1236
+1444,Miss Gulch,113,1237
+1445,Uncle Henry,113,1238
+1446,Auntie Em,113,1239
+1447,Toto,113,1240
+1448,Emerald City Manicurist,113,1241
+1449,Logan,114,489
+1450,Charles,114,1242
+1451,Laura,114,1243
+1452,Pierce,114,1244
+1453,Caliban,114,1245
+1454,Gabriela,114,1246
+1455,Dr. Rice,114,1247
+1456,Will Munson,114,1248
+1457,Kathryn Munson,114,1249
+1458,Federale Commander,114,1250
+1459,Federale Lieutenant,114,1251
+1460,Mohawk,114,1252
+1461,Macon,114,1253
+1462,Bone Breaker,114,1254
+1463,Phil,115,1255
+1464,Rita,115,1256
+1465,Larry,115,1257
+1466,Ned,115,611
+1467,Buster,115,1258
+1468,Nancy,115,1259
+1469,Mrs. Lancaster,115,1260
+1470,Gus,115,1261
+1471,Ralph,115,1262
+1472,Doris the Waitress,115,1263
+1473,Phil's Assistant Kenny,115,1264
+1474,Man in Hallway,115,1265
+1475,Gusteau,116,1266
+1476,Linguini,116,1267
+1477,Remy,116,1268
+1478,Skinner,116,122
+1479,Django,116,1269
+1480,Emile,116,1270
+1481,Anton Ego,116,1271
+1482,Colette,116,1272
+1483,Horst,116,1273
+1484,Larousse,116,644
+1485,Mustafa,116,653
+1486,Lawyer (Talon Labarthe),116,655
+1487,Git (Lab Rat),116,1274
+1488,Ambrister Minion,116,1275
+1489,Chris MacNeil,117,332
+1490,Father Lankester Merrin,117,997
+1491,Regan MacNeil,117,1276
+1492,Lt. William Kinderman,117,65
+1493,Sharon,117,1277
+1494,Burke Dennings,117,1278
+1495,Father Damien Karras,117,1279
+1496,Father Dyer,117,1280
+1497,Dr. Klein,117,1281
+1498,Dr. Barringer - Clinic Director,117,1282
+1499,Karl,117,1283
+1500,Dr. Taney,117,1284
+1501,Psychiatrist,117,1285
+1502,Karras' Mother,117,1286
+1503,Karras' Uncle,117,1287
+1504,Language Lab Director,117,1288
+1505,Jesse,118,1126
+1506,Celine,118,1289
+1507,Bookstore Manager,118,1290
+1508,Man at Grill,118,1291
+1509,Milly Stephenson,119,1292
+1510,Fred Derry,119,1293
+1511,Al Stephenson,119,1294
+1512,Peggy Stephenson,119,1295
+1513,Marie Derry,119,1296
+1514,Wilma Cameron,119,1297
+1515,Butch Engle,119,1298
+1516,Homer Parrish,119,1299
+1517,Hortense Derry,119,1300
+1518,Pat Derry,119,1301
+1519,Mr. Milton,119,1302
+1520,Mrs. Parrish,119,1303
+1521,Mr. Parrish,119,1304
+1522,Cliff,119,1305
+1523,Mrs. Cameron,119,1306
+1524,Mr. Cameron,119,1307
+1525,Prew,119,1308
+1526,Bob Parr,120,1309
+1527,Lucius Best,120,106
+1528,Helen Parr,120,1310
+1529,Buddy Pine,120,1311
+1530,Bomb Voyage,120,1312
+1531,Newsreel Narrator,120,655
+1532,Mrs. Hogenson,120,1313
+1533,Gilbert Huph,120,852
+1534,Dashiell 'Dash' Parr,120,1314
+1535,Bernie Kropp,120,1267
+1536,Violet Parr,120,1315
+1537,Mirage,120,1316
+1538,Rick Dicker,120,952
+1539,Edna 'E' Mode,120,1275
+1540,Col. Mathieu,121,1317
+1541,'Maxim' de Winter,122,1318
+1542,Mrs. de Winter,122,1319
+1543,Jack Favell,122,1320
+1544,Mrs. Danvers,122,1321
+1545,Major Giles Lacy,122,1322
+1546,Frank Crawley,122,1323
+1547,Colonel Julyan,122,1324
+1548,Beatrice Lacy,122,1325
+1549,Mrs. Van Hopper,122,1326
+1550,Coroner,122,1327
+1551,Dr. Baker,122,1328
+1552,Ben,122,1329
+1553,Tabbs,122,1330
+1554,Frith,122,1331
+1555,Chalcroft,122,1332
+1556,Maid,122,1333
+1557,Policeman,122,1334
+1558,Maria Tura,123,1335
+1559,Joseph Tura,123,1336
+1560,Lieutenant Stanislav Sobinski,123,1337
+1561,Greenberg,123,1338
+1562,Rawitch,123,1339
+1563,Professor Siletsky,123,1340
+1564,Colonel Ehrhardt,123,1341
+1565,Bronski,123,1342
+1566,Producer Jan Dobosz,123,1308
+1567,Actor-Adjutant,123,1343
+1568,Captain Schultz,123,1344
+1569,Anna,123,1345
+1570,General Armstrong,123,1346
+1571,Major Cunningham,123,1347
+1572,Gestapo Sergeant at Desk at Top of Hotel Stairs,123,721
+1573,German Soldier,123,1348
+1574,Tom Joad,124,64
+1575,Ma Joad,124,1349
+1576,Jim Casy,124,1350
+1577,Grandpa Joad,124,1238
+1578,Rosasharn Rivers,124,1351
+1579,Pa Joad,124,1352
+1580,Al Joad,124,1353
+1581,Muley Bates,124,513
+1582,Connie Rivers,124,1354
+1583,Grandma Joad,124,1355
+1584,Noah Joad,124,1356
+1585,Uncle John Joad,124,1357
+1586,Winfield Joad,124,1230
+1587,Ruthie Joad,124,1358
+1588,Thomas,124,1359
+1589,Caretaker,124,1360
+1590,Davis,124,1361
+1591,Luke,125,1362
+1592,Dragline,125,1363
+1593,Captain,125,1364
+1594,Society Red,125,1365
+1595,Koko,125,1366
+1596,Loudmouth Steve,125,1367
+1597,Arletta,125,1368
+1598,Carr,125,1369
+1599,Boss Godfrey,125,1370
+1600,Boss Paul,125,1371
+1601,Rabbitt,125,1372
+1602,Blind Dick,125,1373
+1603,Boss Shorty,125,1374
+1604,Tattoo,125,1375
+1605,Babalugats,125,620
+1606,Boss Keen,125,1376
+1607,Gambler,125,1377
+1608,Tramp,125,316
+1609,Octavio,126,874
+1610,Valeria,126,1378
+1611,Susana,126,1379
+1612,Luis,126,1380
+1613,Jorge,126,1381
+1614,Tía Luisa (Aunt Luisa),126,1382
+1615,Mama Octavio (Octavio's Mother),126,1383
+1616,Andrés Salgado,126,1384
+1617,Parker Wilson,127,1385
+1618,Cate Wilson,127,1386
+1619,Ken,127,1387
+1620,Andy,127,1388
+1621,Carl,127,1389
+1622,Jasjeet,127,1390
+1623,Michael,127,1391
+1624,Heather,127,1392
+1625,Dersu Uzala,128,1393
+1626,Arsenev,128,1394
+1627,Otryad Arseneva,128,1395
+1628,Turtygin,128,1396
+1629,Olenev,128,1397
+1630,Hüseyin,129,1398
+1631,Nuran,129,1399
+1632,Gülbeyaz,129,1400
+1633,Salim,129,1401
+1634,Aysun,129,1402
+1635,Birgül,129,1403
+1636,Özkan,129,1404
+1637,Antoine Doinel,130,1405
+1638,Julien Doinel - le beau-père d'Antoine,130,1406
+1639,Mr. Bigey - le père de René,130,1407
+1640,Alma,131,1001
+1641,Elisabet Vogler,131,1408
+1642,The Doctor,131,1409
+1643,Mr. Vogler,131,998
+1644,Elisabet's Son,131,1410
+1645,Wise Man #2,132,1411
+1646,Wise Man #1,132,1412
+1647,Wise Man #3,132,1413
+1648,Man Even Further Forward,132,1414
+1649,Mr. Cheeky,132,1415
+1650,Mandy Cohen,132,1416
+1651,Gregory,132,1417
+1652,Mrs. Gregory,132,1418
+1653,Jesus,132,190
+1654,A Weedy Samaritan,132,1419
+1655,False Prophet,132,1420
+1656,"Matthias, Son of Deuteronomy of Gath",132,1421
+1657,Mrs. Big Nose,132,1422
+1658,Alfonso,132,1423
+1659,Vinz,133,1424
+1660,Hubert,133,1425
+1661,Saïd,133,1426
+1662,Jack Sparrow,134,1144
+1663,Barbossa,134,1427
+1664,Will Turner,134,94
+1665,Elizabeth Swann,134,1428
+1666,Norrington,134,1429
+1667,Governor Weatherby Swann,134,1430
+1668,Pintel,134,1431
+1669,Ragetti,134,1432
+1670,Lt. Gillette,134,1433
+1671,Mullroy,134,1434
+1672,Cotton,134,1435
+1673,Twigg,134,1436
+1674,Joshamee Gibbs,134,1437
+1675,Koehler,134,1438
+1676,Anamaria,134,742
+1677,Harbormaster,134,1439
+1678,Peter Warne,135,1440
+1679,Ellie Andrews,135,1441
+1680,Alexander Andrews,135,1442
+1681,Oscar Shapeley,135,1443
+1682,King Westley,135,1444
+1683,Danker,135,1445
+1684,Joe Gordon,135,1446
+1685,The Bag Thief,135,1447
+1686,Woman at Auto Camp,135,1448
+1687,Clark,135,1449
+1688,Wedding Party Guest,135,1450
+1689,Wedding Guest,135,1451
+1690,Bus Driver #1,135,261
+1691,Henderson,135,1452
+1692,Boy Bus Passenger,135,1453
+1693,Maria,136,1454
+1694,Captain Georg von Trapp,136,1455
+1695,The Baroness,136,1456
+1696,Max Detweiler,136,1457
+1697,Mother Abbess,136,1458
+1698,Liesl von Trapp,136,1459
+1699,Louisa von Trapp,136,1460
+1700,Friedrich von Trapp,136,1461
+1701,Kurt von Trapp,136,1462
+1702,Brigitta von Trapp,136,1463
+1703,Marta von Trapp,136,1464
+1704,Sister Margaretta,136,1465
+1705,Sister Berthe,136,1466
+1706,Herr Zeller,136,1467
+1707,Rolfe,136,1468
+1708,Frau Schmidt,136,729
+1709,Lady Hideko,137,1469
+1710,Count Fujiwara,137,1470
+1711,Uncle Kouzuki,137,1471
+1712,Aunt of Lady Hideko,137,1472
+1713,Sook-Hee,137,1473
+1714,Goo-gai,137,1474
+1715,Miss Sasaki,137,1475
+1716,Mahatma Gandhi,138,78
+1717,Lord Irwin,138,1476
+1718,Aladdin,139,1477
+1719,Genie,139,931
+1720,Princess Jasmine,139,1478
+1721,Jafar,139,1479
+1722,Abu,139,433
+1723,Iago,139,1480
+1724,Sultan,139,1481
+1725,Gazeem,139,1482
+1726,Additional Voices,139,858
+1727,Additional Voices,139,662
+1728,Skeeter Phelan,140,1483
+1729,Aibileen Clark,140,1484
+1730,Minny Jackson,140,1485
+1731,Hilly Holbrook,140,1486
+1732,Celia Foote,140,330
+1733,Elizabeth Leefolt,140,1487
+1734,Charlotte Phelan,140,764
+1735,Jolene French,140,1488
+1736,Stuart Whitworth,140,1489
+1737,Constantine Jefferson,140,1490
+1738,Johnny Foote,140,1491
+1739,Missus Walters,140,1492
+1740,Robert Phelan,140,1493
+1741,Carlton Phelan,140,1494
+1742,Yule Mae Davis,140,1495
+1743,William Holbrook,140,1496
+1744,Belle,141,1497
+1745,Beast,141,1498
+1746,Lefou,141,1499
+1747,Maurice,141,1500
+1748,Mrs. Potts,141,1501
+1749,Lumiere,141,1502
+1750,Chip,141,1503
+1751,Wardrobe,141,1504
+1752,Bimbette,141,1505
+1753,Stove,141,1506
+1754,Monsieur D'Arque,141,1507
+1755,Featherduster,141,1508
+1756,Philippe,141,1509
+1757,Bimbette,141,1510
+1758,Bruce Wayne,142,1511
+1759,Selina Kyle,142,799
+1760,Lt. James Gordon,142,1512
+1761,Oz,142,1513
+1762,The Riddler,142,1514
+1763,Carmine Falcone,142,1045
+1764,Alfred,142,125
+1765,District Attorney Gil Colson,142,1515
+1766,Unseen Arkham Prisoner,142,1516
+1767,Kenzie,142,1517
+1768,Chief Mackenzie Bock,142,1518
+1769,Commissioner Pete Savage,142,1519
+1770,"Mayor Don Mitchell, Jr.",142,1520
+1771,Mrs. Mitchell,142,1521
+1772,Carla,142,1522
+1773,Tony le Stéphanois,143,1523
+1774,Jo le Suédois,143,1524
+1775,Mario Ferrati,143,1525
+1776,Louise,143,1526
+1777,Louis Grutter dit le Tatoué,143,1527
+1778,Remi Grutter,143,1528
+1779,Pierre Grutter,143,1529
+1780,Viviane,143,1530
+1781,Mado les Grands Bras,143,1531
+1782,Ida Ferrati,143,1532
+1783,Cesar le Milanais,143,1533
+1784,"Webb, le bijoutier",143,1534
+1785,Lieutenant Dunbar,144,1535
+1786,Stands With A Fist,144,1536
+1787,Kicking Bird,144,312
+1788,Wind In His Hair,144,1537
+1789,Ten Bears,144,1538
+1790,Black Shawl,144,1539
+1791,Timmons,144,1540
+1792,Lieutenant Elgin,144,1541
+1793,Major Fambrough,144,1542
+1794,Stone Calf,144,1543
+1795,Otter,144,1544
+1796,Sergeant Pepper,144,1545
+1797,Sergeant Bauer,144,1546
+1798,Edwards,144,1547
