@@ -18,17 +18,76 @@ const comments_component = (under_user) => ({
         },
         {
           type: 'wrapper',
-          body: under_user ? '${name}' : '${name}'
+          body: under_user ? '${movie_name}' : '${user_name}'
+        },
+        {
+          type: 'wrapper',
+          body: '${comment_date}'
+        },
+
+        {
+          type: 'action',
+          label: under_user ? 'go to movie detail page' : 'go to user homepage',
+          actionType: 'link',
+          link: under_user ? '/movie/${movie_id}' : '/user/${user_id}'
+        },
+      ]
+    },
+    body: [
+      {
+        type: 'wrapper',
+        body: 'Rate: ${rate}'
+      },
+      {
+        type: 'wrapper',
+        body: 'Comment: ${content}'
+      }
+    ]
+  }
+});
+
+
+const me_comments_component = () => ({
+  type: 'each',
+  source: '${comments}',
+  items: {
+    type: 'panel',
+    title: {
+      type: 'wrapper',
+      className: 'flex justify-between items-center',
+      body: [
+        {
+          type: 'avatar',
+          src: '${cover_url}',
+        },
+        {
+          type: 'wrapper',
+          body: '${movie_name}'
         },
         {
           type: 'wrapper',
           body: '${comment_date}'
         },
         {
-          type: 'action',
-          label: under_user ? 'go to movie detail page' : 'go to user homepage',
-          actionType: 'link',
-          link: under_user ? '/movie/${id}' : '/user/${id}'
+          type: 'button-group',
+          buttons: [
+            {
+              type: 'action',
+              label:  'go to movie detail page',
+              actionType: 'link',
+              link: '/movie/${movie_id}' 
+            },
+            
+            {
+              label: 'delete comment',
+              type: 'button',
+              actionType: 'ajax',
+              api: 'delete:/api/comment/delete-comment/${comment_id}',
+              confirmText: "Are you sure you want to delete this comment?",
+              reload: "window"
+            }
+          ]
+
         }
       ]
     },
@@ -44,6 +103,8 @@ const comments_component = (under_user) => ({
     ]
   }
 });
+
+
 
 const login = {
   url: 'login',
@@ -596,7 +657,7 @@ const me = {
           type: 'html',
           html: '<h2>Comments</h2>'
         },
-        comments_component(under_user = true)
+        me_comments_component()
       ]
     }
   }

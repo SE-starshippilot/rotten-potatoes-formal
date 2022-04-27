@@ -1,7 +1,7 @@
 const query = require('./query')
 
 const sqlDropTables = `
-    drop table if exists movies, actors, users, characters, comments
+    drop table if exists characters, comments, movies, actors, users
 `
 
 const sqlCreateTableMovies = `
@@ -14,6 +14,10 @@ const sqlCreateTableMovies = `
     )engine=innodb default charset=utf8
 `
 
+const sql_create_movie_idx = `
+    create index movie_name on movies(name)
+`
+
 const sqlCreateTableActors = `
     create table if not exists actors(
         id int auto_increment primary key,
@@ -24,6 +28,11 @@ const sqlCreateTableActors = `
     )engine=innodb default charset=utf8
 `
 
+const sql_create_actor_idx = `
+    create index actor_name on actors(name)
+`
+
+
 const sqlCreateTableUsers = `
     create table if not exists users(
         id int auto_increment primary key,
@@ -32,6 +41,11 @@ const sqlCreateTableUsers = `
         password varchar(255) not null
     )engine=innodb default charset=utf8
 `
+
+const sql_create_user_idx = `
+    create index user_name on users(name)
+`
+
 
 const sqlCreateTableCharacters = `
     create table if not exists characters(
@@ -43,6 +57,8 @@ const sqlCreateTableCharacters = `
         foreign key(actor_id) references actors(id)
     )engine=innodb default charset=utf8
 `
+
+
 
 const sqlCreateTableComments = `
     create table if not exists comments(
@@ -57,6 +73,8 @@ const sqlCreateTableComments = `
     )engine=innodb default charset=utf8
 `
 
+
+
 const init = async (reset) => {
     try {
         if (reset) await query(sqlDropTables)
@@ -66,6 +84,10 @@ const init = async (reset) => {
         await query(sqlCreateTableUsers)
         await query(sqlCreateTableCharacters)
         await query(sqlCreateTableComments)
+        await query(sql_create_movie_idx)
+        await query(sql_create_actor_idx)
+        await query(sql_create_user_idx)
+        
 
         await query(`set global local_infile=1`)
         await query(`load data local infile 'data/movies.csv' into table movies fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)

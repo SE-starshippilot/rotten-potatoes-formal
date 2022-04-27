@@ -19,15 +19,23 @@ router.get('/user/me/info', user.getMeInfo)
 router.post('/user/me/change-avatar', upload.single('avatar'), user.changeMeAvatar)
 router.put('/user/me/change-name', user.changeMeName)
 router.put('/user/me/change-password', user.changeMePassword)
+router.delete('/user/me/delete', user.delete_user)
+router.get('/user/search', user.search_user)
+
 
 router.get('/movie/list', movie.listMovies)
 router.get('/movie/detail/:id', movie.getMovieDetail)
+router.get('/movie/search', movie.search_movie)
+
 
 router.get('/actor/list', actor.listActors)
 router.get('/actor/detail/:id', actor.getActorDetail)
+router.get('/actor/search', actor.search_actor)
+
 
 router.get('/comment/list', comment.listComments)
 router.post('/comment/add-to-movie/:id', comment.addCommentToMovie)
+router.delete('/comment/delete-comment/:id', comment.delete_comment)
 
 router.use((e) => {
     console.log(e)

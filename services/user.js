@@ -1,12 +1,13 @@
+const res = require('express/lib/response')
 const fs = require('fs')
 const path = require('path')
 const query = require('../db/query')
 
 const userInfo = async(user_id) => {
     let [ user ] = await query('select avatar_url, name from users where id=?', user_id)
-    user.comments = await query('select m.id, m.name, m.cover_url, c.rate, c.content, c.comment_date from movies m inner join comments c on m.id=c.movie_id where c.user_id=?', user_id)
+    user.comments = await query('select m.id as movie_id, m.name as movie_name, m.cover_url, c.rate, c.content, c.comment_date, c.id as comment_id from movies m inner join comments c on m.id=c.movie_id where c.user_id=?', user_id)
     return user
-}
+}  
 
 const getUserInfo = async(req, res, next) => {
     try {
@@ -92,10 +93,51 @@ const changeMePassword = async(req, res, next) => {
     }
 }
 
+
+const delete_user = async(req, res, next) => {
+    try {
+        let {inp_password} = req.body
+        let [{password}] = await query(`select password from users where id='${req.user_id}'`)
+        if (password !== inp_password){
+            res.json({
+                staus: 1,
+                msg: 'wrong password'
+            })
+            return
+        }
+        await query(`delete from users where id='${req.user_id}'`)
+        await query(`update comments set user_id=null where user_id='${req.user_id}'`)
+        res.json({
+            staus: 0,
+            msg: 'delete user successfully'
+        })
+    }
+    catch(e){
+        next(e)
+    }
+}
+
+const search_user = async(req, res, next) => {
+    try {
+        let {user_name} = req.body
+        await query(`select id, name, avatar_url from users where name like concat('${user_name}', '%')`)
+        res.join({
+            status: 0,
+            msg: 'searching success'
+        }) 
+    }
+    catch(e){
+        next(e)
+    }
+}
+
+
 module.exports = {
     getUserInfo,
     getMeInfo,
     changeMeAvatar,
     changeMeName,
-    changeMePassword
+    changeMePassword,
+    delete_user,
+    search_user
 }
