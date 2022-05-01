@@ -55,6 +55,8 @@ const search_movie = async(req, res, next) => {
 }
 
 
+
+
 module.exports = {
     listMovies,
     getMovieDetail,

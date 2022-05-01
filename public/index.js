@@ -647,6 +647,33 @@ const me = {
                 localStorage.removeItem('token')
                 history.push('/login')
               }
+            },
+            {
+              label: 'delete account',
+              type: 'button',
+              actionType: 'dialog',
+              dialog: {
+                title: 'Please enter your password to confirm',
+                body: {
+                  type: 'form',
+                  api: 'put:/api/user/me/delete',
+                  onFinished: (res) => {
+                    if (!res.status)
+                    {
+                      localStorage.removeItem('token')
+                      history.push('/login')
+                    }
+                  },
+                  body: [
+                    {
+                      type: 'input-password',
+                      name: 'password',
+                      label: 'password',
+                      required: true
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
