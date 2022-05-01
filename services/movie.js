@@ -42,12 +42,23 @@ const getMovieDetail = async(req, res, next) => {
 
 const search_movie = async(req, res, next) => {
     try {
-        let {movie_name} = req.body
-        await query(`select id, name, cover_url, release_year from movies where name like concat('${movie_name}', '%')`)
-        res.join({
+        let movie_name = ''
+        if ('name' in req.query) movie_name = req.query.name
+        let movie = await query(`
+        select m.name, m.cover_url, m.release_year, round(avg(c.rate),1) as rate 
+        from movies as m inner join comments as c on c.movie_id = m.id
+        where name like concat('%', ?, '%')
+        group by m.id 
+        `, movie_name)
+        let [table_num] = await query("select count(id) from movies") 
+        table_num = table_num['count(id)']
+        res.json({
             status: 0,
-            msg: 'searching success'
-        }) 
+            msg: 'searching success',
+            data: {movie},
+            total: table_num
+        })
+
     }
     catch(e){
         next(e)

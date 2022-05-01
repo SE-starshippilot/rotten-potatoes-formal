@@ -723,6 +723,61 @@ const user = {
   }
 };
 
+
+const search_movie = {
+  url: 'search_movie',
+  visible: false,
+  schema : {
+    type: 'page',
+    body: {
+      type: "crud",
+      api: "get:/api/movie/search",
+      syncLocation: false,
+      autoGenerateFilter: true,
+      headerToolbar: [
+        {
+          type: "columns-toggler",
+          align: "right",
+          draggable: true,
+          icon: "fas fa-cog",
+          overlay: true,
+          footerBtnSize: "sm"
+        }
+      ],
+      columns: [
+        {
+          name: "name",
+          label: "name",
+          searchable: {
+            type: "input-text",
+            name: "name",
+            label: "name",
+            placeholder: "Enter the movie name"
+          }
+        },
+
+        {
+          name: "cover_url",
+          label: "",
+          type: 'image',
+          thumbMode: 'cover',
+          enlargeAble: true
+        },
+
+        {
+          name: "release_year",
+          label: "release_year",
+        },
+
+        {
+          name: "rate",
+          label: "rate"
+        }
+      ]
+      }
+  }
+};
+
 const app = {
   type: 'app',
   brandName: 'Rotten Potatoes',
@@ -741,7 +796,8 @@ const app = {
         actor,
         comments,
         me,
-        user
+        user,
+        search_movie
       ]
     }
   ]
