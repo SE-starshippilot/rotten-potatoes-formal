@@ -797,7 +797,7 @@ const search_movie = {
           searchable: {
             type: "input-text",
             name: "name",
-            label: "movie name",
+            label: "name",
             placeholder: "Enter movie name"
           }
         },
@@ -812,7 +812,7 @@ const search_movie = {
 
         {
           name: "release_year",
-          label: "release year",
+          label: "release_year",
           searchable: {
             type: "input-range",
             name: "release_year",
