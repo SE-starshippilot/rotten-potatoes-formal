@@ -42,7 +42,7 @@ const getMovieDetail = async(req, res, next) => {
 
 const search_movie = async(req, res, next) => {
     try {
-        let movie_name = '     '
+        let movie_name = ''
         let start_time = 0
         let end_time = 2030
         let start_rate = 0

@@ -38,7 +38,7 @@ const getActorDetail = async(req, res, next) => {
 
 const search_actor = async(req, res, next) => {
     try {
-        let actor_name = '       '
+        let actor_name = ''
         if ('name' in req.query) actor_name = req.query.name
         let start_date = '1800-1-1'
         let end_date = '2050-1-1'

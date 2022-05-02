@@ -120,7 +120,7 @@ const delete_user = async(req, res, next) => {
 
 const search_user = async(req, res, next) => {
     try {
-        let user_name = '              '
+        let user_name = ''
         if ('name' in req.query)
         {
             user_name = req.query.name
