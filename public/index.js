@@ -690,6 +690,7 @@ const me = {
   }
 };
 
+
 const user = {
   url: 'user/:id',
   visible: false,
@@ -724,6 +725,44 @@ const user = {
 };
 
 
+const search = {
+  url: 'search',
+  label: 'Search',
+  icon: 'fas fa-search',
+  visible: true,
+  schema: {
+    type: 'page',
+    body: {
+      type: "button-group",
+      buttons: [
+        {
+          type: 'action',
+          label: 'search movie',
+          actionType: 'link',
+          link: 'search_movie'
+        },
+
+        {
+          type: 'action',
+          label: 'search actor',
+          actionType: 'link',
+          link: 'search_actor'
+        },
+
+
+        {
+          type: 'action',
+          label: 'search user',
+          actionType: 'link',
+          link: 'search_user'
+        }
+
+      ]
+    }
+  }
+}
+
+
 const search_movie = {
   url: 'search_movie',
   visible: false,
@@ -734,14 +773,21 @@ const search_movie = {
       api: "get:/api/movie/search",
       syncLocation: false,
       autoGenerateFilter: true,
+      itemAction: {
+        type: "button",
+        actionType: "link",
+        link: "/movie/${id}"
+      },
+
       headerToolbar: [
         {
           type: "columns-toggler",
-          align: "right",
+          align: "left",
           draggable: true,
           icon: "fas fa-cog",
           overlay: true,
-          footerBtnSize: "sm"
+          footerBtnSize: "xs",
+          size: "xs"
         }
       ],
       columns: [
@@ -752,7 +798,7 @@ const search_movie = {
             type: "input-text",
             name: "name",
             label: "name",
-            placeholder: "Enter the movie name"
+            placeholder: "Enter movie name"
           }
         },
 
@@ -767,16 +813,159 @@ const search_movie = {
         {
           name: "release_year",
           label: "release_year",
+          searchable: {
+            type: "input-range",
+            name: "release_year",
+            label: "year",
+            step: 1,
+            multiple: true,
+            min: 1880,
+            max: 2050
+          }
         },
 
         {
           name: "rate",
-          label: "rate"
+          label: "rate",
+          searchable: {
+            type: "input-range",
+            name: "rate",
+            label: "rate",
+            step: 0.1,
+            multiple: true,
+            min: 0,
+            max: 10
+          }
         }
       ]
       }
   }
 };
+
+
+
+
+
+
+
+
+const search_user = {
+  url: 'search_user',
+  visible: false,
+  schema : {
+    type: 'page',
+    body: {
+      type: "crud",
+      api: "get:/api/user/search",
+      syncLocation: false,
+      autoGenerateFilter: true,
+      itemAction: {
+        type: "button",
+        actionType: "link",
+        link: "/user/${id}"
+      },
+
+      headerToolbar: [
+        {
+          type: "columns-toggler",
+          align: "left",
+          draggable: true,
+          icon: "fas fa-cog",
+          overlay: true,
+          footerBtnSize: "xs",
+          size: "xs"
+        }
+      ],
+      columns: [
+        {
+          name: "name",
+          label: "name",
+          searchable: {
+            type: "input-text",
+            name: "name",
+            label: "name",
+            placeholder: "Enter user name"
+          }
+        },
+
+        {
+          name: "avatar_url",
+          label: "",
+          type: 'image',
+          thumbMode: 'cover',
+          enlargeAble: true
+        }
+      ]
+      }
+  }
+};
+
+
+
+const search_actor = {
+  url: 'search_actor',
+  visible: false,
+  schema : {
+    type: 'page',
+    body: {
+      type: "crud",
+      api: "get:/api/actor/search",
+      syncLocation: false,
+      autoGenerateFilter: true,
+      itemAction: {
+        type: "button",
+        actionType: "link",
+        link: "/actor/${id}"
+      },
+
+      headerToolbar: [
+        {
+          type: "columns-toggler",
+          align: "left",
+          draggable: true,
+          icon: "fas fa-cog",
+          overlay: true,
+          footerBtnSize: "xs",
+          size: "xs"
+        }
+      ],
+      columns: [
+        {
+          name: "name",
+          label: "name",
+          searchable: {
+            type: "input-text",
+            name: "name",
+            label: "name",
+            placeholder: "Enter actor name"
+          }
+        },
+
+
+        {
+          name: "avatar_url",
+          label: "",
+          type: 'image',
+          thumbMode: 'cover',
+          enlargeAble: true
+        },
+
+        {
+          name: "birth_date",
+          label: "birth date",
+          searchable: {
+            type: "input-datetime-range",
+            name: "birth_date",
+            format: "YYYY-MM-DD"
+          }
+        }
+
+      ]
+      }
+  }
+};
+
+
 
 const app = {
   type: 'app',
@@ -797,7 +986,10 @@ const app = {
         comments,
         me,
         user,
-        search_movie
+        search_movie,
+        search_user,
+        search_actor,
+        search
       ]
     }
   ]

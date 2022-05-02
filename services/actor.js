@@ -38,11 +38,21 @@ const getActorDetail = async(req, res, next) => {
 
 const search_actor = async(req, res, next) => {
     try {
-        let {actor_name} = req.body
-        await query(`select id, name, photo_url from actors where name like concat('${actor_name}', '%')`)
-        res.join({
+        let actor_name = '       '
+        if ('name' in req.query) actor_name = req.query.name
+        let start_date = '1800-1-1'
+        let end_date = '2050-1-1'
+        if ('birth_date' in req.query)
+        {
+            start_date = req.query.birth_date.split(',')[0]
+            end_date = req.query.birth_date.split(',')[1]
+        }
+        let actors = await query(`select id, name, photo_url, birth_date from actors where name like concat('%' , ? , '%')
+        and birth_date between ? and ?`, actor_name, start_date, end_date)
+        res.json({
             status: 0,
-            msg: 'searching success'
+            msg: 'searching success',
+            data: actors
         }) 
     }
     catch(e){

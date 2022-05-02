@@ -42,21 +42,38 @@ const getMovieDetail = async(req, res, next) => {
 
 const search_movie = async(req, res, next) => {
     try {
-        let movie_name = ''
+        let movie_name = '     '
+        let start_time = 0
+        let end_time = 2030
+        let start_rate = 0
+        let end_rate = 10
+        console.log(req.query)
         if ('name' in req.query) movie_name = req.query.name
+        if ('release_year' in req.query)
+        {
+            start_time = Number(req.query.release_year.split(',')[0])
+            end_time = Number(req.query.release_year.split(',')[1])
+        }
+        console.log(req.query)
+        if ('rate' in req.query)
+        {
+            start_rate = Number(req.query.rate.split(',')[0])
+            end_rate = Number(req.query.rate.split(',')[1])
+        }
         let movie = await query(`
-        select m.name, m.cover_url, m.release_year, round(avg(c.rate),1) as rate 
+        with search_name as(
+        select m.name, m.id, m.cover_url, m.release_year, round(avg(c.rate),1) as rate 
         from movies as m inner join comments as c on c.movie_id = m.id
         where name like concat('%', ?, '%')
-        group by m.id 
-        `, movie_name)
-        let [table_num] = await query("select count(id) from movies") 
-        table_num = table_num['count(id)']
+        group by m.id)
+        select name, id, cover_url, release_year, rate
+        from search_name
+        where release_year between ? and ? and rate between ? and ?
+        `, movie_name, start_time, end_time, start_rate, end_rate)
         res.json({
             status: 0,
             msg: 'searching success',
             data: {movie},
-            total: table_num
         })
 
     }

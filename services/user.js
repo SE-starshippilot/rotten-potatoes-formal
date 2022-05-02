@@ -120,11 +120,16 @@ const delete_user = async(req, res, next) => {
 
 const search_user = async(req, res, next) => {
     try {
-        let {user_name} = req.body
-        await query(`select id, name, avatar_url from users where name like concat('?', '%')`, user_name)
-        res.join({
+        let user_name = '              '
+        if ('name' in req.query)
+        {
+            user_name = req.query.name
+        }
+        user = await query(`select id, name, avatar_url from users where name like concat('%' , ?, '%') and id != 0`, user_name)
+        res.json({
             status: 0,
-            msg: 'searching success'
+            msg: 'searching success',
+            data: {user} 
         }) 
     }
     catch(e){

@@ -10,13 +10,12 @@ const sqlCreateTableMovies = `
         name varchar(255) not null,
         cover_url varchar(255),
         introduction varchar(16383),
-        release_year year
+        release_year year,
+        index(name),
+        index(release_year)
     )engine=innodb default charset=utf8
 `
 
-const sql_create_movie_idx = `
-    create index movie_name on movies(name)
-`
 
 const sqlCreateTableActors = `
     create table if not exists actors(
@@ -24,13 +23,12 @@ const sqlCreateTableActors = `
         name varchar(255) not null,
         photo_url varchar(255),
         introduction varchar(16383),
-        birth_date date
+        birth_date date,
+        index(name),
+        index(birth_date)
     )engine=innodb default charset=utf8
 `
 
-const sql_create_actor_idx = `
-    create index actor_name on actors(name)
-`
 
 
 const sqlCreateTableUsers = `
@@ -38,13 +36,11 @@ const sqlCreateTableUsers = `
         id int auto_increment primary key,
         name varchar(255) not null unique,
         avatar_url varchar(255),
-        password varchar(255) not null
+        password varchar(255) not null,
+        index(name)
     )engine=innodb default charset=utf8
 `
 
-const sql_create_user_idx = `
-    create index user_name on users(name)
-`
 
 
 const sqlCreateTableCharacters = `
@@ -85,10 +81,7 @@ const init = async (reset) => {
         await query(sqlCreateTableUsers)
         await query(sqlCreateTableCharacters)
         await query(sqlCreateTableComments)
-        await query(sql_create_movie_idx)
-        await query(sql_create_actor_idx)
-        await query(sql_create_user_idx)
-    
+
         
         await query(`insert into users (id, name, avatar_url, password) values (0, 'User deleted', 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjQ4MTY5NzU2M15BMl5BanBnXkFtZTgwNDc5NTgwMTI@._V1_.jpg', '123') `)
         await query(`set global local_infile=1`)
