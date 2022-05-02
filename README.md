@@ -12,16 +12,17 @@ This is CUHKSZ CSC3170 group project
 ## How to Run
 1. Set up your database
 
-* Check ./db/config.js:
+* Check `.env` file:
 
 ```js
-const config = {
-    host: 'localhost',
-    port: '3306',
-    user: 'root',
-    password: '123456',
-    database: 'rotten_potatoes'
-}
+PORT=3000
+SECRET_KEY=RotTeNPOtATOeS
+DB_RESET=true
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=passwd
+DB_DATABASE=rotten_potatoes
 ```
 
 substitute `user` field and `password` field with your own mysql user and password

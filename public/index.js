@@ -794,10 +794,11 @@ const search_movie = {
         {
           name: "name",
           label: "name",
+          "sortable":true,
           searchable: {
             type: "input-text",
             name: "name",
-            label: "name",
+            label: "movie name",
             placeholder: "Enter movie name"
           }
         },
@@ -812,7 +813,8 @@ const search_movie = {
 
         {
           name: "release_year",
-          label: "release_year",
+          label: "release year",
+          sortable: true,
           searchable: {
             type: "input-range",
             name: "release_year",
@@ -827,6 +829,7 @@ const search_movie = {
         {
           name: "rate",
           label: "rate",
+          sortable: true,
           searchable: {
             type: "input-range",
             name: "rate",
@@ -933,6 +936,7 @@ const search_actor = {
         {
           name: "name",
           label: "name",
+          sortable: true,
           searchable: {
             type: "input-text",
             name: "name",
@@ -953,6 +957,7 @@ const search_actor = {
         {
           name: "birth_date",
           label: "birth date",
+          sortable: true,
           searchable: {
             type: "input-datetime-range",
             name: "birth_date",
