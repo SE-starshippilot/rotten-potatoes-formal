@@ -19,7 +19,7 @@ router.get('/user/me/info', user.getMeInfo)
 router.post('/user/me/change-avatar', upload.single('avatar'), user.changeMeAvatar)
 router.put('/user/me/change-name', user.changeMeName)
 router.put('/user/me/change-password', user.changeMePassword)
-router.delete('/user/me/delete', user.delete_user)
+router.put('/user/me/delete', user.delete_user)
 router.get('/user/search', user.search_user)
 
 

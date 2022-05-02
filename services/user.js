@@ -96,19 +96,20 @@ const changeMePassword = async(req, res, next) => {
 
 const delete_user = async(req, res, next) => {
     try {
-        let {inp_password} = req.body
-        let [{password}] = await query(`select password from users where id='${req.user_id}'`)
+        let inp_password = req.body.password
+        let user_id = Number(req.user_id)
+        let [{password}] = await query(`select password from users where id= ?`, user_id)
         if (password !== inp_password){
             res.json({
-                staus: 1,
+                status: 1,
                 msg: 'wrong password'
             })
             return
         }
-        await query(`delete from users where id='${req.user_id}'`)
-        await query(`update comments set user_id=null where user_id='${req.user_id}'`)
+        await query(`delete from users where id=?`, user_id)
+        await query(`update comments set user_id=0 where user_id=?`, user_id)
         res.json({
-            staus: 0,
+            status: 0,
             msg: 'delete user successfully'
         })
     }
@@ -119,11 +120,16 @@ const delete_user = async(req, res, next) => {
 
 const search_user = async(req, res, next) => {
     try {
-        let {user_name} = req.body
-        await query(`select id, name, avatar_url from users where name like concat('${user_name}', '%')`)
-        res.join({
+        let user_name = ''
+        if ('name' in req.query)
+        {
+            user_name = req.query.name
+        }
+        user = await query(`select id, name, avatar_url from users where name like concat('%' , ?, '%') and id != 0`, user_name)
+        res.json({
             status: 0,
-            msg: 'searching success'
+            msg: 'searching success',
+            data: {user} 
         }) 
     }
     catch(e){
