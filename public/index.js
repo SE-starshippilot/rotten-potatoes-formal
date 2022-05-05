@@ -257,6 +257,19 @@ const movie = {
                     {
                       type: 'html',
                       html: '<h3>release: ${release_year}</h3>'
+                    },
+                    {
+                      type: 'cards',
+                      source: '${genres}',
+                      className: 'flex space-between', 
+                      card: {
+                        header: {
+                          title: '${genres_name}'
+                        },
+                        itemAction: {
+                          type: 'button'
+                        }
+                      }
                     }
                   ]
                 }
@@ -397,6 +410,10 @@ const actor = {
                 {
                   type: 'html',
                   html: '<h1>${name}</h1>'
+                },
+                {
+                  type: 'html',
+                  html: '<h3>birthday: ${birth_date}</h3>'
                 },
                 {
                   type: 'html',
@@ -794,6 +811,7 @@ const search_movie = {
         {
           name: "name",
           label: "name",
+          "sortable":true,
           searchable: {
             type: "input-text",
             name: "name",
@@ -812,7 +830,7 @@ const search_movie = {
 
         {
           name: "release_year",
-          label: "release_year",
+          label: "release year",
           searchable: {
             type: "input-range",
             name: "release_year",
@@ -827,6 +845,7 @@ const search_movie = {
         {
           name: "rate",
           label: "rate",
+          sortable: true,
           searchable: {
             type: "input-range",
             name: "rate",
@@ -836,6 +855,12 @@ const search_movie = {
             min: 0,
             max: 10
           }
+        },
+        
+        {
+          name:"genres",
+          label:"genres",
+
         }
       ]
       }
@@ -933,6 +958,7 @@ const search_actor = {
         {
           name: "name",
           label: "name",
+          sortable: true,
           searchable: {
             type: "input-text",
             name: "name",
@@ -953,6 +979,7 @@ const search_actor = {
         {
           name: "birth_date",
           label: "birth date",
+          sortable: true,
           searchable: {
             type: "input-datetime-range",
             name: "birth_date",

@@ -1,7 +1,7 @@
 const query = require('./query')
 
 const sqlDropTables = `
-    drop table if exists characters, comments, movies, actors, users
+    drop table if exists characters, comments, movies, actors, users, genres
 `
 
 const sqlCreateTableMovies = `
@@ -69,7 +69,14 @@ const sqlCreateTableComments = `
     )engine=innodb default charset=utf8
 `
 
-
+const sqlCreateTableGenres = `
+    create table if not exists genres(
+        id int,
+        genres_name varchar(15),
+        primary key(genres_name, id),
+        foreign key (id) references movies(id)
+        )engine=innodb default charset=utf8
+`
 
 const init = async (reset) => {
     try {
@@ -82,6 +89,7 @@ const init = async (reset) => {
         await query(sqlCreateTableUsers)
         await query(sqlCreateTableCharacters)
         await query(sqlCreateTableComments)
+        await query(sqlCreateTableGenres)
 
         
         await query(`insert into users (id, name, avatar_url, password) values (0, 'User deleted', 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjQ4MTY5NzU2M15BMl5BanBnXkFtZTgwNDc5NTgwMTI@._V1_.jpg', '123') `)
@@ -91,6 +99,7 @@ const init = async (reset) => {
         await query(`load data local infile 'data/users.csv' into table users fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
         await query(`load data local infile 'data/characters.csv' into table characters fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
         await query(`load data local infile 'data/comments.csv' into table comments fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
+        await query(`load data local infile 'data/genres.csv' into table genres fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
         await query(`set global local_infile=0`)
 
 
