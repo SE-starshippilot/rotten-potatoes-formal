@@ -129,31 +129,31 @@ for movie in movies:
                     user_id = user_id + 1
         movie_id = movie_id + 1
 with open('data/genres.csv', 'w', encoding='UTF8', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(['movie_id', 'genres'])
+    writer = csv.writer(f, lineterminator='\n')
+    writer.writerow(['movie_id', 'genres_name'])
     writer.writerows(genres_data)
 
 with open('data/movies.csv', 'w', encoding='UTF8', newline='') as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, lineterminator='\n')
     writer.writerow(['id', 'name', 'cover_url', 'introduction', 'release_year'])
     writer.writerows(movies_data)
     
 with open('data/actors.csv', 'w', encoding='UTF8', newline='') as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, lineterminator='\n')
     writer.writerow(['id', 'isFemale', 'name', 'photo_url', 'introduction', 'birth_date'])
     writer.writerows(actors_data)
     
 with open('data/users.csv', 'w', encoding='UTF8', newline='') as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, lineterminator='\n')
     writer.writerow(['id', 'name', 'avatar_url', 'password'])
     writer.writerows(users_data)
     
 with open('data/characters.csv', 'w', encoding='UTF8', newline='') as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, lineterminator='\n')
     writer.writerow(['id', 'character_name', 'movie_id', 'actor_id'])
     writer.writerows(characters_data)
     
 with open('data/comments.csv', 'w', encoding='UTF8', newline='') as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, lineterminator='\n')
     writer.writerow(['id', 'rate', 'content', 'comment_date', 'movie_id', 'user_id'])
     writer.writerows(comments_data)
