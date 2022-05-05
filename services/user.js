@@ -106,8 +106,8 @@ const delete_user = async(req, res, next) => {
             })
             return
         }
-        await query(`delete from users where id=?`, user_id)
         await query(`update comments set user_id=0 where user_id=?`, user_id)
+        await query(`delete from users where id=?`, user_id)
         res.json({
             status: 0,
             msg: 'delete user successfully'

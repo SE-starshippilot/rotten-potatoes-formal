@@ -65,6 +65,7 @@ const sqlCreateTableComments = `
         comment_date date not null,
         movie_id int not null,
         user_id int not null,
+        foreign key(user_id) references users(id),
         foreign key(movie_id) references movies(id)
     )engine=innodb default charset=utf8
 `
