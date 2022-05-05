@@ -7,7 +7,7 @@ This is CUHKSZ CSC3170 group project
 
 * zsf
 * zby
-* ...
+* sth\<TEST\>
 
 ## How to Run
 1. Set up your database
