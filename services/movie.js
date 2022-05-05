@@ -27,8 +27,11 @@ const getMovieDetail = async(req, res, next) => {
         let [ movie ] = await query('select * from movies where id=?', movie_id)
         movie.actors = await query('select a.id, a.name, a.photo_url, c.character_name from actors as a inner join characters as c on a.id=c.actor_id where c.movie_id=?', movie_id)
         movie.comments = await query('select u.id as user_id, u.name as user_name, u.avatar_url, c.rate, c.content, c.comment_date, c.id as comment_id from comments as c inner join users as u on c.user_id=u.id where c.movie_id=?', movie_id)
+        movie.genres = await query('select genres_name from genres where id=?', movie_id)
+        console.log(movie.genres.genre_name)
         let rate = movie.comments.reduce((prev, cur) => prev + cur.rate, 0) / movie.comments.length
         movie.rate = Math.round(((rate + Number.EPSILON) * 10)) / 10
+        console.log(movie)
         res.json({
             status: 0,
             data: movie
