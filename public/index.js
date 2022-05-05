@@ -257,6 +257,19 @@ const movie = {
                     {
                       type: 'html',
                       html: '<h3>release: ${release_year}</h3>'
+                    },
+                    {
+                      type: 'cards',
+                      source: '${genres}',
+                      className: 'flex space-between', 
+                      card: {
+                        header: {
+                          title: '${genres_name}'
+                        },
+                        itemAction: {
+                          type: 'button'
+                        }
+                      }
                     }
                   ]
                 }
@@ -397,6 +410,10 @@ const actor = {
                 {
                   type: 'html',
                   html: '<h1>${name}</h1>'
+                },
+                {
+                  type: 'html',
+                  html: '<h3>birthday: ${birth_date}</h3>'
                 },
                 {
                   type: 'html',
@@ -839,6 +856,12 @@ const search_movie = {
             min: 0,
             max: 10
           }
+        },
+        
+        {
+          name:"genres",
+          label:"genres",
+
         }
       ]
       }

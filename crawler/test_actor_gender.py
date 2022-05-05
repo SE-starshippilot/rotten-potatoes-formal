@@ -12,7 +12,7 @@ s.keep_alive = False
 base_url = 'https://www.imdb.com'
 
 def visit_page(url):
-    return BeautifulSoup(s.get(base_url + url).text, 'lxml')
+    return BeautifulSoup(s.get(base_url + url, timeout=120).text, 'lxml')
 
 def to_original_resolution(url):
     return url[0:url.find('_V1_')] + '_V1_.jpg'
@@ -27,7 +27,7 @@ users_data = []
 characters_data = []
 comments_data = []
 
-num_of_movies = 200
+num_of_movies = 20
 num_of_actors_per_movie = 20
 num_of_comments_per_movie = 20
 
@@ -61,9 +61,14 @@ for movie in movies:
         comments_page_url = movie_page.find('section', {'data-testid': 'UserReviews'}).find('div', {'data-testid': 'reviews-header'}).a.attrs['href']
         comments_page = visit_page(comments_page_url)
         comments = comments_page.find_all('div', class_='lister-item-content')
-    except:
-        print('oops')
+    except requests.exceptions.ConnectionError as cexcep:
+        print('Maximum connection time reached')
+    except requests.exceptions.RequestException as rexcep:
+        print('Connection overtime')
+    except KeyboardInterrupt as ke:
+        break
     else:
+        print(f'Movie Data:    id:{movie_id}  name:{movie_name}  release:{release_year}')
         movies_data.append([movie_id, movie_name, cover_url, introduction, release_year])
         for genres in curr_genres:
             genres_data.append([movie_id, genres])
@@ -71,37 +76,33 @@ for movie in movies:
         for actor in actors:
             if actor_id - prev_actor_id >= num_of_actors_per_movie:
                 break
-            try:
-                name_tag = actor.find('a', {'data-testid': 'title-cast-item__actor'})
-                actor_name = name_tag.text
-                photo_url = actor.find('img')
-                if photo_url == None:
-                    continue
-                photo_url = to_original_resolution(photo_url.attrs['src'])
-                character_names = []
-                for character in actor.find_all('li'):
-                    if character.a != None:
-                        character_names.append(character.a.span.text)
-                actor_page_url = name_tag.attrs['href']
-                actor_page = visit_page(actor_page_url)
-                introduction = actor_page.find('div', {'id': 'name-bio-text'}).div.div.contents[0]
-                birth_date = actor_page.find('div', {'id': 'name-born-info'}).time.attrs['datetime']
-                gender_field = actor_page.find(text=['Actor', 'Actress'])
-                isFemale = True if 'Actress' in gender_field else False
-            except:
-                print('ouch')
+            name_tag = actor.find('a', {'data-testid': 'title-cast-item__actor'})
+            actor_name = name_tag.text
+            photo_url = actor.find('img')
+            if photo_url == None:
+                continue
+            photo_url = to_original_resolution(photo_url.attrs['src'])
+            character_names = []
+            for character in actor.find_all('li'):
+                if character.a != None:
+                    character_names.append(character.a.span.text)
+            actor_page_url = name_tag.attrs['href']
+            actor_page = visit_page(actor_page_url)
+            introduction = actor_page.find('div', {'id': 'name-bio-text'}).div.div.contents[0]
+            birth_date = actor_page.find('div', {'id': 'name-born-info'}).time.attrs['datetime']
+            gender_field = actor_page.find(text=['Actor', 'Actress'])
+            isFemale = True if 'Actress' in gender_field else False
+            if actor_name in actor_name_to_id:
+                for character_name in character_names:
+                    characters_data.append([character_id, character_name, movie_id, actor_name_to_id[actor_name]])
+                    character_id = character_id + 1
             else:
-                if actor_name in actor_name_to_id:
-                    for character_name in character_names:
-                        characters_data.append([character_id, character_name, movie_id, actor_name_to_id[actor_name]])
-                        character_id = character_id + 1
-                else:
-                    for character_name in character_names:
-                        characters_data.append([character_id, character_name, movie_id, actor_id])
-                        character_id = character_id + 1
-                    actors_data.append([actor_id, actor_name, isFemale, photo_url, introduction, birth_date, isFemale])
-                    actor_name_to_id[actor_name] = actor_id
-                    actor_id = actor_id + 1
+                for character_name in character_names:
+                    characters_data.append([character_id, character_name, movie_id, actor_id])
+                    character_id = character_id + 1
+                actors_data.append([actor_id, actor_name, isFemale, photo_url, introduction, birth_date])
+                actor_name_to_id[actor_name] = actor_id
+                actor_id = actor_id + 1
         prev_comment_id = comment_id
         for comment in comments:
             if comment_id - prev_comment_id >= num_of_comments_per_movie:
