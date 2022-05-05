@@ -12,7 +12,7 @@ s.keep_alive = False
 base_url = 'https://www.imdb.com'
 
 def visit_page(url):
-    return BeautifulSoup(s.get(base_url + url).text, 'lxml')
+    return BeautifulSoup(s.get(base_url + url, timeout=20).text, 'lxml')
 
 def to_original_resolution(url):
     return url[0:url.find('_V1_')] + '_V1_.jpg'
@@ -99,7 +99,8 @@ for movie in movies:
                     for character_name in character_names:
                         characters_data.append([character_id, character_name, movie_id, actor_id])
                         character_id = character_id + 1
-                    actors_data.append([actor_id, actor_name, isFemale, photo_url, introduction, birth_date, isFemale])
+                    print([actor_id, actor_name, isFemale, birth_date])
+                    actors_data.append([actor_id, actor_name, isFemale, photo_url, introduction, birth_date])
                     actor_name_to_id[actor_name] = actor_id
                     actor_id = actor_id + 1
         prev_comment_id = comment_id

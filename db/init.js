@@ -21,6 +21,7 @@ const sqlCreateTableActors = `
     create table if not exists actors(
         id int auto_increment primary key,
         name varchar(255) not null,
+        sex boolean,
         photo_url varchar(255),
         introduction varchar(16383),
         birth_date date,
@@ -94,7 +95,7 @@ const init = async (reset) => {
         await query(`insert into users (id, name, avatar_url, password) values (0, 'User deleted', 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjQ4MTY5NzU2M15BMl5BanBnXkFtZTgwNDc5NTgwMTI@._V1_.jpg', '123') `)
         await query(`set global local_infile=1`)
         await query(`load data local infile 'data/movies.csv' into table movies fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
-        await query(`load data local infile 'data/actors.csv' into table actors fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
+        await query(`load data local infile 'data/actors.csv' into table actors fields terminated by ',' enclosed by '"' lines terminated by '\r\n'(id, name, sex, photo_url, introduction, @birth_date) set birth_date=nullif(@birth_date, 'Null') ignore 1 rows`)
         await query(`load data local infile 'data/users.csv' into table users fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
         await query(`load data local infile 'data/characters.csv' into table characters fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
         await query(`load data local infile 'data/comments.csv' into table comments fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
