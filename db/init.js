@@ -21,7 +21,6 @@ const sqlCreateTableActors = `
     create table if not exists actors(
         id int auto_increment primary key,
         name varchar(255) not null,
-        sex boolean,
         photo_url varchar(255),
         introduction varchar(16383),
         birth_date date,
