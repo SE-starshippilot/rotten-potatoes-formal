@@ -257,19 +257,6 @@ const movie = {
                     {
                       type: 'html',
                       html: '<h3>release: ${release_year}</h3>'
-                    },
-                    {
-                      type: 'cards',
-                      source: '${genres}',
-                      className: 'flex space-between', 
-                      card: {
-                        header: {
-                          title: '${genres_name}'
-                        },
-                        itemAction: {
-                          type: 'button'
-                        }
-                      }
                     }
                   ]
                 }
@@ -306,6 +293,23 @@ const movie = {
               }
             },
           ]
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'html',
+          html: '<h2>Genres</h2>'
+        },
+        {
+          type: 'cards',
+          source: '${genres}',
+          card: {
+            header: {
+              title: '${genres_name}',
+              className: 'flex flex-col items-center'
+            }
+          }
         },
         {
           type: 'divider'
@@ -431,12 +435,8 @@ const actor = {
               className: 'ml-8',
               body: [
                 {
-                  type: 'html',
+                  type: 'html', 
                   html: '<h1>${name}</h1>'
-                },
-                {
-                  type: 'html',
-                  html: '<h3>birthday: ${birth_date}</h3>'
                 },
                 {
                   type: 'html',
@@ -485,10 +485,11 @@ const actor = {
     }
   }
 };
+
 const directors = {
   label: 'Director',
   url: 'director',
-  icon: 'fas fa-male',
+  icon: 'fas fa-video',
   schema: {
     type: 'page',
     title: 'director',
@@ -513,6 +514,7 @@ const directors = {
     }
   }
 };
+
 const director = {
   url: 'director/:id',
   visible: false,
@@ -544,10 +546,6 @@ const director = {
                   type: 'html',
                   html: '<h3>birthday: ${birth_date}</h3>'
                 },
-                {
-                  type: 'html',
-                  html: '<h3>birthday: ${birth_date}</h3>'
-                }
               ]
             }
           ]
@@ -835,7 +833,6 @@ const me = {
   }
 };
 
-
 const user = {
   url: 'user/:id',
   visible: false,
@@ -868,7 +865,6 @@ const user = {
     }
   }
 };
-
 
 const search = {
   url: 'search',
@@ -906,7 +902,6 @@ const search = {
     }
   }
 }
-
 
 const search_movie = {
   url: 'search_movie',
@@ -983,24 +978,15 @@ const search_movie = {
             min: 0,
             max: 10
           }
-        },
-        
+        },     
         {
           name:"genres",
           label:"genres",
-
         }
       ]
       }
   }
 };
-
-
-
-
-
-
-
 
 const search_user = {
   url: 'search_user',
@@ -1017,7 +1003,6 @@ const search_user = {
         actionType: "link",
         link: "/user/${id}"
       },
-
       headerToolbar: [
         {
           type: "columns-toggler",
@@ -1040,7 +1025,6 @@ const search_user = {
             placeholder: "Enter user name"
           }
         },
-
         {
           name: "avatar_url",
           label: "",
@@ -1049,11 +1033,9 @@ const search_user = {
           enlargeAble: true
         }
       ]
-      }
+    }
   }
 };
-
-
 
 const search_actor = {
   url: 'search_actor',
@@ -1070,7 +1052,6 @@ const search_actor = {
         actionType: "link",
         link: "/actor/${id}"
       },
-
       headerToolbar: [
         {
           type: "columns-toggler",
@@ -1094,16 +1075,13 @@ const search_actor = {
             placeholder: "Enter actor name"
           }
         },
-
-
         {
-          name: "avatar_url",
+          name: "photo_url",
           label: "",
           type: 'image',
           thumbMode: 'cover',
           enlargeAble: true
         },
-
         {
           name: "birth_date",
           label: "birth date",
@@ -1114,13 +1092,10 @@ const search_actor = {
             format: "YYYY-MM-DD"
           }
         }
-
       ]
       }
   }
 };
-
-
 
 const app = {
   type: 'app',

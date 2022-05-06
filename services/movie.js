@@ -28,11 +28,9 @@ const getMovieDetail = async(req, res, next) => {
         movie.directors = await await query('select d.id, d.name, d.photo_url from directors as d inner join direct as ds on d.id=ds.director_id where ds.movie_id=?', movie_id)
         movie.actors = await query('select a.id, a.name, a.photo_url, c.character_name from actors as a inner join characters as c on a.id=c.actor_id where c.movie_id=?', movie_id)
         movie.comments = await query('select u.id as user_id, u.name as user_name, u.avatar_url, c.rate, c.content, c.comment_date, c.id as comment_id from comments as c inner join users as u on c.user_id=u.id where c.movie_id=?', movie_id)
-        movie.genres = await query('select genres_name from genres where id=?', movie_id)
-        console.log(movie.genres.genre_name)
+        movie.genres = await query('select genres_name from genres where movie_id=?', movie_id)
         let rate = movie.comments.reduce((prev, cur) => prev + cur.rate, 0) / movie.comments.length
         movie.rate = Math.round(((rate + Number.EPSILON) * 10)) / 10
-        console.log(movie)
         res.json({
             status: 0,
             data: movie
@@ -53,7 +51,6 @@ const search_movie = async(req, res, next) => {
         let end_rate = 10
         let criteria = 'id'
         let asc = true
-        console.log(req.query)
         if ('name' in req.query) movie_name = req.query.name
         if ('release_year' in req.query)
         {
@@ -68,14 +65,11 @@ const search_movie = async(req, res, next) => {
             criteria = 'id'
             asc = true
         }
-        // console.log(req.query)
         if ('rate' in req.query)
         {
             start_rate = Number(req.query.rate.split(',')[0])
             end_rate = Number(req.query.rate.split(',')[1])
         }
-        console.log(typeof criteria)
-        // console.log("********movie name:%s, start_time:%s, end_time:%s, start_rate:%s, end_rate:%s, criteria:%s, ascending:%s*********", movie_name, start_time, end_time, start_rate, end_rate, criteria, asc)
         let movie = await query(`
         with search_name as(
             select m.name, m.id, m.cover_url, m.release_year, round(avg(c.rate),1) as rate 
@@ -91,7 +85,7 @@ const search_movie = async(req, res, next) => {
         res.json({
             status: 0,
             msg: 'searching success',
-            data: {movie},
+            data: {items: movie},
         })
 
     }
