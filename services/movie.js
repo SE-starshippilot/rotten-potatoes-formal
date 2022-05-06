@@ -85,7 +85,7 @@ const search_movie = async(req, res, next) => {
         res.json({
             status: 0,
             msg: 'searching success',
-            data: {movie},
+            data: {items: movie},
         })
 
     }

@@ -63,7 +63,7 @@ const search_actor = async(req, res, next) => {
         res.json({
             status: 0,
             msg: 'searching success',
-            data: actors
+            data: {items: actors}
         }) 
     }
     catch(e){

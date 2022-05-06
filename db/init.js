@@ -16,7 +16,6 @@ const sqlCreateTableMovies = `
     )engine=innodb default charset=utf8
 `
 
-
 const sqlCreateTableActors = `
     create table if not exists actors(
         id int auto_increment primary key,
@@ -28,6 +27,7 @@ const sqlCreateTableActors = `
         index(birth_date)
     )engine=innodb default charset=utf8
 `
+
 const sqlCreateTableDirectors = `
     create table if not exists directors(
         id int auto_increment primary key,
@@ -49,7 +49,6 @@ const sqlCreateTableDirect = `
     )engine=innodb default charset=utf8
 `
 
-
 const sqlCreateTableUsers = `
     create table if not exists users(
         id int auto_increment primary key,
@@ -59,8 +58,6 @@ const sqlCreateTableUsers = `
         index(name)
     )engine=innodb default charset=utf8
 `
-
-
 
 const sqlCreateTableCharacters = `
     create table if not exists characters(
@@ -72,8 +69,6 @@ const sqlCreateTableCharacters = `
         foreign key(actor_id) references actors(id)
     )engine=innodb default charset=utf8
 `
-
-
 
 const sqlCreateTableComments = `
     create table if not exists comments(
