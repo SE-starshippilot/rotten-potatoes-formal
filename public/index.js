@@ -687,40 +687,6 @@ const comments = {
   }
 };
 
-const me_recommendation_component = () => ({
-  type: 'each',
-  source: '${recommendations}',
-  items: {
-    type: 'panel',
-    title: {
-      type: 'wrapper',
-      className: 'flex justify-between items-center',
-      body: [
-        {
-          type: 'avatar',
-          src: '${cover_url}',
-        },
-        {
-          type: 'wrapper',
-          body: '${name}'
-        },
-        {
-          type: 'button-group',
-          buttons: [
-            {
-              type: 'action',
-              label:  'go to movie detail page',
-              actionType: 'link',
-              link: '/movie/${id}' 
-            },
-          ]
-
-        }
-      ]
-    },
-  }
-});
-
 const me = {
   label: 'Me',
   url: 'me',
@@ -866,7 +832,22 @@ const me = {
           type: 'html',
           html: '<h2>Guess you like</h2>'
         },
-        me_recommendation_component()
+        {
+          type: 'cards',
+          source: '${recommendations}',
+          card: {
+            header: {
+              className: 'flex flex-col items-center',
+              avatar: '${cover_url}',
+              title: '${name}',
+            },
+            itemAction: {
+              type: 'button',
+              actionType: 'link',
+              url: '/movie/${id}'
+            }
+          }
+        }
       ]
     }
   }
@@ -905,46 +886,9 @@ const user = {
   }
 };
 
-const search = {
-  url: 'search',
-  label: 'Search',
-  icon: 'fas fa-search',
-  visible: true,
-  schema: {
-    type: 'page',
-    body: {
-      type: "button-group",
-      buttons: [
-        {
-          type: 'action',
-          label: 'search movie',
-          actionType: 'link',
-          link: 'search_movie'
-        },
-
-        {
-          type: 'action',
-          label: 'search actor',
-          actionType: 'link',
-          link: 'search_actor'
-        },
-
-
-        {
-          type: 'action',
-          label: 'search user',
-          actionType: 'link',
-          link: 'search_user'
-        }
-
-      ]
-    }
-  }
-}
-
 const search_movie = {
-  url: 'search_movie',
-  visible: false,
+  label: 'Search Movie',
+  url: 'movie',
   schema : {
     type: 'page',
     body: {
@@ -957,7 +901,6 @@ const search_movie = {
         actionType: "link",
         link: "/movie/${id}"
       },
-
       headerToolbar: [
         {
           type: "columns-toggler",
@@ -981,7 +924,6 @@ const search_movie = {
             placeholder: "Enter movie name"
           }
         },
-
         {
           name: "cover_url",
           label: "",
@@ -989,7 +931,6 @@ const search_movie = {
           thumbMode: 'cover',
           enlargeAble: true
         },
-
         {
           name: "release_year",
           label: "release year",
@@ -1003,7 +944,6 @@ const search_movie = {
             max: 2050
           }
         },
-
         {
           name: "rate",
           label: "rate",
@@ -1028,8 +968,8 @@ const search_movie = {
 };
 
 const search_user = {
-  url: 'search_user',
-  visible: false,
+  label: 'Search User',
+  url: 'user',
   schema : {
     type: 'page',
     body: {
@@ -1077,8 +1017,8 @@ const search_user = {
 };
 
 const search_actor = {
-  url: 'search_actor',
-  visible: false,
+  label: 'Search Actor',
+  url: 'actor',
   schema : {
     type: 'page',
     body: {
@@ -1136,6 +1076,18 @@ const search_actor = {
   }
 };
 
+const search = {
+  label: 'Search',
+  url: '/search',
+  redirect: '/search/movie',
+  icon: 'fas fa-search',
+  children: [
+    search_movie,
+    search_actor,
+    search_user
+  ]
+};
+
 const app = {
   type: 'app',
   brandName: 'Rotten Potatoes',
@@ -1157,9 +1109,6 @@ const app = {
         comments,
         me,
         user,
-        search_movie,
-        search_user,
-        search_actor,
         search
       ]
     }
