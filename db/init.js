@@ -61,10 +61,11 @@ const sqlCreateTableUsers = `
 
 const sqlCreateTableCharacters = `
     create table if not exists characters(
-        id int auto_increment primary key,
+        id int auto_increment,
         character_name varchar(255) not null,
         movie_id int not null,
         actor_id int not null,
+        primary key (id, movie_id, actor_id),
         foreign key(movie_id) references movies(id),
         foreign key(actor_id) references actors(id)
     )engine=innodb default charset=utf8
@@ -72,12 +73,13 @@ const sqlCreateTableCharacters = `
 
 const sqlCreateTableComments = `
     create table if not exists comments(
-        id int auto_increment primary key,
+        id int auto_increment,
         rate int not null,
         content varchar(16383) not null,
         comment_date date not null,
         movie_id int not null,
         user_id int not null,
+        primary key(id, user_id, movie_id),
         foreign key(user_id) references users(id),
         foreign key(movie_id) references movies(id)
     )engine=innodb default charset=utf8
