@@ -8,13 +8,15 @@ This is CUHKSZ CSC3170 group project
 * zsf
 * zby
 * sth\<TEST\>
+* ly
+* wmj
 
 ## How to Run
 1. Set up your database
 
 * Check `.env` file:
 
-```js
+```sh
 PORT=3000
 SECRET_KEY=RotTeNPOtATOeS
 DB_RESET=true
@@ -25,7 +27,7 @@ DB_PASSWORD=passwd
 DB_DATABASE=rotten_potatoes
 ```
 
-substitute `user` field and `password` field with your own mysql user and password
+substitute `DB_USER` field and `DB_PASSWORD` field with your own mysql user and password
 * Create database `rotten_potatoes`:
 
 Simply log into the mysql on your machine and run sql: `create database rotten_potatoes;`
