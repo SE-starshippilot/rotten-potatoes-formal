@@ -323,6 +323,29 @@ const movie = {
           body: '${introduction}'
         },
         {
+          type:'divider'
+        },
+        {
+          type: 'html',
+          html: '<h2>Director</h2>'
+        },
+        {
+          type: 'cards',
+          source: '${directors}',
+          card: {
+            header: {
+              className: 'flex flex-col items-center',
+              avatar: '${photo_url}',
+              title: '${name}',
+            },
+            itemAction: {
+              type: 'button',
+              actionType: 'link',
+              url: '/director/${id}'
+            }
+          }
+        },
+        {
           type: 'divider'
         },
         {
@@ -454,6 +477,111 @@ const actor = {
               avatar: '${cover_url}',
               title: '${name}',
               subTitle: '${character_name}'
+            },
+            itemAction: {
+              type: 'button',
+              actionType: 'link',
+              url: '/movie/${id}'
+            }
+          }
+        }
+      ]
+    }
+  }
+};
+const directors = {
+  label: 'Director',
+  url: 'director',
+  icon: 'fas fa-male',
+  schema: {
+    type: 'page',
+    title: 'director',
+    body: {
+      type: 'crud',
+      api: 'get:/api/director/list',
+      syncLocation: false,
+      mode: 'cards',
+      placeholder: 'no director',
+      card: {
+        className: 'flex items-center',
+        header: {
+          avatar: '${photo_url}',
+        },
+        body: '${name}',
+        itemAction: {
+          type: 'button',
+          actionType: 'link',
+          url: '/director/${id}'
+        }
+      }
+    }
+  }
+};
+const director = {
+  url: 'director/:id',
+  visible: false,
+  schema: {
+    type: 'page',
+    body: {
+      type: 'service',
+      api: 'get:/api/director/detail/${params.id}',
+      body: [
+        {
+          type: 'wrapper',
+          className: 'flex',
+          body: [
+            {
+              type: 'image',
+              src: '${photo_url}',
+              thumbMode: 'cover',
+              enlargeAble: true
+            },
+            {
+              type: 'wrapper',
+              className: 'ml-8',
+              body: [
+                {
+                  type: 'html',
+                  html: '<h1>${name}</h1>'
+                },
+                {
+                  type: 'html',
+                  html: '<h3>birthday: ${birth_date}</h3>'
+                },
+                {
+                  type: 'html',
+                  html: '<h3>birthday: ${birth_date}</h3>'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'html',
+          html: '<h2>Introduction</h2>'
+        },
+        {
+          type: 'wrapper',
+          body: '${introduction}'
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'html',
+          html: '<h2>Movies</h2>'
+        },
+        {
+          type: 'cards',
+          source: '${movies}',
+          card: {
+            header: {
+              className: 'flex flex-col items-center',
+              avatar: '${cover_url}',
+              title: '${name}',
             },
             itemAction: {
               type: 'button',
@@ -1012,6 +1140,8 @@ const app = {
         movie,
         actors,
         actor,
+        directors,
+        director,
         comments,
         me,
         user,
