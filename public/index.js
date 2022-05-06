@@ -257,19 +257,6 @@ const movie = {
                     {
                       type: 'html',
                       html: '<h3>release: ${release_year}</h3>'
-                    },
-                    {
-                      type: 'cards',
-                      source: '${genres}',
-                      className: 'flex space-between', 
-                      card: {
-                        header: {
-                          title: '${genres_name}'
-                        },
-                        itemAction: {
-                          type: 'button'
-                        }
-                      }
                     }
                   ]
                 }
@@ -306,6 +293,23 @@ const movie = {
               }
             },
           ]
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'html',
+          html: '<h2>Genres</h2>'
+        },
+        {
+          type: 'cards',
+          source: '${genres}',
+          card: {
+            header: {
+              title: '${genres_name}',
+              className: 'flex flex-col items-center'
+            }
+          }
         },
         {
           type: 'divider'
@@ -983,12 +987,10 @@ const search_movie = {
             min: 0,
             max: 10
           }
-        },
-        
+        },     
         {
           name:"genres",
           label:"genres",
-
         }
       ]
       }
