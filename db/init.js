@@ -1,7 +1,7 @@
 const query = require('./query')
 
 const sqlDropTables = `
-    drop table if exists characters, comments, movies, actors, users
+    drop table if exists comments, genres, characters, direct, users, movies, actors, directors
 `
 
 const sqlCreateTableMovies = `
@@ -16,7 +16,6 @@ const sqlCreateTableMovies = `
     )engine=innodb default charset=utf8
 `
 
-
 const sqlCreateTableActors = `
     create table if not exists actors(
         id int auto_increment primary key,
@@ -29,7 +28,26 @@ const sqlCreateTableActors = `
     )engine=innodb default charset=utf8
 `
 
+const sqlCreateTableDirectors = `
+    create table if not exists directors(
+        id int auto_increment primary key,
+        name varchar(255) not null,
+        photo_url varchar(255),
+        introduction varchar(16383),
+        birth_date date,
+        index(name),
+        index(birth_date)
+    )engine=innodb default charset=utf8
+`
 
+const sqlCreateTableDirect = `
+    create table if not exists direct(
+        movie_id int primary key,
+        director_id int not null,
+        foreign key(movie_id) references movies(id),
+        foreign key(director_id) references directors(id)
+    )engine=innodb default charset=utf8
+`
 
 const sqlCreateTableUsers = `
     create table if not exists users(
@@ -41,8 +59,6 @@ const sqlCreateTableUsers = `
     )engine=innodb default charset=utf8
 `
 
-
-
 const sqlCreateTableCharacters = `
     create table if not exists characters(
         id int auto_increment primary key,
@@ -53,8 +69,6 @@ const sqlCreateTableCharacters = `
         foreign key(actor_id) references actors(id)
     )engine=innodb default charset=utf8
 `
-
-
 
 const sqlCreateTableComments = `
     create table if not exists comments(
@@ -69,7 +83,14 @@ const sqlCreateTableComments = `
     )engine=innodb default charset=utf8
 `
 
-
+const sqlCreateTableGenres = `
+    create table if not exists genres(
+        movie_id int not null,
+        genres_name varchar(15) not null,
+        primary key(genres_name, movie_id),
+        foreign key (movie_id) references movies(id)
+    )engine=innodb default charset=utf8
+`
 
 const init = async (reset) => {
     try {
@@ -82,15 +103,20 @@ const init = async (reset) => {
         await query(sqlCreateTableUsers)
         await query(sqlCreateTableCharacters)
         await query(sqlCreateTableComments)
-
+        await query(sqlCreateTableGenres)
+        await query(sqlCreateTableDirectors)
+        await query(sqlCreateTableDirect)
         
         await query(`insert into users (id, name, avatar_url, password) values (0, 'User deleted', 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjQ4MTY5NzU2M15BMl5BanBnXkFtZTgwNDc5NTgwMTI@._V1_.jpg', '123') `)
         await query(`set global local_infile=1`)
-        await query(`load data local infile 'data/movies.csv' into table movies fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
-        await query(`load data local infile 'data/actors.csv' into table actors fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
-        await query(`load data local infile 'data/users.csv' into table users fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
-        await query(`load data local infile 'data/characters.csv' into table characters fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
-        await query(`load data local infile 'data/comments.csv' into table comments fields terminated by ',' enclosed by '"' lines terminated by '\r\n' ignore 1 rows`)
+        await query(`load data local infile 'data/movies.csv' into table movies fields terminated by ',' enclosed by '"' ignore 1 rows`)
+        await query(`load data local infile 'data/actors.csv' into table actors fields terminated by ',' enclosed by '"' ignore 1 rows`)
+        await query(`load data local infile 'data/users.csv' into table users fields terminated by ',' enclosed by '"' ignore 1 rows`)
+        await query(`load data local infile 'data/characters.csv' into table characters fields terminated by ',' enclosed by '"' ignore 1 rows`)
+        await query(`load data local infile 'data/comments.csv' into table comments fields terminated by ',' enclosed by '"' ignore 1 rows`)
+        await query(`load data local infile 'data/genres.csv' into table genres fields terminated by ',' enclosed by '"' ignore 1 rows`)
+        await query(`load data local infile 'data/directors.csv' into table directors fields terminated by ',' enclosed by '"' ignore 1 rows`)
+        await query(`load data local infile 'data/direct.csv' into table direct fields terminated by ',' enclosed by '"' ignore 1 rows`)
         await query(`set global local_infile=0`)
 
 

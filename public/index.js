@@ -299,11 +299,51 @@ const movie = {
         },
         {
           type: 'html',
+          html: '<h2>Genres</h2>'
+        },
+        {
+          type: 'cards',
+          source: '${genres}',
+          card: {
+            header: {
+              title: '${genres_name}',
+              className: 'flex flex-col items-center'
+            }
+          }
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'html',
           html: '<h2>Introduction</h2>'
         },
         {
           type: 'wrapper',
           body: '${introduction}'
+        },
+        {
+          type:'divider'
+        },
+        {
+          type: 'html',
+          html: '<h2>Director</h2>'
+        },
+        {
+          type: 'cards',
+          source: '${directors}',
+          card: {
+            header: {
+              className: 'flex flex-col items-center',
+              avatar: '${photo_url}',
+              title: '${name}',
+            },
+            itemAction: {
+              type: 'button',
+              actionType: 'link',
+              url: '/director/${id}'
+            }
+          }
         },
         {
           type: 'divider'
@@ -395,7 +435,7 @@ const actor = {
               className: 'ml-8',
               body: [
                 {
-                  type: 'html',
+                  type: 'html', 
                   html: '<h1>${name}</h1>'
                 },
                 {
@@ -433,6 +473,109 @@ const actor = {
               avatar: '${cover_url}',
               title: '${name}',
               subTitle: '${character_name}'
+            },
+            itemAction: {
+              type: 'button',
+              actionType: 'link',
+              url: '/movie/${id}'
+            }
+          }
+        }
+      ]
+    }
+  }
+};
+
+const directors = {
+  label: 'Director',
+  url: 'director',
+  icon: 'fas fa-video',
+  schema: {
+    type: 'page',
+    title: 'director',
+    body: {
+      type: 'crud',
+      api: 'get:/api/director/list',
+      syncLocation: false,
+      mode: 'cards',
+      placeholder: 'no director',
+      card: {
+        className: 'flex items-center',
+        header: {
+          avatar: '${photo_url}',
+        },
+        body: '${name}',
+        itemAction: {
+          type: 'button',
+          actionType: 'link',
+          url: '/director/${id}'
+        }
+      }
+    }
+  }
+};
+
+const director = {
+  url: 'director/:id',
+  visible: false,
+  schema: {
+    type: 'page',
+    body: {
+      type: 'service',
+      api: 'get:/api/director/detail/${params.id}',
+      body: [
+        {
+          type: 'wrapper',
+          className: 'flex',
+          body: [
+            {
+              type: 'image',
+              src: '${photo_url}',
+              thumbMode: 'cover',
+              enlargeAble: true
+            },
+            {
+              type: 'wrapper',
+              className: 'ml-8',
+              body: [
+                {
+                  type: 'html',
+                  html: '<h1>${name}</h1>'
+                },
+                {
+                  type: 'html',
+                  html: '<h3>birthday: ${birth_date}</h3>'
+                },
+              ]
+            }
+          ]
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'html',
+          html: '<h2>Introduction</h2>'
+        },
+        {
+          type: 'wrapper',
+          body: '${introduction}'
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'html',
+          html: '<h2>Movies</h2>'
+        },
+        {
+          type: 'cards',
+          source: '${movies}',
+          card: {
+            header: {
+              className: 'flex flex-col items-center',
+              avatar: '${cover_url}',
+              title: '${name}',
             },
             itemAction: {
               type: 'button',
@@ -690,7 +833,6 @@ const me = {
   }
 };
 
-
 const user = {
   url: 'user/:id',
   visible: false,
@@ -723,7 +865,6 @@ const user = {
     }
   }
 };
-
 
 const search = {
   url: 'search',
@@ -762,7 +903,6 @@ const search = {
   }
 }
 
-
 const search_movie = {
   url: 'search_movie',
   visible: false,
@@ -798,7 +938,7 @@ const search_movie = {
           searchable: {
             type: "input-text",
             name: "name",
-            label: "movie name",
+            label: "name",
             placeholder: "Enter movie name"
           }
         },
@@ -814,7 +954,6 @@ const search_movie = {
         {
           name: "release_year",
           label: "release year",
-          sortable: true,
           searchable: {
             type: "input-range",
             name: "release_year",
@@ -839,18 +978,15 @@ const search_movie = {
             min: 0,
             max: 10
           }
+        },     
+        {
+          name:"genres",
+          label:"genres",
         }
       ]
       }
   }
 };
-
-
-
-
-
-
-
 
 const search_user = {
   url: 'search_user',
@@ -867,7 +1003,6 @@ const search_user = {
         actionType: "link",
         link: "/user/${id}"
       },
-
       headerToolbar: [
         {
           type: "columns-toggler",
@@ -890,7 +1025,6 @@ const search_user = {
             placeholder: "Enter user name"
           }
         },
-
         {
           name: "avatar_url",
           label: "",
@@ -899,11 +1033,9 @@ const search_user = {
           enlargeAble: true
         }
       ]
-      }
+    }
   }
 };
-
-
 
 const search_actor = {
   url: 'search_actor',
@@ -920,7 +1052,6 @@ const search_actor = {
         actionType: "link",
         link: "/actor/${id}"
       },
-
       headerToolbar: [
         {
           type: "columns-toggler",
@@ -944,16 +1075,13 @@ const search_actor = {
             placeholder: "Enter actor name"
           }
         },
-
-
         {
-          name: "avatar_url",
+          name: "photo_url",
           label: "",
           type: 'image',
           thumbMode: 'cover',
           enlargeAble: true
         },
-
         {
           name: "birth_date",
           label: "birth date",
@@ -964,13 +1092,10 @@ const search_actor = {
             format: "YYYY-MM-DD"
           }
         }
-
       ]
       }
   }
 };
-
-
 
 const app = {
   type: 'app',
@@ -988,6 +1113,8 @@ const app = {
         movie,
         actors,
         actor,
+        directors,
+        director,
         comments,
         me,
         user,

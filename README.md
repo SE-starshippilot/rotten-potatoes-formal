@@ -7,7 +7,7 @@ This is CUHKSZ CSC3170 group project
 
 * zsf
 * zby
-* ...
+* sth\<TEST\>
 
 ## How to Run
 1. Set up your database
@@ -62,6 +62,10 @@ Data in this project is scraped from [IMDb Top 250 Movies](https://www.imdb.com/
 * show comments that a user commented under the user's detail page
 * release_date, average rate of movie and birth_date of actor
 * collect data: finished with python crawler
+* sort
+    * movies: by release_date, average rate
+    * actors: by birth_date (i.e. age), experience (number of movies acted)
+
 
 2. ToDos: 
 * character list page
@@ -70,8 +74,6 @@ Data in this project is scraped from [IMDb Top 250 Movies](https://www.imdb.com/
 * comment on actors
 * like, dislike comment
 * sort
-    * movies: by release_date, average rate
-    * actors: by birth_date (i.e. age), experience (number of movies acted)
     * comments: by comment_date, like, dislike
 * filter
     * movies: by movie_type, which decade (80s, 90s)
