@@ -687,6 +687,40 @@ const comments = {
   }
 };
 
+const me_recommendation_component = () => ({
+  type: 'each',
+  source: '${recommendations}',
+  items: {
+    type: 'panel',
+    title: {
+      type: 'wrapper',
+      className: 'flex justify-between items-center',
+      body: [
+        {
+          type: 'avatar',
+          src: '${cover_url}',
+        },
+        {
+          type: 'wrapper',
+          body: '${name}'
+        },
+        {
+          type: 'button-group',
+          buttons: [
+            {
+              type: 'action',
+              label:  'go to movie detail page',
+              actionType: 'link',
+              link: '/movie/${id}' 
+            },
+          ]
+
+        }
+      ]
+    },
+  }
+});
+
 const me = {
   label: 'Me',
   url: 'me',
@@ -827,7 +861,12 @@ const me = {
           type: 'html',
           html: '<h2>Comments</h2>'
         },
-        me_comments_component()
+        me_comments_component(),
+        {
+          type: 'html',
+          html: '<h2>Guess you like</h2>'
+        },
+        me_recommendation_component()
       ]
     }
   }
