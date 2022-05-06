@@ -5,7 +5,7 @@ const user = require('../services/user')
 const movie = require('../services/movie')
 const actor = require('../services/actor')
 const comment = require('../services/comment')
-
+const director =require('../services/director')
 const router = express.Router()
 const upload = multer({ dest: './public/images' })
 
@@ -32,7 +32,9 @@ router.get('/actor/list', actor.listActors)
 router.get('/actor/detail/:id', actor.getActorDetail)
 router.get('/actor/search', actor.search_actor)
 
-
+router.get('/director/list', director.listDirectors)
+router.get('/director/detail/:id', director.getDirectorDetail)
+router.get('/director/search', director.search_Director)
 router.get('/comment/list', comment.listComments)
 router.post('/comment/add-to-movie/:id', comment.addCommentToMovie)
 router.delete('/comment/delete-comment/:id', comment.delete_comment)

@@ -5,7 +5,7 @@ import string
 import random 
 from datetime import datetime
 
-requests.adapters.DEFAULT_RETRIES = 5
+requests.adapters.DEFAULT_RETRIES = 3
 s = requests.session()
 s.keep_alive = False
 
@@ -26,11 +26,12 @@ genres_data = []
 users_data = []
 characters_data = []
 comments_data = []
-
+director_data = []
+direct_data = []
 num_of_movies = 200
 num_of_actors_per_movie = 20
 num_of_comments_per_movie = 20
-
+director_id = 1
 movie_id = 1
 actor_id = 1
 user_id = 1
@@ -53,6 +54,7 @@ for movie in movies:
         release_year = movie.find('td', class_='titleColumn').span.text[1:5]
         movie_page_url = movie.find('td', class_='titleColumn').a.attrs['href']
         movie_page = visit_page(movie_page_url)
+        directors = (movie_page.find('span',string = 'Director')).find_parent('li')
         genre_tags = movie_page.find("div", {"data-testid":"genres"})
         for tag in genre_tags.findChildren("li"):
             curr_genres.append(tag.text)
@@ -65,6 +67,15 @@ for movie in movies:
         print('oops')
     else:
         movies_data.append([movie_id, movie_name, cover_url, introduction, release_year])
+        director_id += 1
+        director_page_url = directors.find('a').attrs['href']
+        director_page = visit_page(director_page_url)
+        director_name = director_page.find('h1',class_ = 'header').text.strip()
+        picture_url = director_page.find('img',{'id' : "name-poster"}).attrs['src']
+        introduction = director_page.find('div', {'id': 'name-bio-text'}).div.div.contents[0].text.strip()
+        birth_date = director_page.find('div', {'id': 'name-born-info'}).time.attrs['datetime']
+        direct_data.append([movie_id,director_id])
+        director_data.append([director_id,director_name,picture_url,introduction,birth_date])
         for genres in curr_genres:
             genres_data.append([movie_id, genres])
         prev_actor_id = actor_id
@@ -128,6 +139,7 @@ for movie in movies:
                     user_name_to_id[user_name] = user_id
                     user_id = user_id + 1
         movie_id = movie_id + 1
+        print(movie_id,'finish!')
 with open('data/genres.csv', 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(['movie_id', 'genres'])
@@ -157,3 +169,13 @@ with open('data/comments.csv', 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(['id', 'rate', 'content', 'comment_date', 'movie_id', 'user_id'])
     writer.writerows(comments_data)
+
+with open('data/directors.csv', 'w', encoding='UTF8', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(['id', 'name', 'photo_url', 'introduction', 'birth_date'])
+    writer.writerows(director_data)
+
+with open('data/direct.csv', 'w', encoding='UTF8', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(['movie_id','director_id'])
+    writer.writerows(direct_data)
