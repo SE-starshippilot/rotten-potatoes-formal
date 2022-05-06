@@ -1,15 +1,26 @@
-from matplotlib.pyplot import pause
+from sqlalchemy import create_engine
 import numpy as np
 import pandas as pd
+from dotenv import load_dotenv, find_dotenv
+import os
 
 K = 10 # maximum rating
 
+load_dotenv(find_dotenv('.env'))
+env_dist = os.environ
+enginePath = 'mysql+pymysql://%s:%s@%s:%s/%s'%(env_dist.get("DB_USER"), env_dist.get("DB_PASSWORD"), env_dist.get("DB_HOST"), env_dist.get("DB_PORT"), env_dist.get("DB_DATABASE"))
+engine = create_engine(enginePath)
+
+sql = "SELECT movie_id, user_id, rate FROM comments"
+
 def getData():
-    df = pd.read_csv("./data/comments.csv")
+    #df = pd.read_csv("./data/comments.csv")
+    df = pd.read_sql_query(sql, engine)
     data = df[["movie_id", "user_id", "rate"]].to_numpy(dtype=np.int)
     for record in data:
         record[0] -= 1
         record[1] -= 1
+    #print(df.head())
     return data
 
 def getUsefulStats(training):

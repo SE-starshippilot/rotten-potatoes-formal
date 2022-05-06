@@ -3,9 +3,26 @@ const fs = require('fs')
 const path = require('path')
 const query = require('../db/query')
 
+const getRecommendations = async(user_id) => {
+    const PythonShell = require('python-shell').PythonShell
+    var options = {
+        args: [user_id]
+    }
+    return new Promise((resolve, reject) => {
+        PythonShell.run('./recommend/predict.py', options, function (err, results) {
+            if (err) reject(err)
+            else
+            resolve(results[0])
+          });
+    })
+}
+
 const userInfo = async(user_id) => {
     let [ user ] = await query('select avatar_url, name from users where id=?', user_id)
     user.comments = await query('select m.id as movie_id, m.name as movie_name, m.cover_url, c.rate, c.content, c.comment_date, c.id as comment_id from movies m inner join comments c on m.id=c.movie_id where c.user_id=?', user_id)
+    data = await getRecommendations(user_id)
+    data = data.split(' ').map(Number)
+    user.recommendations = await query('select id, name, cover_url from movies where id in (?)', data)
     return user
 }  
 
@@ -136,7 +153,6 @@ const search_user = async(req, res, next) => {
         next(e)
     }
 }
-
 
 module.exports = {
     getUserInfo,

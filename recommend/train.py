@@ -55,6 +55,7 @@ def trainRBM():
             r = lib.getRForUser(ratingsForUser, trStats)
 
             negData = np.copy(v)
+
             for CDT in range(T):
                 posHiddenProb = lib.visibleToHiddenVec(negData, weightsForUser, hiddenBiases, r, D)    
                 posprods[ratingsForUser[:, 0], :, :] = lib.probProduct(v, posHiddenProb)
@@ -100,7 +101,7 @@ def trainRBM():
     tr_r_hat = preLib.predict(trStats["movies"], trStats["users"], W, visibleBiases, hiddenBiases, D, training)
     trRMSE = lib.rmse(trStats["ratings"], tr_r_hat)
     print('training:', trRMSE)
-
+'''
 def getPredRforRBM():
     movie_num = trStats['n_movies']
     user_num = trStats['n_users']
@@ -113,7 +114,7 @@ def getPredRforRBM():
             predR[u, m] = preLib.predictMovieForUser(m, u, W, visibleBiases, hiddenBiases, D, training)
 
     return predR
-
+'''
 def getPredRforLinearRegression(rBar, b):
     predR = np.zeros((trStats["n_users"], trStats["n_movies"]))
     for u in range(predR.shape[0]):
@@ -249,18 +250,18 @@ def linearRegression(l):
 
     error = lib.rmse(linearPredict(trStats["movies"], trStats["users"], rBar, b), trStats["ratings"])
 
-    print("RMSE for linear regression:", error)
+    #print("RMSE for linear regression:", error)
     
-    neighbourHood(getPredRforLinearRegression(rBar, b))
+    #neighbourHood(getPredRforLinearRegression(rBar, b))
     
-linearRegression(0)    
+#linearRegression(0)    
 
-trainRBM()
+#trainRBM()
 
-W = np.load("./recommend/modelData/weightMatrix.npy")
-visibleBiases = np.load("./recommend/modelData/movieBias.npy")
-hiddenBiases = np.load("./recommend/modelData/hiddenBias.npy")
-D = np.load("./recommend/modelData/DMatrix.npy")
+#W = np.load("./recommend/modelData/weightMatrix.npy")
+#visibleBiases = np.load("./recommend/modelData/movieBias.npy")
+#hiddenBiases = np.load("./recommend/modelData/hiddenBias.npy")
+#D = np.load("./recommend/modelData/DMatrix.npy")
 #print(W[0])
 #print(visibleBiases)
 #print(hiddenBiases)

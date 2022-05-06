@@ -1,6 +1,6 @@
-from matplotlib.pyplot import pause
 import numpy as np
 import lib
+import sys
 
 def getPredictedDistribution(v, w, wq, b, c, r, D):
     '''
@@ -29,6 +29,57 @@ def predictRatingExp(ratingDistribution):
     for i in range(ratingDistribution.size):
         exp += ratingDistribution[i] * (i + 1)
     return exp
+
+
+def trainModel(trData):
+    trStats = lib.getUsefulStats(trData)
+    rBar = np.mean(trStats["ratings"])
+
+    A = np.zeros((trStats["n_ratings"], trStats["n_movies"] + trStats["n_users"]))
+    # The i-th row is the i-th rating. Suppose it is user U for movie M.
+    # In the i-th row, the U-th and ("n_users" + M)-th entries are both 1. 
+    n_users = trStats["n_users"]
+    for rows in range(len(trData)):
+        data = trData[rows]
+        movie = data[0]
+        userID = data[1]
+        A[rows][userID] = 1
+        A[rows][movie+n_users] = 1
+    c = trStats["ratings"] - rBar
+
+    ATA = np.dot(A.T, A)
+    RegularATA = ATA + 0 * np.eye(len(ATA))
+    try:
+        coeff = np.dot(np.linalg.inv(RegularATA), A.T)
+    except:
+        coeff = np.dot(np.linalg.pinv(RegularATA), A.T)
+    return np.dot(coeff, c)
+
+def predictAllRatingsForUser(userID, b, data):
+    stats = lib.getUsefulStats(data)
+    rBar = np.mean(stats["ratings"])
+    predicted = {}
+    for i in range(stats["n_movies"]):
+        rating = rBar + b[userID - 1] + b[stats["n_users"] + i]
+        if rating > 10: rating = 10.0
+        if rating < 1: rating = 1.0
+        predicted[i + 1] = rating
+    for singleRate in data:
+        if singleRate[1] == userID - 1:
+            predicted.pop(singleRate[0] + 1)
+    sortedPredictions = sorted(predicted.items(), key=lambda x: x[1], reverse=True)
+    ret = ''
+    for i in range(10):
+        ret += str(sortedPredictions[i][0]) 
+        if i != 9:
+            ret += ' '
+    #print(sortedPredictions)
+    return ret
+
+def recommendForUser(userID, data):
+    weightMatrix = trainModel(data)
+    allRatings = predictAllRatingsForUser(userID, weightMatrix, data)
+    return allRatings
 
 def predictRatingMax(ratingDistribution):
     #return a rating from the distribution
@@ -68,3 +119,6 @@ def predict(movies, users, W, b, c, D, training):
 # c = np.load("./recommend/modelData/hiddenBias.npy")
 # D = np.load("./recommend/modelData/DMatrix.npy")
 
+userID = int(sys.argv[1])
+data = lib.getData()
+print(recommendForUser(userID, data))
