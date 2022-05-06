@@ -43,14 +43,6 @@ const sqlCreateTableActors = `
 
 
 
-const sqlCreateTableDirect = `
-    create table if not exists direct(
-        movie_id int primary key,
-        director_id int not null,
-        foreign key(movie_id) references movies(id),
-        foreign key(director_id) references directors(id)
-    )engine=innodb default charset=utf8
-`
 
 const sqlCreateTableUsers = `
     create table if not exists users(
@@ -96,9 +88,7 @@ const sqlCreateTableGenres = `
         foreign key (movie_id) references movies(id)
     )engine=innodb default charset=utf8
 `
-const sqlFixDirector = `
-    Update movies inner join direct on direct.movie_id = movies.id SET movies.director_id = direct.director_id
-`
+
 
 const init = async (reset) => {
     try {
@@ -113,7 +103,6 @@ const init = async (reset) => {
         await query(sqlCreateTableCharacters)
         await query(sqlCreateTableComments)
         await query(sqlCreateTableGenres)
-        await query(sqlCreateTableDirect)
         
         await query(`insert into users (id, name, avatar_url, password) values (0, 'User deleted', 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjQ4MTY5NzU2M15BMl5BanBnXkFtZTgwNDc5NTgwMTI@._V1_.jpg', '123') `)
         await query(`set global local_infile=1`)
@@ -124,10 +113,8 @@ const init = async (reset) => {
         await query(`load data local infile 'data/characters.csv' into table characters fields terminated by ',' enclosed by '"' ignore 1 rows`)
         await query(`load data local infile 'data/comments.csv' into table comments fields terminated by ',' enclosed by '"' ignore 1 rows`)
         await query(`load data local infile 'data/genres.csv' into table genres fields terminated by ',' enclosed by '"' ignore 1 rows`)
-        await query(`load data local infile 'data/direct.csv' into table direct fields terminated by ',' enclosed by '"' ignore 1 rows`)
         await query(`set global local_infile=0`)
-        await query(sqlFixDirector)
-        await query(`drop table direct`)
+
 
         let root = await query(`select * from users where name='root'`)
         if (root.length === 0) await query(`insert into users(name, password) value('root', '123')`)
