@@ -146,7 +146,7 @@ const search_user = async(req, res, next) => {
         res.json({
             status: 0,
             msg: 'searching success',
-            data: {user} 
+            data: {items: user} 
         }) 
     }
     catch(e){
