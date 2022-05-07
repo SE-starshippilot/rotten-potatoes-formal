@@ -43,7 +43,7 @@ const search_actor = async(req, res, next) => {
         let start_date = '1800-1-1'
         let end_date = '2050-1-1'
         let criteria = 'id'
-        let asc = true
+        let asc = 1
         if ('birth_date' in req.query)
         {
             start_date = req.query.birth_date.split(',')[0]
@@ -52,14 +52,16 @@ const search_actor = async(req, res, next) => {
         if(req.query.orderBy)
         {
             criteria = req.query.orderBy
-            asc = (req.query.orderDir == 'asc')? true:false
+            asc = (req.query.orderDir == 'asc')? 1:0
         } else {
             criteria = 'id'
-            asc = true
+            asc = 1
         }
         let actors = await query(`select id, name, photo_url, birth_date from actors where name like concat('%' , ? , '%')
         and birth_date between ? and ?
-        order by case when ? then ??  else -?? end`, actor_name, start_date, end_date,asc, criteria, criteria)
+        order by 
+        case when ?=1 then ?? end ASC, 
+        case when ?=0 then ?? end DESC`, actor_name, start_date, end_date, asc, criteria, asc, criteria)
         res.json({
             status: 0,
             msg: 'searching success',
