@@ -50,7 +50,7 @@ const search_movie = async(req, res, next) => {
         let start_rate = 0
         let end_rate = 10
         let criteria = 'id'
-        let asc = true
+        let asc = 1
         let genres = []
         if ('name' in req.query) movie_name = req.query.name
         if ('release_year' in req.query)
@@ -61,10 +61,10 @@ const search_movie = async(req, res, next) => {
         if(req.query.orderBy)
         {
             criteria = req.query.orderBy
-            asc = (req.query.orderDir == 'asc')? true:false
+            asc = (req.query.orderDir == 'asc')? 1:0
         } else {
             criteria = 'id'
-            asc = true
+            asc = 1
         }
         if ('rate' in req.query)
         {
@@ -82,8 +82,9 @@ const search_movie = async(req, res, next) => {
         select name, id, cover_url, release_year, rate
         from search_name
         where release_year between ? and ? and rate between ? and ?
-        order by case when ? then ??  else -?? end
-        `, movie_name, start_time, end_time, start_rate, end_rate, asc, criteria, criteria)
+        order by 
+        case when ?=1 then ?? end ASC, 
+        case when ?=0 then ?? end DESC`, movie_name, start_time, end_time, start_rate, end_rate, asc, criteria, asc, criteria)
         let movies_genres = await Promise.all(movies.map(movie => query('select genres_name from genres where movie_id=?', movie.id)))
         let filtered_movies = []
         for (let i in movies) {

@@ -88,23 +88,22 @@ Data in this project is scraped from [IMDb Top 250 Movies](https://www.imdb.com/
 * release_date, average rate of movie and birth_date of actor
 * collect data: finished with python crawler
 * sort
-    * movies: by release_date, average rate
+    * movies: by release_date, average rate, name
     * actors: by birth_date (i.e. age), experience (number of movies acted)
+* filter
+    * movies: by movie_type, which decade (80s, 90s)
+    * actors: by actor_type, which decade (80s, 90s)
+* recommendation system
 
 
 2. ToDos: 
 * character list page
 * distinguish various types of actors (movie_type): director, actor, ...
-* distinguish various types of movies (actor_type): action, horror, history, ...
 * comment on actors
 * like, dislike comment
 * sort
     * comments: by comment_date, like, dislike
-* filter
-    * movies: by movie_type, which decade (80s, 90s)
-    * actors: by actor_type, which decade (80s, 90s)
 * judge a user's preferences (e.g. prefer horror movies)
-* recommendation system
 * speed up crawler by async request
 
 3. Problems:
