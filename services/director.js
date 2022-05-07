@@ -25,7 +25,7 @@ const getDirectorDetail = async(req, res, next) => {
     try {
         let director_id = Number(req.params.id)
         let [ director ] = await query('select * from directors where id=?', director_id)
-        director.movies = await query('select m.id, m.name, m.cover_url from movies as m inner join direct as d on m.id=d.movie_id where d.director_id=?', director_id)
+        director.movies = await query('select m.id, m.name, m.cover_url from movies as m inner join directors as d on m.director_id=d.id where d.id=?', director_id)
         res.json({
             status: 0,
             data: director

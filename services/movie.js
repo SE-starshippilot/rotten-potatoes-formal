@@ -25,7 +25,7 @@ const getMovieDetail = async(req, res, next) => {
     try {
         let movie_id = Number(req.params.id)
         let [ movie ] = await query('select * from movies where id=?', movie_id)
-        movie.directors = await await query('select d.id, d.name, d.photo_url from directors as d inner join direct as ds on d.id=ds.director_id where ds.movie_id=?', movie_id)
+        movie.directors = await await query('select d.id, d.name, d.photo_url from directors as d inner join movies as m on d.id=m.director_id where m.id=?', movie_id)
         movie.actors = await query('select a.id, a.name, a.photo_url, c.character_name from actors as a inner join characters as c on a.id=c.actor_id where c.movie_id=?', movie_id)
         movie.comments = await query('select u.id as user_id, u.name as user_name, u.avatar_url, c.rate, c.content, c.comment_date, c.id as comment_id from comments as c inner join users as u on c.user_id=u.id where c.movie_id=?', movie_id)
         movie.genres = await query('select genres_name from genres where movie_id=?', movie_id)
@@ -70,7 +70,7 @@ const search_movie = async(req, res, next) => {
             start_rate = Number(req.query.rate.split(',')[0])
             end_rate = Number(req.query.rate.split(',')[1])
         }
-        let movie = await query(`
+        let movies = await query(`
         with search_name as(
             select m.name, m.id, m.cover_url, m.release_year, round(avg(c.rate),1) as rate 
             from movies as m inner join comments as c on c.movie_id = m.id
@@ -82,10 +82,14 @@ const search_movie = async(req, res, next) => {
         where release_year between ? and ? and rate between ? and ?
         order by case when ? then ??  else -?? end
         `, movie_name, start_time, end_time, start_rate, end_rate, asc, criteria, criteria)
+        let movie_genres = await Promise.all(movies.map(movie => query('select genres_name from genres where movie_id=?', movie.id)))
+        for (let i in movies) {
+            movies[i].genres = movie_genres[i].reduce((prev, cur) => prev + (prev === '' ? '' : ', ') + cur.genres_name, '')
+        }
         res.json({
             status: 0,
             msg: 'searching success',
-            data: {items: movie},
+            data: {items: movies},
         })
 
     }
