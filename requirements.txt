@@ -3,3 +3,4 @@ sqlalchemy
 python-dotenv
 python-shell
 pandas
+numpy
