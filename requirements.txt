@@ -1,0 +1,4 @@
+PyMySQL
+sqlalchemy
+python-dotenv
+python-shell
