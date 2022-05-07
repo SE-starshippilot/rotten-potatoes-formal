@@ -2,3 +2,4 @@ PyMySQL
 sqlalchemy
 python-dotenv
 python-shell
+pandas
