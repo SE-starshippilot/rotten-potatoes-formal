@@ -1099,6 +1099,7 @@ const search = {
 const app = {
   type: 'app',
   brandName: 'Rotten Potatoes',
+  logo: 'images/Rotten_Potatoes.png',
   pages: [
     {
       url: '/',
