@@ -30,6 +30,8 @@ def predictRatingExp(ratingDistribution):
         exp += ratingDistribution[i] * (i + 1)
     return exp
 
+def predictMoiveForUser(i, user, W, b, c, D, training):
+    return 0
 
 def trainModel(trData):
     trStats = lib.getUsefulStats(trData)
@@ -55,7 +57,8 @@ def trainModel(trData):
         coeff = np.dot(np.linalg.pinv(RegularATA), A.T)
     return np.dot(coeff, c)
 
-def predictAllRatingsForUser(userID, b, data):
+def getRecommendationForUser(ret):
+    b = trainModel(data)
     stats = lib.getUsefulStats(data)
     rBar = np.mean(stats["ratings"])
     predicted = {}
@@ -69,7 +72,7 @@ def predictAllRatingsForUser(userID, b, data):
             predicted.pop(singleRate[0] + 1)
     sortedPredictions = sorted(predicted.items(), key=lambda x: x[1], reverse=True)
     ret = ''
-    for i in range(10):
+    for i in range(8):
         ret += str(sortedPredictions[i][0]) 
         if i != 9:
             ret += ' '
@@ -77,9 +80,12 @@ def predictAllRatingsForUser(userID, b, data):
     return ret
 
 def recommendForUser(userID, data):
-    weightMatrix = trainModel(data)
-    allRatings = predictAllRatingsForUser(userID, weightMatrix, data)
-    return allRatings
+    W = np.load("./recommend/modelData/weightMatrix.npy")
+    b = np.load("./recommend/modelData/movieBias.npy")
+    c = np.load("./recommend/modelData/hiddenBias.npy")
+    D = np.load("./recommend/modelData/DMatrix.npy")
+    allRatings = predictForUser(userID, W, b, c, D, data)
+    return getRecommendationForUser(allRatings)
 
 def predictRatingMax(ratingDistribution):
     #return a rating from the distribution
@@ -97,7 +103,7 @@ def predictForUser(user, W, b, c, D, training):
     trStats = lib.getUsefulStats(training)
     ret = np.zeros(trStats["n_movies"])
     for i in range(ret.size):
-        ret[i] = predictMovieForUser(i, user, W, b, c, D, training)
+        ret[i] = predictMoiveForUser(i, user, W, b, c, D, training)
     return ret
 
 def predictMovieForUser(q, user, W, b, c, D, training):
@@ -114,10 +120,6 @@ def predictMovieForUser(q, user, W, b, c, D, training):
 def predict(movies, users, W, b, c, D, training):
     return [predictMovieForUser(movie, user, W, b, c, D, training) for (movie, user) in zip(movies, users)]
 
-# W = np.load("./recommend/modelData/weightMatrix.npy")
-# b = np.load("./recommend/modelData/movieBias.npy")
-# c = np.load("./recommend/modelData/hiddenBias.npy")
-# D = np.load("./recommend/modelData/DMatrix.npy")
 
 userID = int(sys.argv[1])
 data = lib.getData()
