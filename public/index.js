@@ -961,9 +961,17 @@ const search_movie = {
         {
           name:"genres",
           label:"genres",
+          searchable: {
+            type: "select",
+            name: "genres",
+            label: "genres",
+            multiple: true,
+            searchable: true,
+            source: "get:/api/movie/list-genres"
+          }
         }
       ]
-      }
+    }
   }
 };
 
