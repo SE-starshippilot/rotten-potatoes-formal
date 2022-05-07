@@ -7,16 +7,43 @@ This is CUHKSZ CSC3170 group project
 
 * zsf
 * zby
-* sth\<TEST\>
+* sth
 * ly
 * wmj
 
+## Demo
+
+This project contains a demo which can be browsed within the CUHK(SZ) campus network
+
+Open a browser and visit:
+
+**10.20.12.72:3000**
+
+This site will be close after project grading is completed.
+
 ## How to Run
-1. Set up your database
 
-* Check `.env` file:
+1. Install Packages
 
-```sh
+   1. python packages
+
+	```bash
+   pip install -r requirements.txt
+	```
+	
+	   2. node.js packages
+	
+	```
+	npm install
+	```
+
+2. Set up your database
+
+- Create database `rotten_potatoes`
+
+* Create`.env` file:
+
+```shell
 PORT=3000
 SECRET_KEY=RotTeNPOtATOeS
 DB_RESET=true
@@ -28,13 +55,9 @@ DB_DATABASE=rotten_potatoes
 ```
 
 substitute `DB_USER` field and `DB_PASSWORD` field with your own mysql user and password
-* Create database `rotten_potatoes`:
 
-Simply log into the mysql on your machine and run sql: `create database rotten_potatoes;`
+3. Run nodejs server
 
-2. Run nodejs server
-
-* Install dependencies: `npm install`
 * Run the server: `npm start`
 * The server will be running at: "localhost:3000" (visit this url in your browser)
 * Login the app with default user with name "root" and password "123"
