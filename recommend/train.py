@@ -1,4 +1,3 @@
-from matplotlib.pyplot import pause
 import numpy as np
 import lib
 import predict as preLib

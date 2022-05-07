@@ -51,6 +51,7 @@ const search_movie = async(req, res, next) => {
         let end_rate = 10
         let criteria = 'id'
         let asc = true
+        let genres = []
         if ('name' in req.query) movie_name = req.query.name
         if ('release_year' in req.query)
         {
@@ -70,6 +71,7 @@ const search_movie = async(req, res, next) => {
             start_rate = Number(req.query.rate.split(',')[0])
             end_rate = Number(req.query.rate.split(',')[1])
         }
+        if ('genres' in req.query) genres = req.query.genres.split(',')
         let movies = await query(`
         with search_name as(
             select m.name, m.id, m.cover_url, m.release_year, round(avg(c.rate),1) as rate 
@@ -82,14 +84,19 @@ const search_movie = async(req, res, next) => {
         where release_year between ? and ? and rate between ? and ?
         order by case when ? then ??  else -?? end
         `, movie_name, start_time, end_time, start_rate, end_rate, asc, criteria, criteria)
-        let movie_genres = await Promise.all(movies.map(movie => query('select genres_name from genres where movie_id=?', movie.id)))
+        let movies_genres = await Promise.all(movies.map(movie => query('select genres_name from genres where movie_id=?', movie.id)))
+        let filtered_movies = []
         for (let i in movies) {
-            movies[i].genres = movie_genres[i].reduce((prev, cur) => prev + (prev === '' ? '' : ', ') + cur.genres_name, '')
+            let movie_genres = movies_genres[i].map(g => g.genres_name)
+            if (genres.every(g => movie_genres.indexOf(g) >= 0)) {
+                movies[i].genres = movie_genres.join(',')
+                filtered_movies.push(movies[i])
+            }
         }
         res.json({
             status: 0,
             msg: 'searching success',
-            data: {items: movies},
+            data: {items: filtered_movies},
         })
 
     }
@@ -98,11 +105,25 @@ const search_movie = async(req, res, next) => {
     }
 }
 
-
+const listMovieGenres = async(req, res, next) => {
+    try {
+        let genres = await query('select distinct genres_name from genres')
+        genres = genres.map(g => g.genres_name)
+        res.json({
+            status: 0,
+            data: {
+                options: genres
+            }
+        })
+    } catch(e) {
+        next(e)
+    }
+}
 
 
 module.exports = {
     listMovies,
     getMovieDetail,
-    search_movie
+    search_movie,
+    listMovieGenres
 }

@@ -22,11 +22,10 @@ router.put('/user/me/change-password', user.changeMePassword)
 router.put('/user/me/delete', user.delete_user)
 router.get('/user/search', user.search_user)
 
-
 router.get('/movie/list', movie.listMovies)
 router.get('/movie/detail/:id', movie.getMovieDetail)
 router.get('/movie/search', movie.search_movie)
-
+router.get('/movie/list-genres', movie.listMovieGenres)
 
 router.get('/actor/list', actor.listActors)
 router.get('/actor/detail/:id', actor.getActorDetail)
