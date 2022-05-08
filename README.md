@@ -17,7 +17,7 @@ This project contains a demo which can be browsed within the CUHK(SZ) campus net
 
 Open a browser and visit:
 
-**10.20.12.72:3000**
+[**http://10.20.12.72:3000**](http://10.20.12.72:3000)
 
 This site will be close after project grading is completed.
 
@@ -30,8 +30,8 @@ This site will be close after project grading is completed.
 	```bash
    pip install -r requirements.txt
 	```
-	
-	   2. node.js packages
+
+    2. node.js packages
 	
 	```
 	npm install
@@ -62,7 +62,7 @@ substitute `DB_USER` field and `DB_PASSWORD` field with your own mysql user and 
 * The server will be running at: "localhost:3000" (visit this url in your browser)
 * Login the app with default user with name "root" and password "123"
 
-## Learn
+## Frameworks
 Technology stack used in this project:
 * Frontend: [amis](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index)
 * Backend: [express](https://expressjs.com)
@@ -74,8 +74,7 @@ Data in this project is scraped from [IMDb Top 250 Movies](https://www.imdb.com/
 
 **if there is any infringement, please contact to delete**
 
-## Progress
-1. Dones:
+## Functions
 * login/register/personal center
 * movie list and detail
 * actor list and detail
@@ -96,17 +95,9 @@ Data in this project is scraped from [IMDb Top 250 Movies](https://www.imdb.com/
 * recommendation system
 
 
-2. ToDos: 
+## Future Works
 * character list page
-* distinguish various types of actors (movie_type): director, actor, ...
 * comment on actors
 * like, dislike comment
-* sort
-    * comments: by comment_date, like, dislike
-* judge a user's preferences (e.g. prefer horror movies)
+* sort comments: by comment_date, like, dislike
 * speed up crawler by async request
-
-3. Problems:
-* no prompt message/wrong prompt message after submitting a form
-* CSS problem: actors of a movie/movies of an actor under detail page not on the same line
-* CSS problem: instead of ugly "go to user homepage", better to go to homepage once click on user's avatar
