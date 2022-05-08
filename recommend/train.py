@@ -12,7 +12,6 @@ trStats = lib.getUsefulStats(training)
 #vlStats = lib.getUsefulStats(validation)
 
 F = 5
-batchSize = 200
 epochs = 50
 
 L = 30 # number of neighbours for reference
@@ -46,7 +45,7 @@ def trainRBM():
         gradC = np.zeros(hiddenBiases.size)
         gradD = np.zeros(D.shape)
 
-        for user in visitingOrder[:batchSize]:
+        for user in visitingOrder:
             ratingsForUser = lib.getRatingsForUser(user, training)
             v = lib.getV(ratingsForUser)
             weightsForUser = W[ratingsForUser[:, 0], :, :]
@@ -63,10 +62,10 @@ def trainRBM():
                 negHiddenProb = lib.visibleToHiddenVec(negData, weightsForUser, hiddenBiases, r, D)
                 negprods[ratingsForUser[:, 0], :, :] = lib.probProduct(negData, negHiddenProb)
 
-            grad[ratingsForUser[:, 0], :, :] += gradientLearningRate / batchSize * (posprods[ratingsForUser[:, 0], :, :] - negprods[ratingsForUser[:, 0], :, :])
-            gradB[ratingsForUser[:, 0], :] += gradientLearningRate / batchSize * (v - negData)
-            gradC += gradientLearningRate / batchSize * (posHiddenProb - negHiddenProb)
-            gradD += gradientLearningRate / batchSize * np.outer(r, (posHiddenProb - negHiddenProb))
+            grad[ratingsForUser[:, 0], :, :] += gradientLearningRate * (posprods[ratingsForUser[:, 0], :, :] - negprods[ratingsForUser[:, 0], :, :])
+            gradB[ratingsForUser[:, 0], :] += gradientLearningRate * (v - negData)
+            gradC += gradientLearningRate * (posHiddenProb - negHiddenProb)
+            gradD += gradientLearningRate * np.outer(r, (posHiddenProb - negHiddenProb))
 
         W += grad
         visibleBiases += gradB
