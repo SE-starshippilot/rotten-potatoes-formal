@@ -50,8 +50,71 @@
 \section{Introduction}
 
 \section{Design}
-\subsection{ER Diagram}
-\subsection{Schema Reduction}
+In this section, we focus on the design of Entity-Relationship Model, 
+the reduction from ER diagram into relational schemas, constraint and index.
+
+\subsection{Entity-Relationship Model}
+As shown in the ER digram below, there are 6 entities and 5 relationships. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{er.png}
+\caption{ER Diagram}
+\end{figure}
+\paragraph{Entity ``movies''}
+To store id, name, cover url, introduction, release year and genres of a movie, where genres is a multivariate attribute. Identified by id. 
+\paragraph{Entity ``directors''}
+To store id, name, photo url, introduction and birth date of a director. This entity has a one-to-many relationship ``direct'' with the entity ``movies'', which means a director can directs multiple movies and a movie can be directed by only one director in our assumption. Identified by id. 
+\paragraph{Entity ``actors''}
+To store id, name, photo url, introduction and birth date of an actor. This entity has a many-to-many relationship with the entity ``movies'', which means an actor can act in multiple movies and a movie can be acted by multiple actors in our assumption. Identified by id. 
+\paragraph{Entity ``users''}
+To store id, name, avatar url, password of a user. This entity has a many-to-many relationship with the entity ``movies'', which means a user can comment on multiple movies and a movie can be commented by multiple users in our assumption. Identified by id. 
+\paragraph{Entity ``characters''}
+To store movie id (of the movie where this character appears), actor id (of the actor who acts as this character), id, character name of a character. This entity is a weak entity identified by entity ``movies'' through relationship ``appear'' and entity ``actors'' through relationship ``act as'', and also by its own id, which means a character can be acted by exactly one actor and appear in exactly one movie in our assumption (we treat characters of the same name appearing in multiple movies or acted by multiple actors as multiple different characters for simplicity). Note that since this entity is also identified by its own id, it is allowed that an actor acts as multiple characters in the same movie. 
+\paragraph{Entity ``comments''}
+To store movie id (of the movie commented by this comment), user id (of the user who makes this comment), id, rate (from 0 to 10), content and comment date of a comment. This entity is a weak entity identified by entity ``movies'' and entity ``users'', and also by its own id, which means a comment is on exactly one movie and is made by exactly one user in our assumption. Note that since this entity is also identified by its own id, it is allowed that a user makes multiple comments on the same movie. 
+
+\subsection{Relational Schema}
+As shown in the relational schema digram below, there are 7 schemas. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{schema.png}
+\caption{Relational Schema Diagram}
+\end{figure}
+
+The following reductions are made:
+\begin{itemize}
+\item The attribute ``genres'' in entity ``movies'' is reduced to schema ``genres'' with attributes ``genres\_name'' and ``movie\_id'' as a foreign key, both of which forms a primary key to make sure no redundant genres of a movie.
+\item The relationship ``direct'' between entity ``movies'' and ``directors'' is reduced to attribute ``director\_id''as a foreign key in schema ``movies'' so that a movie is directed by exactly one director. 
+\item All attributes identifying the entity are reduced to primary keys.
+\item ``movie\_id'', ``actor\_id'' of entity ``characters'', ``movie\_id'', ``user\_id'' of entity ``comments'' are reduced to foreign keys in their schemas referencing their corresponding identifying strong entities. 
+\end{itemize}
+
+\subsection{Constraint}
+3 types of constraints are further added:
+\paragraph{Not Null Constraints}
+\begin{itemize}
+\item All ``id'' attributes as they are primary key and thus automatically becoming not null.
+\item ``name'' attribute of schema ``movies''.
+\item ``name'' and ``director\_id'' attributes of schema ``directors'', as a movie is directed by exactly one director.
+\item ``name'' attribute of schema ``actors''.
+\item ``name'' and ``password'' attributes of schema ``users''.
+\item ``actor\_id'', ``movie\_id'' and ``character\_name'' attributes of schema ``characters'', as it is a weak entity of schemas ``actors'' and ``movies''.
+\item ``user\_id'', ``movie\_id'', ``rate'', ``content'' and ``comment\_date'' attributes of schema ``comments'', as it is a weak entity of schemas ``users'' and ``movies''.
+\item ``genres\_name'', ``movie\_id'' attributes of schema ``genres'', as it is a multivariate attribute of schema ``movies''.
+\end{itemize}
+\paragraph{Unique Constraint}
+A unique constraint is added to ``name'' attribute of schema ``users'' as by our assumption there should be no repeating user names. 
+\paragraph{Check Constraint}
+A check constraint is added to ``rate'' attribute of schema ``comments'' to make sure the rate is from 0 to 10.
+
+\subsection{Index}
+The following attributes are indexed to make search faster:
+\begin{itemize}
+\item ``name'' and ``release\_year'' attributes of schema ``movies''.
+\item ``name'' and ``birth\_date'' attributes of schema ``directors''.
+\item ``name'' and ``birth\_date'' attributes of schema ``actors''.
+\item ``name'' attribute of schema ``users''.
+\end{itemize}
 
 \section{Implementation}
 \subsection{Frontend}

@@ -15,6 +15,7 @@ const sqlCreateTableDirectors = `
         index(birth_date)
     )engine=innodb default charset=utf8
 `
+
 const sqlCreateTableMovies = `
     create table if not exists movies(
         id int auto_increment primary key,
@@ -22,7 +23,7 @@ const sqlCreateTableMovies = `
         cover_url varchar(255),
         introduction varchar(16383),
         release_year year,
-        director_id int,
+        director_id int not null,
         foreign key(director_id) references directors(id),
         index(name),
         index(release_year)
@@ -40,9 +41,6 @@ const sqlCreateTableActors = `
         index(birth_date)
     )engine=innodb default charset=utf8
 `
-
-
-
 
 const sqlCreateTableUsers = `
     create table if not exists users(
@@ -69,7 +67,7 @@ const sqlCreateTableCharacters = `
 const sqlCreateTableComments = `
     create table if not exists comments(
         id int auto_increment,
-        rate int not null,
+        rate int not null check (rate>=0 and rate<=10),
         content varchar(16383) not null,
         comment_date date not null,
         movie_id int not null,
