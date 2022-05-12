@@ -184,7 +184,7 @@ During the scrapping process, we encountered some issues.
 \subsection{Data Analysis}
 \subsubsection{Recommendation System with Restricted Boltzmann Machines}
 
-In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). We reproduce the model (see \hyperref[RBM]{Fig.5}) in our project to do recommendation. We use Contastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling.
+In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional, neighborhood. We reproduce the model proposed by Hinton (see \hyperref[RBM]{Fig.5}) in this project to do recommendation. We use Contastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling.
 \begin{itemize}
     \item First get the visible movies ratings $ \bm{V} $ of the user.
     \item Sample the hidden units to binary numbers by probability given by \\ $ p(h_j = 1 | \bm{V}, \bm{r}) = \sigma(c_j + \sum_{i = 1}^m \sum_{k = 1}^K v_i^k W_{ij}^k + \sum_{i = 1}^M r_i D_{ij}) $, where $ \sigma(x) = \frac{1}{1 + e^{-x}}  $.
@@ -221,30 +221,32 @@ Users have their preferences and tend to give similar ratings to movies of the s
     \item Predict the error of one movie through the errors of its neighbours: $ \hat{\tilde{r}}_{i A}=\frac{1}{\sum_{B \in S}\left|d_{A B}\right|} \sum_{B \in S} d_{A B} \widetilde{r}_{i B}  $, where $ S $ is the set of neighbours (with high absolute similarities) of $ A $.
     \item Improve our RBM predictions by $ R_{u m}^{*}=\hat{R}_{u m}+\hat{\tilde{r}}_{u m} $ for each $ (user, movie) $ pair desired.
 \end{itemize}
-We improve the RMSE from 1.04 to 1.02. The improvement is not high because our matrix is sparse. In our data set, many users only give one rating, so it is hard to construct a well defined similarity matrix. 
+We improve the RMSE from 1.04 to 1.02. The improvement is not high because our matrix is sparse. In our data set, many users only give one rating, so it is hard to construct a well defined similarity matrix. The other reason is that we crawl high-rating movies and the biases are not large to give a performance boost. However, we are still able to leverage the data and get some insight into the movie ratings. 
+
+For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has a high similarity (based on the difference between real rating and predicted rating) of $ 0.9999 $, which is expected. However, movie \textit{The Lord of the Rings: The Return of the King} has a similarity of $ -0.9999 $ while the movie \textit{The Lord of the Rings: The Fellowship of the Ring} has a similarity of $ 0.9999 $. This is counter intuitive and we should look into the data. We have three users giving ratings to both \textit{The Godfather} and \textit{The Lord of the Rings: The Return of the King}. The ratings are $ (10, 10) $, $ (10, 10) $ and $ (8, 10) $, respectively. For \textit{The Godfather} and \textit{The Lord of the Rings: The Fellowship of the Ring}, the rating pairs are all $ (10, 10) $. 8 is a relatively low rating in our dataset, hence the algorithm concludes that they are high negatively correlated.
 
 \section{Future Works}
 \section{Result}
 
 \section{Conclusion}
-\paragraph{} In this project we build a moive database based on a large amount of data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every entity in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for moives, casts or other users using name,  time information, rate(only moives) and genres(only moives) as the keyword.
-\paragraph{} In order to improve user experience and replace the complex database operations by a few simple mouse clicks from users, we build a user friendly website. Based on that, abundant \textbf{personalized interaction behaviors} can be achieved, which serves our users more conveniently. We hold an integral process of account management for users. Users can add comments to a moive and rate on it as well as discover their approbated reviews or users.
-\paragraph{} It is common for a moive database to recommend moives that the users have potential interest in. However,  how to make a personalized recommendation lists of high quality is always a problem. We use a lot of techinques in the data analysis to satisfy the needs from users . We build a \textbf{Restricted Boltzmann Machines}  with \textbf{Neighbourhood model} and get gratifying results.
+\paragraph{} In this project we build a movie database based on a large amount of data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every entity in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for moives, casts or other users using name,  time information, rate(only movies) and genres(only movies) as the keyword.
+\paragraph{} In order to improve user experience and replace the complex database operations by a few simple mouse clicks from users, we build a user friendly website. Based on that, abundant \textbf{personalized interaction behaviors} can be achieved, which serves our users more conveniently. We hold an integral process of account management for users. Users can add comments to a movie and rate on it as well as discover their appreciated reviews or users.
+\paragraph{} It is common for a movie database to recommend movies that the users have potential interest in. However,  how to make a personalized recommendation lists of high quality is always a problem. We use a lot of techniques in the data analysis to satisfy the needs from users . We build a \textbf{Restricted Boltzmann Machines}  with \textbf{Neighbourhood model} and get gratifying results.
 \section{Self Evaluation}
-In this part, we evaulate the advantages and disadvantages of our project/
+In this part, we evaluate the advantages and disadvantages of our project/
 \subsection{What we have achieved}
 \begin{enumerate}
 \item Build a database conforming to the low redundancy paradigm
-\item Implement and optimize many necessary  searching functionss
+\item Implement and optimize many necessary  searching functions
 \item Create a user-friendly website to lower the bar of use
 \item Feed the database with a suitable amount of data and design a proper data analysis algorithm to satisfy personalized requirements
 \end{enumerate}
 \subsection{Future Improvements}
 \begin{enumerate}
-\item More information about moives, dierctors, actors can be added to the database. For example, for actors we may add their nationality and oscar nominations; for movies we may add its budget and the classification (PG13, NC17).
-\item More interaction functions can be add, like \''like'' a moive or \''subsrcibe'' a user
-\item In the future, we plan to distiguish the users of our platform. We will allow a common user to upgrade as administrator, which will reduce the effort to maintain and supervise the comments other users post.
-\item Currently the web crawler is implemeted using synced requests, which reduced its performance. In the future, we will write the crawler using async requestst to speed up the crawling performance and acquire more data for our database.
+\item More information about movies, directors, actors can be added to the database. For example, for actors we may add their nationality and Oscar nominations; for movies we may add its budget and the classification (PG13, NC17).
+\item More interaction functions can be add, like ``like'' a movie or ``subsrcibe'' a user. We can also add functions like ``want to watch'' a movie or ``watched'' a movie without commenting on it. This information can be utilized in conditional RBM to provide better recommendation (Hinton et al, 2007). Currently, we have the algorithm implemented but the information is unknown. 
+\item In the future, we plan to distinguish the users of our platform. We will allow a common user to upgrade as administrator, which will reduce the effort to maintain and supervise the comments other users post.
+\item Currently the web crawler is implemented using synced requests, which reduced its performance. In the future, we will write the crawler using async requests to speed up the crawling performance and acquire more data for our database.
 \end{enumerate}
 \section{Contribution}
 
