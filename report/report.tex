@@ -50,19 +50,13 @@
 \section{Introduction}
 \paragraph{}As an art and commercial work, movies have become pursuits of many people and generated tremendous value. Currently, there are two types of online movie platforms. On the one hand, platforms including Rotten Tomatoes and Douban gives people rich information regarding movies. On the other hand, sites like Netflix offers precise, personalized recommendation to users. Such a recommendation strategy allows users to discover more films they enjoy and attracts more users to the platform.
 \paragraph{}However, currently, no site combines the strengths of the mentioned movie sites. Besides, existing popular movie websites are full of quarrels and controversies from the perspective of the community environment. The movie recommendation sare influenced deeply by the advertising, not the quality of films. Therefore, to satisfy the real requirements of movie lovers, we build a movie database called \textbf{Rotten Potatoes}, based on which, users can talk about their reviews on the movie freely. It also offers plenty of searching functions and personalized recommendations from the platform. 
-\paragraph{}We use python packages \textbf{\textit{Requests}}, \textbf{\textit{BeautifulSoup}} to obtain the required data from IMDB, store it in a MySQL database. Then we build our searching functions and personalized moive recommendations on those data. We also build a user-friendly web using \textbf{\textit{amis}} as the front end and \textbf{\textit{express}} as the back end.
+\paragraph{}We use python packages \textbf{\textit{Requests}}, \textbf{\textit{BeautifulSoup}} to obtain the required data from IMDB, store it in a MySQL database. Then we build our searching functions and personalized moive recommendations on those data. We also build a user-friendly web using \textbf{\textit{amis}} as the frontend and \textbf{\textit{express}} as the backend.
 \section{Design}
 In this section, we focus on the design of Entity-Relationship Model, 
 the reduction from ER diagram into relational schemas, constraint and index.
 
 \subsection{Entity-Relationship Model}
-As shown in the \hyperref[ERD]{ER digram below}, there are 6 entities and 5 relationships. 
-\begin{figure}[h]
-\centering
-\label{ERD}
-\includegraphics[width=0.8\textwidth]{er.png}
-\caption{ER Diagram}
-\end{figure}
+As shown in the \hyperref[ERD]{ER digram}, there are 6 entities and 5 relationships. 
 \paragraph{Entity ``movies''}
 To store id, name, cover url, introduction, release year and genres of a movie, where genres is a multivariate attribute. Identified by id. 
 \paragraph{Entity ``directors''}
@@ -76,14 +70,15 @@ To store movie id (of the movie where this character appears), actor id (of the 
 \paragraph{Entity ``comments''}
 To store movie id (of the movie commented by this comment), user id (of the user who makes this comment), id, rate (from 0 to 10), content and comment date of a comment. This entity is a weak entity identified by entity ``movies'' and entity ``users'', and also by its own id, which means a comment is on exactly one movie and is made by exactly one user in our assumption. Note that since this entity is also identified by its own id, it is allowed that a user makes multiple comments on the same movie. 
 
-\subsection{Relational Schema}
-As shown in the \hyperref[RelationalSchema]{relational schema digram below}, there are 7 schemas. 
 \begin{figure}[h]
 \centering
-\label{RelationalSchema}
-\includegraphics[width=0.8\textwidth]{schema.png}
-\caption{Relational Schema Diagram}
+\label{ERD}
+\includegraphics[width=0.8\textwidth]{er.png}
+\caption{ER Diagram}
 \end{figure}
+
+\subsection{Relational Schema}
+As shown in the \hyperref[RelationalSchema]{relational schema digram}, there are 7 schemas. 
 
 The following reductions are made:
 \begin{itemize}
@@ -92,6 +87,13 @@ The following reductions are made:
 \item All attributes identifying the entity are reduced to primary keys.
 \item ``movie\_id'', ``actor\_id'' of entity ``characters'', ``movie\_id'', ``user\_id'' of entity ``comments'' are reduced to foreign keys in their schemas referencing their corresponding identifying strong entities. 
 \end{itemize}
+
+\begin{figure}[h]
+\centering
+\label{RelationalSchema}
+\includegraphics[width=0.8\textwidth]{schema.png}
+\caption{Relational Schema Diagram}
+\end{figure}
 
 \subsection{Constraint}
 3 types of constraints are further added:
@@ -122,7 +124,7 @@ The following attributes are indexed to make search faster:
 
 \section{Implementation}
 \subsection{Frontend}
-The frontend of our project is constructed using AMIS, a low-code front end framework. It can generate a website using json configurations, which is suitable for developing a light-weight and agile application like this project.\par
+The frontend of our project is constructed using \textbf{\textit{amis}}, a low-code front end framework. It can generate a website using json configurations, which is suitable for developing a light-weight and agile application like this project.\par
 When users access the webpage, they will be directed to the Login page, where registered user can input user name and password to log in. We also added support for new user registration.
 After login, users can see the  main structure of our website, which features a navigation pannel on the left side and the content on the right. We constructed the following pages:
 \begin{itemize}
@@ -134,24 +136,31 @@ After login, users can see the  main structure of our website, which features a 
     \item Search: to search for movies/actors/user, we implemented three different pages. The details will be discussed in \textbf{Sample Queries} section.
 \end{itemize}
 \par \hyperref[moviePage]{Fig.3} shows the movie page of our website. Since our application is user-oriented, the UI of our website is very concise and user-friendly.\par
+
 \begin{figure}[h]
+    \label{moviePage}
     \centering
     \includegraphics[width=0.8\textwidth]{website.png}
     \caption{Movie page of the website}
-    \label{moviePage}
 \end{figure}
+
 \subsection{Backend}
-Backend of this project is implemented through the express package of javascript. During the initialization, the `init.js' will read data from CSV files and create queries to batch-insert records into corresponding tables.
+施天昊完善下这里，大概讲下/举个例子
+%Backend of this project is implemented through the \textbf{\textit{express}} package of nodejs. During the initialization, the `init.js' will read data from CSV files and create queries to batch-insert records into corresponding tables.
+\paragraph{Connect to MySQL in Nodejs}
+讲下query.js怎么连接mysql完成从nodejs执行query的
+\paragraph{Provide API by Express Router}
+讲下router/index.js怎么把api提供给前端
+\paragraph{Access Control by jsonwebtoken}
+auth/auth.js调用jsonwebtoken包sign和verify token，\\
+services/auth.js中login路由函数调用signToken生成token给前端，\\
+auth中间件函数调用verifyToken验证前端传来的token是否正确/过期（不是很重要，看不懂留着我写）
+
 \subsection{Web Crawler}
 \subsubsection{Basic Workflow}
 To populate our database with real-world data, we wrote a web crawler to scrap information from IMDB's Top 250 Movie Chart. The crawler is written in Python. It uses the requests library to send https requests. The desired fields are acquired through parsing the page using Beautiful Soup 4 library.
 The detailed process is as follows (see \hyperref[crawler]{Fig.4}):\par
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{crawler_flowchart.png}
-    \caption{Web crawler flowchart}
-    \label{crawler}
-\end{figure}
+
 \begin{enumerate}
     \item Access the Top 250 Chart, where all the URLs to the detailed movie pages are located
     \item Traverse through the chart. For every movie of the chart:
@@ -169,6 +178,14 @@ The detailed process is as follows (see \hyperref[crawler]{Fig.4}):\par
         \item For each comment, we acquire the user information by accessing their homepage.
     \end{enumerate}
 \end{enumerate}
+
+\begin{figure}[h]
+    \label{crawler}
+    \centering
+    \includegraphics[width=0.8\textwidth]{crawler_flowchart.png}
+    \caption{Web crawler flowchart}
+\end{figure}
+
 \subsubsection{Encountered Problems and Solutions}
 During the scrapping process, we encountered some issues.
 \begin{itemize}
@@ -178,6 +195,7 @@ During the scrapping process, we encountered some issues.
     \item The gender of the movie stars is not explicitely listed on their detail page. However, by seeking their role in the movie (i.e, actor/actress), we can acquire their gender.
 \end{itemize}
 \subsection{Sample Queries}
+李易写下这里（每个功能大概怎么实现的）
 \subsubsection{User related}
 \subsubsection{CRUD on movies, actors and directors}
 \subsubsection{Comments related}
@@ -225,8 +243,8 @@ We improve the RMSE from 1.04 to 1.02. The improvement is not high because our m
 
 For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has a high similarity (based on the difference between real rating and predicted rating) of $ 0.9999 $, which is expected. However, movie \textit{The Lord of the Rings: The Return of the King} has a similarity of $ -0.9999 $ while the movie \textit{The Lord of the Rings: The Fellowship of the Ring} has a similarity of $ 0.9999 $. This is counter intuitive and we should look into the data. We have three users giving ratings to both \textit{The Godfather} and \textit{The Lord of the Rings: The Return of the King}. The ratings are $ (10, 10) $, $ (10, 10) $ and $ (8, 10) $, respectively. For \textit{The Godfather} and \textit{The Lord of the Rings: The Fellowship of the Ring}, the rating pairs are all $ (10, 10) $. 8 is a relatively low rating in our dataset, hence the algorithm concludes that they are high negatively correlated.
 
-\section{Future Works}
 \section{Result}
+李易写下这里（贴网页截图介绍下功能就ok了）
 
 \section{Conclusion}
 \paragraph{} In this project we build a movie database based on a large amount of data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every entity in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for moives, casts or other users using name,  time information, rate(only movies) and genres(only movies) as the keyword.
@@ -248,7 +266,9 @@ In this part, we evaluate the advantages and disadvantages of our project/
 \item In the future, we plan to distinguish the users of our platform. We will allow a common user to upgrade as administrator, which will reduce the effort to maintain and supervise the comments other users post.
 \item Currently the web crawler is implemented using synced requests, which reduced its performance. In the future, we will write the crawler using async requests to speed up the crawling performance and acquire more data for our database.
 \end{enumerate}
+
 \section{Contribution}
+Each of us contributed 20\% to the whole project.
 
 \end{CJK*}
 \end{document}
