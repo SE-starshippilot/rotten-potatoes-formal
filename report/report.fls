@@ -826,6 +826,7 @@ INPUT report.toc
 INPUT report.toc
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx10.tfm
 OUTPUT report.toc
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbxti10.tfm
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT .\graphics\\er.png
 INPUT .\graphics\\er.png
@@ -865,6 +866,8 @@ INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfont
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbxti10.pfb
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbxti10.pfb
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
