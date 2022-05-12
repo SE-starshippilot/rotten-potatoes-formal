@@ -1,4 +1,4 @@
-\title{Group 10 Report: Rotten Potatoes} % Title
+\title{Group 26 Report: Rotten Potatoes} % Title
 \author{郑时飞 \\ 朱伯源 \\ 李易 \\ 汪明杰 \\ 施天昊}% Author
 \date{\today}% Date
 
@@ -118,15 +118,53 @@ The following attributes are indexed to make search faster:
 
 \section{Implementation}
 \subsection{Frontend}
+The frontend of our project is constructed using AMIS, a low-code front end framework. It can generate a website using json configurations, which is suitable for developing a light-weight and agile application like this project.\par
+When users access the webpage, they will be directed to the Login page, where registered user can input user name and password to log in. We also added support for new user registration.
+After login, users can see the  main structure of our website, which features a navigation pannel on the left side and the content on the right. We constructed the following pages:
+\begin{itemize}
+    \item Movie: a list of all the movies with their name and posters. Each movie is a "Card" widget linking to the movie detail page.
+    \item Actor: a list of all the actor/actresses, also implemented using the "Card" widget, containing links to the detailed information.
+    \item Director: a list of all the directors implemented similarly as the \textbf{Actor} page
+    \item Comment: this page contains the latest comments that users release.
+    \item Me: a portal for users to edit their information. Including updating avatar, name, password. This page also contains a list of movies recommended to the user.
+    \item Search: to search for movies/actors/user, we implemented three different pages. The details will be discussed in \textbf{Sample Queries} section.
+\end{itemize}
+\par The figure below shows the movie page of our website. Since our application is user-oriented, the UI of our website is very concise and user-friendly.\par
+\includegraphics[width=0.8\textwidth]{website.png}
 \subsection{Backend}
+Backend of this project is implemented through the express package of javascript. During the initialization, the `init.js' will read data from CSV files and create queries to batch-insert records into corresponding tables.
 \subsection{Web Crawler}
+\subsubsection{Basic Workflow}
+To populate our database with real-world data, we wrote a web crawler to scrap information from IMDB's Top 250 Movie Chart. The crawler is written in Python. It uses the requests library to send https requests. The desired fields are acquired through parsing the page using Beautiful Soup 4 library.
+The detailed process is as follows:
+\begin{enumerate}
+    \item Access the Top 250 Chart, where all the URLs to the detailed movie pages are located
+    \item Traverse through the chart. For every movie within the chart:
+    \begin{enumerate}
+        \item Access the detailed movie page, where information regarding the movie can be found.
+        \item From the detailed movie page, we access the casting information. For the director:
+        \begin{itemize}
+            \item Access the detailed director page, where information regarding the director can be found.
+        \end{itemize}
+        \item From the detailed movie page, we can also access the actors/actresses who casted in this movie. For each actor/actress:
+        \begin{itemize}
+            \item If the actor/actress's information is yet to be recorded, access the detailed actor/actress page and find detailed information.
+        \end{itemize}
+        \item The comment section locates at the bottom of the movie page.
+    \end{enumerate}
+\end{enumerate}
+\subsubsection{Encountered Problems and Solutions}
+During the scrapping process, we encountered some issues.
+\subsection{Sample Queries}
+\subsubsection{User related}
+\subsubsection{CRUD on movies, actors and directors}
+\subsubsection{Comments related}
 \subsection{Data Analysis}
-
+\section{Future Works}
 \section{Result}
 
 \section{Conclusion}
-
-\section{Self-Evaluation}
+In this project, we constructed a movie information system with personalized recommendation feature. The User Interface is 
 
 \section{Contribution}
 
