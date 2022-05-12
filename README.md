@@ -17,7 +17,7 @@ This project contains a demo which can be browsed within the CUHK(SZ) campus net
 
 Open a browser and visit:
 
-[**http://10.20.12.72:3000**](http://10.20.12.72:3000)
+[**http://10.20.9.99:3000**](http://10.20.12.72:3000)
 
 This site will be close after project grading is completed.
 
