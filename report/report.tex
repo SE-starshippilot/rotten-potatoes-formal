@@ -62,9 +62,9 @@ To store id, name, cover url, introduction, release year and genres of a movie, 
 \paragraph{Entity ``directors''}
 To store id, name, photo url, introduction and birth date of a director. This entity has a one-to-many relationship ``direct'' with the entity ``movies'', which means a director can directs multiple movies and a movie can be directed by only one director in our assumption. Identified by id. 
 \paragraph{Entity ``actors''}
-To store id, name, photo url, introduction and birth date of an actor. This entity has a many-to-many relationship with the entity ``movies'', which means an actor can act in multiple movies and a movie can be acted by multiple actors in our assumption. Identified by id. 
+To store id, name, photo url, introduction and birth date of an actor. An actor can act in multiple movies and a movie can be acted by multiple actors in our assumption. Identified by id. 
 \paragraph{Entity ``users''}
-To store id, name, avatar url, password of a user. This entity has a many-to-many relationship with the entity ``movies'', which means a user can comment on multiple movies and a movie can be commented by multiple users in our assumption. Identified by id. 
+To store id, name, avatar url, password of a user. A user can comment on multiple movies and a movie can be commented by multiple users in our assumption. Identified by id. 
 \paragraph{Entity ``characters''}
 To store movie id (of the movie where this character appears), actor id (of the actor who acts as this character), id, character name of a character. This entity is a weak entity identified by entity ``movies'' through relationship ``appear'' and entity ``actors'' through relationship ``act as'', and also by its own id, which means a character can be acted by exactly one actor and appear in exactly one movie in our assumption (we treat characters of the same name appearing in multiple movies or acted by multiple actors as multiple different characters for simplicity). Note that since this entity is also identified by its own id, it is allowed that an actor acts as multiple characters in the same movie. 
 \paragraph{Entity ``comments''}
@@ -78,8 +78,7 @@ To store movie id (of the movie commented by this comment), user id (of the user
 \end{figure}
 
 \subsection{Relational Schema}
-As shown in the \hyperref[RelationalSchema]{relational schema digram}, there are 7 schemas. 
-
+As shown in the \hyperref[RelationalSchema]{relational schema digram}, there are 7 schemas. \\\\
 The following reductions are made:
 \begin{itemize}
 \item The attribute ``genres'' in entity ``movies'' is reduced to schema ``genres'' with attributes ``genres\_name'' and ``movie\_id'' as a foreign key, both of which forms a primary key to make sure no redundant genres of a movie.
@@ -124,7 +123,7 @@ The following attributes are indexed to make search faster:
 
 \section{Implementation}
 \subsection{Frontend}
-The frontend of our project is constructed using \textbf{\textit{amis}}, a low-code front end framework. It can generate a website using json configurations, which is suitable for developing a light-weight and agile application like this project.\par
+The frontend of our project is constructed using \textbf{\textit{amis}}, a low-code front end framework. It can generate a website using json configurations, which is suitable for developing a light-weight and agile application like this project.\\\\
 When users access the webpage, they will be directed to the Login page, where registered user can input user name and password to log in. We also added support for new user registration.
 After login, users can see the  main structure of our website, which features a navigation pannel on the left side and the content on the right. We constructed the following pages:
 \begin{itemize}
@@ -135,27 +134,25 @@ After login, users can see the  main structure of our website, which features a 
     \item Me: a portal for users to edit their information. Including updating avatar, name, password. This page also contains a list of movies recommended to the user.
     \item Search: to search for movies/actors/user, we implemented three different pages. The details will be discussed in \textbf{Sample Queries} section.
 \end{itemize}
-\par \hyperref[moviePage]{Fig.3} shows the movie page of our website. Since our application is user-oriented, the UI of our website is very concise and user-friendly.\par
+\par Since our application is user-oriented, the UI of our website is very concise and user-friendly. A \hyperref[moviePage]{screenshot} of the movie page of our website:\par
 
-\begin{figure}[h]
-    \label{moviePage}
+\begin{figure}[htbp]
     \centering
+    \label{moviePage}
     \includegraphics[width=0.8\textwidth]{website.png}
     \caption{Movie page of the website}
 \end{figure}
 
 \subsection{Backend}
-%Backend of this project is implemented through the \textbf{\textit{express}} package of nodejs. During the initialization, the `init.js' will read data from CSV files and create queries to batch-insert records into corresponding tables.
 \paragraph{Connect to MySQL in Nodejs}
 The query functions in our database are written in javascript language. They can be found in the corresponding files in the \textbf{services} folder. To maximize reusability, we wrote a template query function in \textbf{query.js} using the \textit{mysql} module of Node.JS. The template function will first access the \textbf{.env} file for database configuration(e.g., the port on which MySQL server is running, the logging username and password). Then, instead of establishing and closing connections to the database on every execution, the template creates a connection pool. Requests from the frontend will pass the query as rest parameter to the template function, which will then issue the query and return the results (and errors, if any) back to the frontend.
+\paragraph{Provide API by Express Router}
+We use the \textbf{express} library to provide APIs for frontend users. All the routers are written in the \textbf{router/index.js}. Whenever users access certain page, it will match a router in the file, which triggers the corresponding handler function. For example, after log in, the user will see the \textit{Movie} page, which contains a list of movies in the database. When user click on any of the movie poser , the frontend will request for page \underline{./movie/detail/$<$movie\_id$>$}, matching a router in index.js (line 26). The router then calls the corresponding handler function, in this case, the \textit{getMovieDetail()} function in \textbf{movie.js}, which directs the user to the corresponding movie detail page.
 \begin{figure}[h]
-    \label{moviePage}
     \centering
     \includegraphics[width=0.8\textwidth]{sqlconnect.png}
     \caption{Database connection flowchart}
 \end{figure}
-\paragraph{Provide API by Express Router}
-We use the \textbf{express} library to provide APIs for frontend users. All the routers are written in the \textbf{router/index.js}. Whenever users access certain page, it will match a router in the file, which triggers the corresponding handler function. For example, after log in, the user will see the \textit{Movie} page, which contains a list of movies in the database. When user click on any of the movie poser , the frontend will request for page \underline{./movie/detail/<movie_id>}, matching a router in index.js (line 26). The router then calls the corresponding handler function, in this case, the \textit{getMovieDetail()} function in \textbf{movie.js}, which directs the user to the corresponding movie detail page.
 \paragraph{Access Control by jsonwebtoken}
 auth/auth.js调用jsonwebtoken包sign和verify token，\\
 services/auth.js中login路由函数调用signToken生成token给前端，\\
@@ -164,7 +161,7 @@ auth中间件函数调用verifyToken验证前端传来的token是否正确/过�
 \subsection{Web Crawler}
 \subsubsection{Basic Workflow}
 To populate our database with real-world data, we wrote a web crawler to scrap information from IMDB's Top 250 Movie Chart. The crawler is written in Python. It uses the requests library to send https requests. The desired fields are acquired through parsing the page using Beautiful Soup 4 library.
-The detailed process is as follows (see \hyperref[crawler]{Fig.4}):\par
+The detailed process is shown in this \hyperref[crawler]{flowchart}:\par
 
 \begin{enumerate}
     \item Access the Top 250 Chart, where all the URLs to the detailed movie pages are located
@@ -207,7 +204,7 @@ During the scrapping process, we encountered some issues.
 \subsection{Data Analysis}
 \subsubsection{Recommendation System with Restricted Boltzmann Machines}
 
-In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM, neighborhood. We reproduce the model proposed by Hinton (see \hyperref[RBM]{Fig.5}) in this project to do recommendation. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling.
+In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM, neighborhood. We reproduce \hyperref[RBM]{the model proposed by Hinton} in this project to do recommendation. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling.
 \begin{itemize}
     \item First get the visible movies ratings $ \bm{V} $ of the user.
     \item Sample the hidden units to binary numbers by probability given by \\ $ p(h_j = 1 | \bm{V}, \bm{r}) = \sigma(c_j + \sum_{i = 1}^m \sum_{k = 1}^K v_i^k W_{ij}^k + \sum_{i = 1}^M r_i D_{ij}) $, where $ \sigma(x) = \frac{1}{1 + e^{-x}}  $.
@@ -215,6 +212,7 @@ In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successf
     \item Update the parameters by the origin data and reconstructed data. For example, $ \Delta W_{ij}^k = \epsilon (<v_i^k h_j>_{data} - <v_i^k h_j>_T) $, where $ T $ represents the number of runs we do Gibbs sampling.
     \item Prediction is much the same as doing Gibbs sampling except that we can reconstruct (predict) missing ratings.
 \end{itemize}
+
 \begin{figure}[htbp]
 \centering
 \label{RBM}
@@ -229,13 +227,16 @@ In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successf
 \caption{Train RMSE vs. Epochs}
 \end{minipage}
 \end{figure}
-\hyperref[RBM]{Fig.6} shows the evolution of Root Mean Squared Error during training. We achieve a RMSE of 1.04. Every time the user enters \textbf{Me} page on our website, the system will automatically predict the ratings over all movies and recommend the top 8 movies to the user in \textbf{Guess you like} module. See \hyperref[recommend]{Fig.7} for an example.
+
+\hyperref[RBM]{This left figure above} shows the evolution of Root Mean Squared Error during training. We achieve a RMSE of 1.04. Every time the user enters \textbf{Me} page on our website, the system will automatically predict the ratings over all movies and recommend the top 8 movies to the user in \textbf{Guess you like} module. An \hyperref[recommend]{example} on the webpage:
+
 \begin{figure}[h]
     \centering
     \label{recommend}
     \includegraphics[width = 0.7\textwidth]{recommendation.png}
     \caption{Personalized Movie Recommendation}
 \end{figure}
+
 \subsubsection{Neighbourhood Model}
 Users have their preferences and tend to give similar ratings to movies of the same kind. In other words, movies are correlated and we can utilize this property to improve our predictions $ \hat{R} $ :
 \begin{itemize}
@@ -244,8 +245,7 @@ Users have their preferences and tend to give similar ratings to movies of the s
     \item Predict the error of one movie through the errors of its neighbours: $ \hat{\tilde{r}}_{i A}=\frac{1}{\sum_{B \in S}\left|d_{A B}\right|} \sum_{B \in S} d_{A B} \widetilde{r}_{i B}  $, where $ S $ is the set of neighbours (with high absolute similarities) of $ A $.
     \item Improve our RBM predictions by $ R_{u m}^{*}=\hat{R}_{u m}+\hat{\tilde{r}}_{u m} $ for each $ (user, movie) $ pair desired.
 \end{itemize}
-We improve the RMSE from 1.04 to 1.02. The improvement is not high because our matrix is sparse. In our data set, many users only give one rating, so it is hard to construct a well defined similarity matrix. The other reason is that we crawl high-rating movies and the biases are not large to give a performance boost. However, we are still able to leverage the data and get some insight into the movie ratings. 
-
+We improve the RMSE from 1.04 to 1.02. The improvement is not high because our matrix is sparse. In our data set, many users only give one rating, so it is hard to construct a well defined similarity matrix. The other reason is that we crawl high-rating movies and the biases are not large to give a performance boost. However, we are still able to leverage the data and get some insight into the movie ratings. \\\\
 For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has a high similarity (based on the difference between real rating and predicted rating) of $ 0.9999 $, which is expected. However, movie \textit{The Lord of the Rings: The Return of the King} has a similarity of $ -0.9999 $ while the movie \textit{The Lord of the Rings: The Fellowship of the Ring} has a similarity of $ 0.9999 $. This is counter intuitive and we should look into the data. We have three users giving ratings to both \textit{The Godfather} and \textit{The Lord of the Rings: The Return of the King}. The ratings are $ (10, 10) $, $ (10, 10) $ and $ (8, 10) $, respectively. For \textit{The Godfather} and \textit{The Lord of the Rings: The Fellowship of the Ring}, the rating pairs are all $ (10, 10) $. 8 is a relatively low rating in our dataset, hence the algorithm concludes that they are high negatively correlated.
 
 \section{Result}
@@ -256,24 +256,24 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \paragraph{} In order to improve user experience and replace the complex database operations by a few simple mouse clicks from users, we build a user friendly website. Based on that, abundant \textbf{personalized interaction behaviors} can be achieved, which serves our users more conveniently. We hold an integral process of account management for users. Users can add comments to a movie and rate on it as well as discover their appreciated reviews or users.
 \paragraph{} It is common for a movie database to recommend movies that the users have potential interest in. However,  how to make a personalized recommendation lists of high quality is always a problem. We use a lot of techniques in the data analysis to satisfy the needs from users . We build a \textbf{Restricted Boltzmann Machines}  with \textbf{Neighbourhood model} and get gratifying results.
 \section{Self Evaluation}
-In this part, we evaluate the advantages and disadvantages of our project/
+In this part, we evaluate the advantages and disadvantages of our project.
 \subsection{What we have achieved}
-\begin{enumerate}
+\begin{itemize}
 \item Build a database conforming to the low redundancy paradigm
 \item Implement and optimize many necessary  searching functions
 \item Create a user-friendly website to lower the bar of use
 \item Feed the database with a suitable amount of data and design a proper data analysis algorithm to satisfy personalized requirements
-\end{enumerate}
+\end{itemize}
 \subsection{Future Improvements}
-\begin{enumerate}
+\begin{itemize}
 \item More information about movies, directors, actors can be added to the database. For example, for actors we may add their nationality and Oscar nominations; for movies we may add its budget and the classification (PG13, NC17).
 \item More interaction functions can be add, like ``like'' a movie or ``subsrcibe'' a user. We can also add functions like ``want to watch'' a movie or ``watched'' a movie without commenting on it. This information can be utilized in conditional RBM to provide better recommendation (Hinton et al, 2007). Currently, we have the algorithm implemented but the information is unknown. 
 \item In the future, we plan to distinguish the users of our platform. We will allow a common user to upgrade as administrator, which will reduce the effort to maintain and supervise the comments other users post.
 \item Currently the web crawler is implemented using synced requests, which reduced its performance. In the future, we will write the crawler using async requests to speed up the crawling performance and acquire more data for our database.
-\end{enumerate}
+\end{itemize}
 
 \section{Contribution}
-Each of us contributed 20\% to the whole project.
+Each of us contributed to 20\% to the whole project.
 
 \end{CJK*}
 \end{document}
