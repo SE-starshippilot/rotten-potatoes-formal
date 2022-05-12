@@ -4,7 +4,7 @@
 
 \include{command}
 
-\usepackage{graphicx}
+\usepackage{graphicx, bm}
 \graphicspath{{graphics/}}
 \usepackage{geometry}
 \geometry{left=5cm,top=5cm,right=0cm,bottom=0cm}
@@ -56,9 +56,10 @@ In this section, we focus on the design of Entity-Relationship Model,
 the reduction from ER diagram into relational schemas, constraint and index.
 
 \subsection{Entity-Relationship Model}
-As shown in the ER digram below, there are 6 entities and 5 relationships. 
+As shown in the \hyperref[ERD]{ER digram below}, there are 6 entities and 5 relationships. 
 \begin{figure}[h]
 \centering
+\label{ERD}
 \includegraphics[width=0.8\textwidth]{er.png}
 \caption{ER Diagram}
 \end{figure}
@@ -76,9 +77,10 @@ To store movie id (of the movie where this character appears), actor id (of the 
 To store movie id (of the movie commented by this comment), user id (of the user who makes this comment), id, rate (from 0 to 10), content and comment date of a comment. This entity is a weak entity identified by entity ``movies'' and entity ``users'', and also by its own id, which means a comment is on exactly one movie and is made by exactly one user in our assumption. Note that since this entity is also identified by its own id, it is allowed that a user makes multiple comments on the same movie. 
 
 \subsection{Relational Schema}
-As shown in the relational schema digram below, there are 7 schemas. 
+As shown in the \hyperref[RelationalSchema]{relational schema digram below}, there are 7 schemas. 
 \begin{figure}[h]
 \centering
+\label{RelationalSchema}
 \includegraphics[width=0.8\textwidth]{schema.png}
 \caption{Relational Schema Diagram}
 \end{figure}
@@ -131,15 +133,25 @@ After login, users can see the  main structure of our website, which features a 
     \item Me: a portal for users to edit their information. Including updating avatar, name, password. This page also contains a list of movies recommended to the user.
     \item Search: to search for movies/actors/user, we implemented three different pages. The details will be discussed in \textbf{Sample Queries} section.
 \end{itemize}
-\par The figure below shows the movie page of our website. Since our application is user-oriented, the UI of our website is very concise and user-friendly.\par
-\includegraphics[width=0.8\textwidth]{website.png}
+\par \hyperref[moviePage]{Fig.3} shows the movie page of our website. Since our application is user-oriented, the UI of our website is very concise and user-friendly.\par
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{website.png}
+    \caption{Movie page of the website}
+    \label{moviePage}
+\end{figure}
 \subsection{Backend}
 Backend of this project is implemented through the express package of javascript. During the initialization, the `init.js' will read data from CSV files and create queries to batch-insert records into corresponding tables.
 \subsection{Web Crawler}
 \subsubsection{Basic Workflow}
 To populate our database with real-world data, we wrote a web crawler to scrap information from IMDB's Top 250 Movie Chart. The crawler is written in Python. It uses the requests library to send https requests. The desired fields are acquired through parsing the page using Beautiful Soup 4 library.
-The detailed process is as follows:\par
-\includegraphics[width=0.8\textwidth]{crawler_flowchart.png}
+The detailed process is as follows (see \hyperref[crawler]{Fig.4}):\par
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{crawler_flowchart.png}
+    \caption{Web crawler flowchart}
+    \label{crawler}
+\end{figure}
 \begin{enumerate}
     \item Access the Top 250 Chart, where all the URLs to the detailed movie pages are located
     \item Traverse through the chart. For every movie of the chart:
@@ -170,6 +182,47 @@ During the scrapping process, we encountered some issues.
 \subsubsection{CRUD on movies, actors and directors}
 \subsubsection{Comments related}
 \subsection{Data Analysis}
+\subsubsection{Recommendation System with Restricted Boltzmann Machines}
+
+In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). We reproduce the model (see \hyperref[RBM]{Fig.5}) in our project to do recommendation. We use Contastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling.
+\begin{itemize}
+    \item First get the visible movies ratings $ \bm{V} $ of the user.
+    \item Sample the hidden units to binary numbers by probability given by \\ $ p(h_j = 1 | \bm{V}, \bm{r}) = \sigma(c_j + \sum_{i = 1}^m \sum_{k = 1}^K v_i^k W_{ij}^k + \sum_{i = 1}^M r_i D_{ij}) $, where $ \sigma(x) = \frac{1}{1 + e^{-x}}  $.
+    \item Reconstruct the visible units by $ p(v_i^k = 1 | \bm{h}) = softmax(b_i^k + \sum_{j = 1}^F h_j W_{ij}^k) $, \\where $ softmax(x_k) = \frac{e^{x_k}}{\sum_{l= 1}^K e^{x_l}} $. Notice that we only reconstruct the movies the use has rated.
+    \item Update the parameters by the origin data and reconstructed data. For example, $ \Delta W_{ij}^k = \epsilon (<v_i^k h_j>_{data} - <v_i^k h_j>_T) $, where $ T $ represents the number of runs we do Gibbs sampling.
+    \item Prediction is much the same as doing Gibbs sampling except that we can reconstruct (predict) missing ratings.
+\end{itemize}
+\begin{figure}[htbp]
+\centering
+\label{RBM}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{conditionalRBM.png}
+\caption{Conditional RBM}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{RBMResult.png}
+\caption{Train RMSE vs. Epochs}
+\end{minipage}
+\end{figure}
+\hyperref[RBM]{Fig.6} shows the evolution of Root Mean Squared Error during training. We achieve a RMSE of 1.04. Every time the user enters \textbf{Me} page on our website, the system will automatically predict the ratings over all movies and recommend the top 8 movies to the user in \textbf{Guess you like} module. See \hyperref[recommend]{Fig.7} for an example.
+\begin{figure}[h]
+    \centering
+    \label{recommend}
+    \includegraphics[width = 0.7\textwidth]{recommendation.png}
+    \caption{Personalized Movie Recommendation}
+\end{figure}
+\subsubsection{Neighbourhood Model}
+Users have their preferences and tend to give similar ratings to movies of the same kind. In other words, movies are correlated and we can utilize this property to improve our predictions $ \hat{R} $ :
+\begin{itemize}
+    \item Define an error matrix by $ \widetilde{R} = R - \hat{R} $
+    \item Define similarity between two movies by their column features (user ratings): $ d_{A B}=\frac{\tilde{r}_{A}^{T} \widetilde{r}_{B}}{\left\|\widetilde{r}_{A}\right\|_{2}\left\|\widetilde{r}_{B}\right\|_{2}} $
+    \item Predict the error of one movie through the errors of its neighbours: $ \hat{\tilde{r}}_{i A}=\frac{1}{\sum_{B \in S}\left|d_{A B}\right|} \sum_{B \in S} d_{A B} \widetilde{r}_{i B}  $, where $ S $ is the set of neighbours (with high absolute similarities) of $ A $.
+    \item Improve our RBM predictions by $ R_{u m}^{*}=\hat{R}_{u m}+\hat{\tilde{r}}_{u m} $ for each $ (user, movie) $ pair desired.
+\end{itemize}
+We improve the RMSE from 1.04 to 1.02. The improvement is not high because our matrix is sparse. In our data set, many users only give one rating, so it is hard to construct a well defined similarity matrix. 
+
 \section{Future Works}
 \section{Result}
 
