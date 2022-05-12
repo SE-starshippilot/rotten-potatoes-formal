@@ -195,10 +195,232 @@ During the scrapping process, we encountered some issues.
     \item The gender of the movie stars is not explicitely listed on their detail page. However, by seeking their role in the movie (i.e, actor/actress), we can acquire their gender.
 \end{itemize}
 \subsection{Sample Queries}
-李易写下这里（每个功能大概怎么实现的）
-\subsubsection{User related}
+\subsubsection{User account \& self center}
+\paragraph{User registration}
+When a user try to create his own account,he need to specify his user name. In our system, every user must has a unique account name. Therefore, user name will be queried from the user table with the input registration name as search key. If there has already existed such a name, the account creation will not be granted.Otherwise, user name as well as user password will be inserted to the user table, with a user ID generated automatically.
+
+
+
+\begin{figure}[htbp]
+\centering
+\label{reg_ver}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{reg_ver.png}
+\caption{User registration verification}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{reg_ins.png}
+\caption{User registration verification insert}
+\end{minipage}
+\end{figure}
+
+
+\paragraph{User login}
+When a user login, password will be queried from the user table, with user name as the search key. It is used to check whether the user name exist and the password is correct.
+
+
+\begin{figure}[h]
+    \label{login}
+    \centering
+    \includegraphics[width=0.45\textwidth]{login.png}
+    \caption{User login}
+\end{figure}
+
+\paragraph{Self center}
+User can modify his avatar, user name and password.This is achieved by updating the user table.
+\begin{figure}[htbp]
+\centering
+\label{avatar}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{avatar.png}
+\caption{Update avatar}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{name.png}
+\caption{Update user name}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{password.png}
+\caption{Update user password}
+\end{figure}
+
+
+
+
+\paragraph{Delete user}
+In our system, a user account can be deleted, while the comments on movies he made will be kept even after the account is deleted.This is achieved by associating the comments to a padding user before deleting the user account.
+\begin{figure}[h]
+    \label{suer delete}
+    \centering
+    \includegraphics[width=0.4\textwidth]{user_del.png}
+    \caption{Delete user}
+\end{figure}
+
+
 \subsubsection{CRUD on movies, actors and directors}
-\subsubsection{Comments related}
+\paragraph{Information listing}Movies, actors and directors are listed in our web page. Basic information is selected from corresponding table.
+\begin{figure}[htbp]
+\centering
+\label{list}
+\begin{minipage}[t]{0.3\textwidth}
+\centering
+\includegraphics[width=6cm]{a_list.png}
+\caption{Listing actor}
+\end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+\centering
+\includegraphics[width=6cm]{dir_list.png}
+\caption{Listing directors}
+\end{minipage}
+
+
+
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{m_list.png}
+\caption{Listing movies}
+\end{minipage}
+\end{figure}
+
+
+
+
+\paragraph{Detail information} To show detailed information of movies, actors and directors, table joined is needed. Actor table is joined with the character table to get all characters played by an actor, while director table is joined with movie table to select all movies directed by the director. For the detail page of movies, 4 table joins are needed to acquire all necessary data. Movie table is joined with character table to get all characters in a specific movie. Join with director table is also needed to find the director of a specific movie. All comments and genres of the movie are obtained by joining the movie table with the comments table and genres table, respectively.
+ 
+
+
+\begin{figure}[htbp]
+\centering
+\label{detail}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{a_detail.png}
+\caption{Actor detail}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{d_detail.png}
+\caption{Director detail}
+\end{minipage}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\label{detail}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{m_detail_char.png}
+\caption{Character information of movies}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\includegraphics[width=6cm]{m_detail_dir.png}
+\caption{Director information of movies}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=6cm]{m_detail_com.png}
+\caption{Comments of movies}
+\end{figure}
+
+
+\paragraph{Search movies}
+Movies can be searched by inputting their names. Besides, we also support filtering movies by their release time, movie rate and movie genres. Besides, user can order the output movies according to release time or rate.
+
+
+
+\paragraph{Search actors}
+Similar to movies, actors are searched by their name, and filtered by their birth date. Also, ordering is supported on the birth date.
+
+
+
+
+
+\paragraph{Search user}
+For user seaarching, only name search is supported.
+
+
+
+
+
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{m_search.png}
+\caption{Movies search}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{a_search.png}
+\caption{Actors search}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{u_search.png}
+\caption{Users search}
+\end{figure}
+
+
+
+
+
+
+
+
+\subsubsection{Comments}
+\paragraph{List comments}
+Join the comment table and the user table to match each comment to its owner. After table join, all tuples are selected to be shown. 
+
+
+
+
+\paragraph{Delete comments} 
+Comments deletion is achieved by deleting corresponding tuples comment table.
+
+
+\paragraph{Add comments} 
+Comment addition is achieved by inserting to the comment table.
+
+
+\begin{figure}[h]
+    \label{comment}
+    \centering
+    \includegraphics[width=0.4\textwidth]{comment.png}
+    \caption{Comments list}
+\end{figure}
+
+
+\begin{figure}[h]
+    \label{comment}
+    \centering
+    \includegraphics[width=0.6\textwidth]{add_comm.png}
+    \caption{Add comments}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=6cm]{del_com.png}
+\caption{Delete comments}
+\end{figure}
+
+
 \subsection{Data Analysis}
 \subsubsection{Recommendation System with Restricted Boltzmann Machines}
 
@@ -228,7 +450,7 @@ In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successf
 \begin{figure}[h]
     \centering
     \label{recommend}
-    \includegraphics[width = 0.7\textwidth]{recommendation.png}
+    \includegraphics[width = 0.55\textwidth]{recommendation.png}
     \caption{Personalized Movie Recommendation}
 \end{figure}
 \subsubsection{Neighbourhood Model}
@@ -244,7 +466,210 @@ We improve the RMSE from 1.04 to 1.02. The improvement is not high because our m
 For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has a high similarity (based on the difference between real rating and predicted rating) of $ 0.9999 $, which is expected. However, movie \textit{The Lord of the Rings: The Return of the King} has a similarity of $ -0.9999 $ while the movie \textit{The Lord of the Rings: The Fellowship of the Ring} has a similarity of $ 0.9999 $. This is counter intuitive and we should look into the data. We have three users giving ratings to both \textit{The Godfather} and \textit{The Lord of the Rings: The Return of the King}. The ratings are $ (10, 10) $, $ (10, 10) $ and $ (8, 10) $, respectively. For \textit{The Godfather} and \textit{The Lord of the Rings: The Fellowship of the Ring}, the rating pairs are all $ (10, 10) $. 8 is a relatively low rating in our dataset, hence the algorithm concludes that they are high negatively correlated.
 
 \section{Result}
-李易写下这里（贴网页截图介绍下功能就ok了）
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{reg.png}
+\caption{Register page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_login.png}
+\caption{Login page}
+\end{figure}
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_ps.png}
+\caption{Personal center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{res_avatar1.png}
+\caption{Before chaning avatar}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_avatar2.png}
+\caption{After chaning avatar}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_name1.png}
+\caption{Before chaning name}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_name2.png}
+\caption{After chaning name}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_movie1.png}
+\caption{Movie list page}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_movie2.png}
+\caption{Movie detail page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_movie3.png}
+\caption{Movie detail page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_movie4.png}
+\caption{Movie detail page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_actor1.png}
+\caption{Actor list page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_actor2.png}
+\caption{Actor detail page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_dir1.png}
+\caption{Director list page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_actor2.png}
+\caption{Director detail page}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search1.png}
+\caption{Movie search page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search2.png}
+\caption{Search movie by name}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search3.png}
+\caption{Filter movie by release date}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search4.png}
+\caption{Filter movie by rate}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search5.png}
+\caption{Filter movie by genres}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search6.png}
+\caption{Order movie by release date}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search7.png}
+\caption{Order movie by rate}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search8.png}
+\caption{Actor search page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_search9.png}
+\caption{User search page}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_comment1.png}
+\caption{Comment list}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_comment2.png}
+\caption{Add comment}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_comment3.png}
+\caption{Comment before deleting user account}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_delete1.png}
+\caption{Delete user account}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{res_delete2.png}
+\caption{Comment after deleting user account}
+\end{figure}
+
+
+
 
 \section{Conclusion}
 \paragraph{} In this project we build a movie database based on a large amount of data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every entity in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for moives, casts or other users using name,  time information, rate(only movies) and genres(only movies) as the keyword.
@@ -269,6 +694,12 @@ In this part, we evaluate the advantages and disadvantages of our project/
 
 \section{Contribution}
 Each of us contributed 20\% to the whole project.
+
+
+
+
+
+
 
 \end{CJK*}
 \end{document}
