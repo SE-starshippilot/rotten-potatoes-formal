@@ -34,6 +34,7 @@ router.get('/actor/search', actor.search_actor)
 router.get('/director/list', director.listDirectors)
 router.get('/director/detail/:id', director.getDirectorDetail)
 router.get('/director/search', director.search_Director)
+
 router.get('/comment/list', comment.listComments)
 router.post('/comment/add-to-movie/:id', comment.addCommentToMovie)
 router.delete('/comment/delete-comment/:id', comment.delete_comment)
