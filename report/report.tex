@@ -48,7 +48,9 @@
 
 \rmfamily
 \section{Introduction}
-
+\paragraph{}As an art and commercial work, movies have become pursuits of many people and generated tremendous value. Currently, there are two types of online movie platforms. On the one hand, platforms including Rotten Tomatoes and Douban gives people rich information regarding movies. On the other hand, sites like Netflix offers precise, personalized recommendation to users. Such a recommendation strategy allows users to discover more films they enjoy and attracts more users to the platform.
+\paragraph{}However, currently, no site combines the strengths of the mentioned movie sites. Besides, existing popular movie websites are full of quarrels and controversies from the perspective of the community environment. The movie recommendation sare influenced deeply by the advertising, not the quality of films. Therefore, to satisfy the real requirements of movie lovers, we build a movie database called \textbf{Rotten Potatoes}, based on which, users can talk about their reviews on the movie freely. It also offers plenty of searching functions and personalized recommendations from the platform. 
+\paragraph{}We use python packages \textbf{\textit{Requests}}, \textbf{\textit{BeautifulSoup}} to obtain the required data from IMDB, store it in a MySQL database. Then we build our searching functions and personalized moive recommendations on those data. We also build a user-friendly web using \textbf{\textit{amis}} as the front end and \textbf{\textit{express}} as the back end.
 \section{Design}
 In this section, we focus on the design of Entity-Relationship Model, 
 the reduction from ER diagram into relational schemas, constraint and index.
@@ -172,8 +174,25 @@ During the scrapping process, we encountered some issues.
 \section{Result}
 
 \section{Conclusion}
-In this project, we constructed a movie information system with personalized recommendation feature. The User Interface is 
-
+\paragraph{} In this project we build a moive database based on a large amount of data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every entity in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for moives, casts or other users using name,  time information, rate(only moives) and genres(only moives) as the keyword.
+\paragraph{} In order to improve user experience and replace the complex database operations by a few simple mouse clicks from users, we build a user friendly website. Based on that, abundant \textbf{personalized interaction behaviors} can be achieved, which serves our users more conveniently. We hold an integral process of account management for users. Users can add comments to a moive and rate on it as well as discover their approbated reviews or users.
+\paragraph{} It is common for a moive database to recommend moives that the users have potential interest in. However,  how to make a personalized recommendation lists of high quality is always a problem. We use a lot of techinques in the data analysis to satisfy the needs from users . We build a \textbf{Restricted Boltzmann Machines}  with \textbf{Neighbourhood model} and get gratifying results.
+\section{Self Evaluation}
+In this part, we evaulate the advantages and disadvantages of our project/
+\subsection{What we have achieved}
+\begin{enumerate}
+\item Build a database conforming to the low redundancy paradigm
+\item Implement and optimize many necessary  searching functionss
+\item Create a user-friendly website to lower the bar of use
+\item Feed the database with a suitable amount of data and design a proper data analysis algorithm to satisfy personalized requirements
+\end{enumerate}
+\subsection{Future Improvements}
+\begin{enumerate}
+\item More information about moives, dierctors, actors can be added to the database like nationality and company
+\item More interaction functions can be add, like \''like'' a moive or \''subsrcibe'' a user
+\item More identities of users, like administrators or common users can be implemented, which is beneficial to the management of the database
+\item Actions should be taken to improve the speed of running, both for searching and the web crawler
+\end{enumerate}
 \section{Contribution}
 
 \end{CJK*}
