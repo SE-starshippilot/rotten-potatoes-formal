@@ -49,8 +49,8 @@
 \rmfamily
 \section{Introduction}
 \paragraph{}As an art and commercial work, movies have become pursuits of many people and generated tremendous value. Currently, there are two types of online movie platforms. On the one hand, platforms including Rotten Tomatoes and Douban gives people rich information regarding movies. On the other hand, sites like Netflix offers precise, personalized recommendation to users. Such a recommendation strategy allows users to discover more films they enjoy and attracts more users to the platform.
-\paragraph{}However, currently, no site combines the strengths of the mentioned movie sites. Besides, existing popular movie websites are full of quarrels and controversies from the perspective of the community environment. The movie recommendation sare influenced deeply by the advertising, not the quality of films. Therefore, to satisfy the real requirements of movie lovers, we build a movie database called \textbf{Rotten Potatoes}, based on which, users can talk about their reviews on the movie freely. It also offers plenty of searching functions and personalized recommendations from the platform. 
-\paragraph{}We use python packages \textbf{\textit{Requests}}, \textbf{\textit{BeautifulSoup}} to obtain the required data from IMDB, store it in a MySQL database. Then we build our searching functions and personalized moive recommendations on those data. We also build a user-friendly web using \textbf{\textit{amis}} as the frontend and \textbf{\textit{express}} as the backend.
+\paragraph{}However, currently, no site combines the strengths of the mentioned movie sites. Besides, existing popular movie websites are full of quarrels and controversies from the perspective of the community environment. The movie recommendation sare influenced deeply by the advertising, not the quality of films. Therefore, to satisfy the real requirements of movie lovers, we build a movie database called \textbf{\href{http://10.20.9.99:3000}{Rotten Potatoes}}, based on which, users can talk about their reviews on the movie freely. It also offers plenty of searching functions and personalized recommendations from the platform. 
+\paragraph{}We use python packages \textbf{\href{https://docs.python-requests.org/en/latest/}{Requests}}, \textbf{\href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{BeautifulSoup}} to obtain the required data from IMDB, store it in a MySQL database. Then we build our searching functions and personalized moive recommendations on those data. We also build a user-friendly web using \textbf{\href{https://aisuda.bce.baidu.com/amis/zh-CN/docs/index}{amis}} as the frontend and \textbf{\href{https://expressjs.com}{express}} as the backend.
 \section{Design}
 In this section, we focus on the design of Entity-Relationship Model, 
 the reduction from ER diagram into relational schemas, constraint and index.
@@ -122,10 +122,9 @@ The following attributes are indexed to make search faster:
 \end{itemize}
 
 \section{Implementation}
+In this section, we will introduce the implementation of our movie website. All codes of this project can be accessed from \href{https://github.com/warin2020/rotten-potatoes}{https://github.com/warin2020/rotten-potatoes}.
 \subsection{Frontend}
-The frontend of our project is constructed using \textbf{\textit{amis}}, a low-code front end framework. It can generate a website using json configurations, which is suitable for developing a light-weight and agile application like this project.\\\\
-When users access the webpage, they will be directed to the Login page, where registered user can input user name and password to log in. We also added support for new user registration.
-After login, users can see the  main structure of our website, which features a navigation pannel on the left side and the content on the right. We constructed the following pages:
+The frontend of our project is constructed using \textbf{\textit{\href{https://aisuda.bce.baidu.com/amis/zh-CN/docs/index}{amis}}}, a low-code frontend framework. It can generate a website using json configurations, which is suitable for developing a light-weight and agile application like this project. We constructed the following pages:
 \begin{itemize}
     \item Movie: a list of all the movies with their name and posters. Each movie is a "Card" widget linking to the movie detail page.
     \item Actor: a list of all the actor/actresses, also implemented using the "Card" widget, containing links to the detailed information.
@@ -147,20 +146,18 @@ After login, users can see the  main structure of our website, which features a 
 \paragraph{Connect to MySQL in Nodejs}
 The query functions in our database are written in javascript language. They can be found in the corresponding files in the \textbf{services} folder. To maximize reusability, we wrote a template query function in \textbf{query.js} using the \textit{mysql} module of Node.JS. The template function will first access the \textbf{.env} file for database configuration(e.g., the port on which MySQL server is running, the logging username and password). Then, instead of establishing and closing connections to the database on every execution, the template creates a connection pool. Requests from the frontend will pass the query as rest parameter to the template function, which will then issue the query and return the results (and errors, if any) back to the frontend.
 \paragraph{Provide API by Express Router}
-We use the \textbf{express} library to provide APIs for frontend users. All the routers are written in the \textbf{router/index.js}. Whenever users access certain page, it will match a router in the file, which triggers the corresponding handler function. For example, after log in, the user will see the \textit{Movie} page, which contains a list of movies in the database. When user click on any of the movie poser , the frontend will request for page \underline{./movie/detail/$<$movie\_id$>$}, matching a router in index.js (line 26). The router then calls the corresponding handler function, in this case, the \textit{getMovieDetail()} function in \textbf{movie.js}, which directs the user to the corresponding movie detail page.
+We use the \textbf{\href{https://expressjs.com}{express}} library to provide APIs for frontend users. All the routers are written in the \textbf{router/index.js}. Whenever users access certain page, it will match a router in the file, which triggers the corresponding handler function. For example, after log in, the user will see the \textit{Movie} page, which contains a list of movies in the database. When user click on any of the movie poser , the frontend will request for page \underline{./movie/detail/$<$movie\_id$>$}, matching a router in index.js (line 26). The router then calls the corresponding handler function, in this case, the \textit{getMovieDetail()} function in \textbf{movie.js}, which directs the user to the corresponding movie detail page.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{sqlconnect.png}
     \caption{Database connection flowchart}
 \end{figure}
 \paragraph{Access Control by jsonwebtoken}
-auth/auth.js调用jsonwebtoken包sign和verify token，\\
-services/auth.js中login路由函数调用signToken生成token给前端，\\
-auth中间件函数调用verifyToken验证前端传来的token是否正确/过期（不是很重要，看不懂留着我写）
+Base on \textbf{\href{https://www.npmjs.com/package/jsonwebtoken}{jsonwebtoken}} package, in \textbf{auth/auth.js} using the key in \textbf{.env} file \textbf{SECRET\_KEY} we implemented 2 functions \textit{signToken} and \textit{verifyToken}, by which, in \textbf{services/auth.js}, the routing function \textit{login} returns a token to frontend and the middleware function \textit{auth} check whether the token from frontend is correct and not outdated.
 
 \subsection{Web Crawler}
 \subsubsection{Basic Workflow}
-To populate our database with real-world data, we wrote a web crawler to scrap information from IMDB's Top 250 Movie Chart. The crawler is written in Python. It uses the requests library to send https requests. The desired fields are acquired through parsing the page using Beautiful Soup 4 library.
+To populate our database with real-world data, we wrote a web crawler to scrap information from IMDB's Top 250 Movie Chart. The crawler is written in Python. It uses the \textbf{\href{https://docs.python-requests.org/en/latest/}{Requests}} library to send https requests. The desired fields are acquired through parsing the page using \textbf{\href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{BeautifulSoup}} library.
 The detailed process is shown in this \hyperref[crawler]{flowchart}:\par
 
 \begin{enumerate}
@@ -205,7 +202,6 @@ When a user try to create his own account,he need to specify his user name. In o
 
 \begin{figure}[htbp]
 \centering
-\label{reg_ver}
 \begin{minipage}[t]{0.45\textwidth}
 \centering
 \includegraphics[width=6cm]{reg_ver.png}
@@ -224,7 +220,6 @@ When a user login, password will be queried from the user table, with user name 
 
 
 \begin{figure}[h]
-    \label{login}
     \centering
     \includegraphics[width=0.45\textwidth]{login.png}
     \caption{User login}
@@ -234,34 +229,25 @@ When a user login, password will be queried from the user table, with user name 
 User can modify his avatar, user name and password.This is achieved by updating the user table.
 \begin{figure}[htbp]
 \centering
-\label{avatar}
-\begin{minipage}[t]{0.45\textwidth}
-\centering
-\includegraphics[width=6cm]{avatar.png}
+\begin{minipage}{0.32\textwidth}
+\includegraphics[width=\linewidth]{avatar.png}
 \caption{Update avatar}
 \end{minipage}
-\begin{minipage}[t]{0.45\textwidth}
-\centering
-\includegraphics[width=6cm]{name.png}
+\begin{minipage}{0.32\textwidth}
+\includegraphics[width=\linewidth]{name.png}
 \caption{Update user name}
 \end{minipage}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{password.png}
+\begin{minipage}{0.32\textwidth}
+\includegraphics[width=\linewidth]{password.png}
 \caption{Update user password}
+\end{minipage}
 \end{figure}
-
-
-
 
 \paragraph{Delete user}
 In our system, a user account can be deleted, while the comments on movies he made will be kept even after the account is deleted.This is achieved by associating the comments to a padding user before deleting the user account.
-\begin{figure}[h]
-    \label{suer delete}
+\begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.4\textwidth]{user_del.png}
+    \includegraphics[width=0.3\textwidth]{user_del.png}
     \caption{Delete user}
 \end{figure}
 
@@ -270,37 +256,24 @@ In our system, a user account can be deleted, while the comments on movies he ma
 \paragraph{Information listing}Movies, actors and directors are listed in our web page. Basic information is selected from corresponding table.
 \begin{figure}[htbp]
 \centering
-\label{list}
-\begin{minipage}[t]{0.3\textwidth}
-\centering
-\includegraphics[width=6cm]{a_list.png}
+\begin{minipage}{0.32\textwidth}
+\includegraphics[width=\linewidth]{a_list.png}
 \caption{Listing actor}
 \end{minipage}
-\begin{minipage}[t]{0.3\textwidth}
-\centering
-\includegraphics[width=6cm]{dir_list.png}
+\begin{minipage}{0.32\textwidth}
+\includegraphics[width=\linewidth]{dir_list.png}
 \caption{Listing directors}
 \end{minipage}
-
-
-
-\begin{minipage}[t]{0.45\textwidth}
-\centering
-\includegraphics[width=6cm]{m_list.png}
+\begin{minipage}{0.32\textwidth}
+\includegraphics[width=\linewidth]{m_list.png}
 \caption{Listing movies}
 \end{minipage}
 \end{figure}
 
-
-
-
 \paragraph{Detail information} To show detailed information of movies, actors and directors, table joined is needed. Actor table is joined with the character table to get all characters played by an actor, while director table is joined with movie table to select all movies directed by the director. For the detail page of movies, 4 table joins are needed to acquire all necessary data. Movie table is joined with character table to get all characters in a specific movie. Join with director table is also needed to find the director of a specific movie. All comments and genres of the movie are obtained by joining the movie table with the comments table and genres table, respectively.
- 
-
 
 \begin{figure}[htbp]
 \centering
-\label{detail}
 \begin{minipage}[t]{0.45\textwidth}
 \centering
 \includegraphics[width=6cm]{a_detail.png}
@@ -313,10 +286,8 @@ In our system, a user account can be deleted, while the comments on movies he ma
 \end{minipage}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
-\label{detail}
 \begin{minipage}[t]{0.45\textwidth}
 \centering
 \includegraphics[width=6cm]{m_detail_char.png}
@@ -329,7 +300,7 @@ In our system, a user account can be deleted, while the comments on movies he ma
 \end{minipage}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=6cm]{m_detail_com.png}
 \caption{Comments of movies}
@@ -338,91 +309,55 @@ In our system, a user account can be deleted, while the comments on movies he ma
 
 \paragraph{Search movies}
 Movies can be searched by inputting their names. Besides, we also support filtering movies by their release time, movie rate and movie genres. Besides, user can order the output movies according to release time or rate.
-
-
-
-\paragraph{Search actors}
-Similar to movies, actors are searched by their name, and filtered by their birth date. Also, ordering is supported on the birth date.
-
-
-
-
-
-\paragraph{Search user}
-For user seaarching, only name search is supported.
-
-
-
-
-
-
-
-
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.6\textwidth]{m_search.png}
 \caption{Movies search}
 \end{figure}
 
-
+\paragraph{Search actors}
+Similar to movies, actors are searched by their name, and filtered by their birth date. Also, ordering is supported on the birth date.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{a_search.png}
 \caption{Actors search}
 \end{figure}
 
-
+\paragraph{Search user}
+For user seaarching, only name search is supported.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{u_search.png}
 \caption{Users search}
 \end{figure}
 
-
-
-
-
-
-
-
 \subsubsection{Comments}
 \paragraph{List comments}
 Join the comment table and the user table to match each comment to its owner. After table join, all tuples are selected to be shown. 
-
-
-
-
-\paragraph{Delete comments} 
-Comments deletion is achieved by deleting corresponding tuples comment table.
-
-
-\paragraph{Add comments} 
-Comment addition is achieved by inserting to the comment table.
-
-
 \begin{figure}[h]
-    \label{comment}
     \centering
     \includegraphics[width=0.4\textwidth]{comment.png}
     \caption{Comments list}
 \end{figure}
 
-
-\begin{figure}[h]
-    \label{comment}
-    \centering
-    \includegraphics[width=0.6\textwidth]{add_comm.png}
-    \caption{Add comments}
-\end{figure}
-
+\paragraph{Delete comments} 
+Comments deletion is achieved by deleting corresponding tuples comment table.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=6cm]{del_com.png}
 \caption{Delete comments}
 \end{figure}
 
+\paragraph{Add comments} 
+Comment addition is achieved by inserting to the comment table.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{add_comm.png}
+    \caption{Add comments}
+\end{figure}
 
+\newpage
+\newpage
 \subsection{Data Analysis}
 \subsubsection{Recommendation System with Restricted Boltzmann Machines}
 
@@ -471,15 +406,13 @@ We improve the RMSE from 1.04 to 1.02. The improvement is not high because our m
 For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has a high similarity (based on the difference between real rating and predicted rating) of $ 0.9999 $, which is expected. However, movie \textit{The Lord of the Rings: The Return of the King} has a similarity of $ -0.9999 $ while the movie \textit{The Lord of the Rings: The Fellowship of the Ring} has a similarity of $ 0.9999 $. This is counter intuitive and we should look into the data. We have three users giving ratings to both \textit{The Godfather} and \textit{The Lord of the Rings: The Return of the King}. The ratings are $ (10, 10) $, $ (10, 10) $ and $ (8, 10) $, respectively. For \textit{The Godfather} and \textit{The Lord of the Rings: The Fellowship of the Ring}, the rating pairs are all $ (10, 10) $. 8 is a relatively low rating in our dataset, hence the algorithm concludes that they are high negatively correlated.
 
 \section{Result}
-
-
+In this section, we will include some screenshots of the webpage we built. The website can be accessed through url \href{http://10.20.9.99:3000}{http://10.20.9.99:3000}.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.7\textwidth]{reg.png}
+\includegraphics[width=1\textwidth]{reg.png}
 \caption{Register page}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \centering
@@ -487,15 +420,11 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Login page}
 \end{figure}
 
-
-
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_ps.png}
 \caption{Personal center}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \centering
@@ -503,14 +432,11 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Before chaning avatar}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_avatar2.png}
 \caption{After chaning avatar}
 \end{figure}
-
-
 
 \begin{figure}[htbp]
 \centering
@@ -518,14 +444,11 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Before chaning name}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_name2.png}
 \caption{After chaning name}
 \end{figure}
-
-
 
 \begin{figure}[htbp]
 \centering
@@ -533,14 +456,11 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Movie list page}
 \end{figure}
 
-
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_movie2.png}
 \caption{Movie detail page}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \centering
@@ -548,13 +468,11 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Movie detail page}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_movie4.png}
 \caption{Movie detail page}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \centering
@@ -562,20 +480,17 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Actor list page}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_actor2.png}
 \caption{Actor detail page}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_dir1.png}
 \caption{Director list page}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \centering
@@ -589,7 +504,6 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Movie search page}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_search2.png}
@@ -602,13 +516,11 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Filter movie by release date}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_search4.png}
 \caption{Filter movie by rate}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \centering
@@ -634,13 +546,11 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Actor search page}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{res_search9.png}
 \caption{User search page}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \centering
@@ -653,7 +563,6 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \includegraphics[width=1\textwidth]{res_comment2.png}
 \caption{Add comment}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \centering
@@ -673,9 +582,7 @@ For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has 
 \caption{Comment after deleting user account}
 \end{figure}
 
-
-
-
+\newpage
 \section{Conclusion}
 \paragraph{} In this project we build a movie database based on a large amount of data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every entity in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for moives, casts or other users using name,  time information, rate(only movies) and genres(only movies) as the keyword.
 \paragraph{} In order to improve user experience and replace the complex database operations by a few simple mouse clicks from users, we build a user friendly website. Based on that, abundant \textbf{personalized interaction behaviors} can be achieved, which serves our users more conveniently. We hold an integral process of account management for users. Users can add comments to a movie and rate on it as well as discover their appreciated reviews or users.
@@ -699,12 +606,6 @@ In this part, we evaluate the advantages and disadvantages of our project.
 
 \section{Contribution}
 Each of us contributed to 20\% to the whole project.
-
-
-
-
-
-
 
 \end{CJK*}
 \end{document}
