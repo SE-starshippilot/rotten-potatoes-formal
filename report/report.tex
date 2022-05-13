@@ -153,6 +153,7 @@ We use the \textbf{\href{https://expressjs.com}{express}} library to provide API
     \caption{Database connection flowchart}
 \end{figure}
 \paragraph{Access Control by jsonwebtoken}
+\label{sec:access}
 Base on \textbf{\href{https://www.npmjs.com/package/jsonwebtoken}{jsonwebtoken}} package, in \textbf{auth/auth.js} using the key in \textbf{.env} file \textbf{SECRET\_KEY} we implemented 2 functions \textit{signToken} and \textit{verifyToken}, by which, in \textbf{services/auth.js}, the routing function \textit{login} returns a token to frontend and the middleware function \textit{auth} check whether the token from frontend is correct and not outdated.
 
 \subsection{Web Crawler}
@@ -171,7 +172,7 @@ The detailed process is shown in this \hyperref[crawler]{flowchart}:\par
         \end{itemize}
         For the actors/actresses who casted in this movie:
         \begin{itemize}
-            \item Access the detailed actor/actress page and find detailed information.
+            \item Access the detailed actor/actress page and find detailed information if their details are yet to be recorded.
         \end{itemize}
         \item The comment section locates at the bottom of the movie page. We collect the rating, comments from this section.
         \item For each comment, we acquire the user information by accessing their homepage.
@@ -194,9 +195,9 @@ During the scrapping process, we encountered some issues.
     \item The gender of the movie stars is not explicitely listed on their detail page. However, by seeking their role in the movie (i.e, actor/actress), we can acquire their gender.
 \end{itemize}
 \subsection{Sample Queries}
-\subsubsection{User account \& self center}
+\subsubsection{User account \& the Portal}
 \paragraph{User registration}
-When a user try to create his own account,he need to specify his user name. In our system, every user must has a unique account name. Therefore, user name will be queried from the user table with the input registration name as search key. If there has already existed such a name, the account creation will not be granted.Otherwise, user name as well as user password will be inserted to the user table, with a user ID generated automatically.
+When a user try to create his own account,he need to specify his user name. In our system, every user must have a unique account name. Therefore, before granting a registration, we will first query the inputted user name in the \textbf{users} table. If the name already exists, the registration will not be accepted and the user should input a new user name. Otherwise, user name as well as user password will be inserted to the user table, with a user ID generated automatically.
 
 
 
@@ -216,7 +217,7 @@ When a user try to create his own account,he need to specify his user name. In o
 
 
 \paragraph{User login}
-When a user login, password will be queried from the user table, with user name as the search key. It is used to check whether the user name exist and the password is correct.
+When a user login, password will be queried from the user table, with user name as the search key. Then, the correct password will be checked using jsonwebtoken, as mentioned in the \hyperref[sec:access]{access control section}
 
 
 \begin{figure}[h]
@@ -225,8 +226,8 @@ When a user login, password will be queried from the user table, with user name 
     \caption{User login}
 \end{figure}
 
-\paragraph{Self center}
-User can modify his avatar, user name and password.This is achieved by updating the user table.
+\paragraph{The Portal}
+User can modify his avatar, user name and password. This is achieved by updating a record in the \textbf{users} table.
 \begin{figure}[htbp]
 \centering
 \begin{minipage}{0.32\textwidth}
@@ -270,7 +271,7 @@ In our system, a user account can be deleted, while the comments on movies he ma
 \end{minipage}
 \end{figure}
 
-\paragraph{Detail information} To show detailed information of movies, actors and directors, table joined is needed. Actor table is joined with the character table to get all characters played by an actor, while director table is joined with movie table to select all movies directed by the director. For the detail page of movies, 4 table joins are needed to acquire all necessary data. Movie table is joined with character table to get all characters in a specific movie. Join with director table is also needed to find the director of a specific movie. All comments and genres of the movie are obtained by joining the movie table with the comments table and genres table, respectively.
+\paragraph{Detail information} To show detailed information of movies, actors and directors, we need to join several tables. \textbf{Actors} table is joined with the \textbf{characters} table to get all characters played by an actor, while \textbf{directors} table is joined with \textbf{movies} table to select all movies directed by the director. For the detail page of movies, 4 table joins are needed to acquire all necessary data. \textbf{Movies} table is joined with \textbf{characters} table to get all characters in a specific movie. Joining the \textbf{directors} table is also necessary to find the director of a specific movie. All comments and genres of the movie are obtained by joining the \textbf{movies} table with the \textbf{comments} table and \textbf{genres} table, respectively.
 
 \begin{figure}[htbp]
 \centering
@@ -308,7 +309,7 @@ In our system, a user account can be deleted, while the comments on movies he ma
 
 
 \paragraph{Search movies}
-Movies can be searched by inputting their names. Besides, we also support filtering movies by their release time, movie rate and movie genres. Besides, user can order the output movies according to release time or rate.
+Movies can be searched using their names. Aside from directly searching, we also support filtering movies by their release time, movie rate and movie genres. We also added support for ordering (in ascending or descending order) the result by name, release year and rating.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.6\textwidth]{m_search.png}
@@ -316,7 +317,7 @@ Movies can be searched by inputting their names. Besides, we also support filter
 \end{figure}
 
 \paragraph{Search actors}
-Similar to movies, actors are searched by their name, and filtered by their birth date. Also, ordering is supported on the birth date.
+Similar to movies, actors are searched by their name, and filtered by their birth date. Also, ordering is supported on the birth date and name.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{a_search.png}
@@ -324,7 +325,7 @@ Similar to movies, actors are searched by their name, and filtered by their birt
 \end{figure}
 
 \paragraph{Search user}
-For user seaarching, only name search is supported.
+For user searching, only name search is supported.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{u_search.png}
@@ -333,7 +334,7 @@ For user seaarching, only name search is supported.
 
 \subsubsection{Comments}
 \paragraph{List comments}
-Join the comment table and the user table to match each comment to its owner. After table join, all tuples are selected to be shown. 
+Join the \textbf{comments} table and the \textbf{users} table to match the sender of each comment. Afte joining, all tuples are shown. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{comment.png}
@@ -362,13 +363,13 @@ Comment addition is achieved by inserting to the comment table.
 \subsubsection{Recommendation System with Restricted Boltzmann Machines}
 
 In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM, neighborhood. We reproduce \hyperref[RBM]{the model proposed by Hinton} in this project to do recommendation. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling.
-\begin{itemize}
-    \item First get the visible movies ratings $ \bm{V} $ of the user.
+\begin{enumerate}
+    \item Acquire the visible movies ratings $ \bm{V} $ of the user.
     \item Sample the hidden units to binary numbers by probability given by \\ $ p(h_j = 1 | \bm{V}, \bm{r}) = \sigma(c_j + \sum_{i = 1}^m \sum_{k = 1}^K v_i^k W_{ij}^k + \sum_{i = 1}^M r_i D_{ij}) $, where $ \sigma(x) = \frac{1}{1 + e^{-x}}  $.
     \item Reconstruct the visible units by $ p(v_i^k = 1 | \bm{h}) = softmax(b_i^k + \sum_{j = 1}^F h_j W_{ij}^k) $, \\where $ softmax(x_k) = \frac{e^{x_k}}{\sum_{l= 1}^K e^{x_l}} $. Notice that we only reconstruct the movies the use has rated.
     \item Update the parameters by the origin data and reconstructed data. For example, $ \Delta W_{ij}^k = \epsilon (<v_i^k h_j>_{data} - <v_i^k h_j>_T) $, where $ T $ represents the number of runs we do Gibbs sampling.
     \item Prediction is much the same as doing Gibbs sampling except that we can reconstruct (predict) missing ratings.
-\end{itemize}
+\end{enumerate}
 
 \begin{figure}[htbp]
 \centering
@@ -385,7 +386,7 @@ In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successf
 \end{minipage}
 \end{figure}
 
-\hyperref[RBM]{This left figure above} shows the evolution of Root Mean Squared Error during training. We achieve a RMSE of 1.04. Every time the user enters \textbf{Me} page on our website, the system will automatically predict the ratings over all movies and recommend the top 8 movies to the user in \textbf{Guess you like} module. An \hyperref[recommend]{example} on the webpage:
+\hyperref[RBM]{Figure 28} shows the evolution of Root Mean Squared Error (RMSE) during training. We achieve a RMSE of 1.04. Every time the user enters \textbf{Me} page on our website, the system will automatically predict the ratings over all movies and recommend the top 8 movies to the user in \textbf{Guess you like} module. An example on the webpage is shown in \hyperref[recommend]{figure 29}.
 
 \begin{figure}[h]
     \centering
@@ -403,188 +404,12 @@ Users have their preferences and tend to give similar ratings to movies of the s
     \item Improve our RBM predictions by $ R_{u m}^{*}=\hat{R}_{u m}+\hat{\tilde{r}}_{u m} $ for each $ (user, movie) $ pair desired.
 \end{itemize}
 We improve the RMSE from 1.04 to 1.02. The improvement is not high because our matrix is sparse. In our data set, many users only give one rating, so it is hard to construct a well defined similarity matrix. The other reason is that we crawl high-rating movies and the biases are not large to give a performance boost. However, we are still able to leverage the data and get some insight into the movie ratings. \\\\
-For the movie \textit{The Godfather}, movie \textit{The Godfather: Part II} has a high similarity (based on the difference between real rating and predicted rating) of $ 0.9999 $, which is expected. However, movie \textit{The Lord of the Rings: The Return of the King} has a similarity of $ -0.9999 $ while the movie \textit{The Lord of the Rings: The Fellowship of the Ring} has a similarity of $ 0.9999 $. This is counter intuitive and we should look into the data. We have three users giving ratings to both \textit{The Godfather} and \textit{The Lord of the Rings: The Return of the King}. The ratings are $ (10, 10) $, $ (10, 10) $ and $ (8, 10) $, respectively. For \textit{The Godfather} and \textit{The Lord of the Rings: The Fellowship of the Ring}, the rating pairs are all $ (10, 10) $. 8 is a relatively low rating in our dataset, hence the algorithm concludes that they are high negatively correlated.
+For example, \textit{The Godfather: part II} has a high similarity($ 0.9999 $) with \textit{The Godfather}(based on the difference between real rating and predicted rating), which is expected. However, the similarity between \textit{The Godfather} and two sequels of \textit{The Lord of the Rings} diverge. \textit{The Fellowship of the Ring} has a similarity of $ 0.9999 $ with \textit{The Godfather}, while its sequel \textit{The Return of the King } has a similarity of $-0.9999 $. This is counter intuitive and we should look into the data. We have three users giving ratings to both \textit{The Godfather} and \textit{The Lord of the Rings: The Return of the King}. The ratings are $ (10, 10) $, $ (10, 10) $ and $ (8, 10) $, respectively. For \textit{The Godfather} and \textit{The Lord of the Rings: The Fellowship of the Ring}, the rating pairs are all $ (10, 10) $. A rating of 8 is a relatively low rating in our dataset, hence the algorithm concludes that they are high negatively correlated.
 
 \section{Result}
-In this section, we will include some screenshots of the webpage we built. The website can be accessed through url \href{http://10.20.9.99:3000}{http://10.20.9.99:3000}.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{reg.png}
-\caption{Register page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_login.png}
-\caption{Login page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_ps.png}
-\caption{Personal center}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.9\textwidth]{res_avatar1.png}
-\caption{Before chaning avatar}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_avatar2.png}
-\caption{After chaning avatar}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_name1.png}
-\caption{Before chaning name}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_name2.png}
-\caption{After chaning name}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_movie1.png}
-\caption{Movie list page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_movie2.png}
-\caption{Movie detail page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_movie3.png}
-\caption{Movie detail page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_movie4.png}
-\caption{Movie detail page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_actor1.png}
-\caption{Actor list page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_actor2.png}
-\caption{Actor detail page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_dir1.png}
-\caption{Director list page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_actor2.png}
-\caption{Director detail page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search1.png}
-\caption{Movie search page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search2.png}
-\caption{Search movie by name}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search3.png}
-\caption{Filter movie by release date}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search4.png}
-\caption{Filter movie by rate}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search5.png}
-\caption{Filter movie by genres}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search6.png}
-\caption{Order movie by release date}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search7.png}
-\caption{Order movie by rate}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search8.png}
-\caption{Actor search page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_search9.png}
-\caption{User search page}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_comment1.png}
-\caption{Comment list}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_comment2.png}
-\caption{Add comment}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_comment3.png}
-\caption{Comment before deleting user account}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_delete1.png}
-\caption{Delete user account}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1\textwidth]{res_delete2.png}
-\caption{Comment after deleting user account}
-\end{figure}
-
-\newpage
+The website can be accessed through url \href{http://10.20.9.99:3000}{http://10.20.9.99:3000}. This server can only be accessed within the CUHK(SZ) campus network. In case of access failure, please contact our group member Tianhao SHI (120090472), who is in charge of server maintenence. You can also find the source code on our \href{https://github.com/warin2020/rotten-potatoes}{github repository}. Snapshots of our website can be found in the appendix.
 \section{Conclusion}
-\paragraph{} In this project we build a movie database based on a large amount of data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every entity in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for moives, casts or other users using name,  time information, rate(only movies) and genres(only movies) as the keyword.
+\paragraph{} In this project we build a movie database based on large-scale data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every schema in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for moives, casts or other users using name,  time information, rate(only movies) and genres(only movies) as the keyword.
 \paragraph{} In order to improve user experience and replace the complex database operations by a few simple mouse clicks from users, we build a user friendly website. Based on that, abundant \textbf{personalized interaction behaviors} can be achieved, which serves our users more conveniently. We hold an integral process of account management for users. Users can add comments to a movie and rate on it as well as discover their appreciated reviews or users.
 \paragraph{} It is common for a movie database to recommend movies that the users have potential interest in. However,  how to make a personalized recommendation lists of high quality is always a problem. We use a lot of techniques in the data analysis to satisfy the needs from users . We build a \textbf{Restricted Boltzmann Machines}  with \textbf{Neighbourhood model} and get gratifying results.
 \section{Self Evaluation}
@@ -606,6 +431,180 @@ In this part, we evaluate the advantages and disadvantages of our project.
 
 \section{Contribution}
 Each of us contributed to 20\% to the whole project.
-
+\newpage
+\section{Appendix}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{reg.png}
+    \caption{Register page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_login.png}
+    \caption{Login page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_ps.png}
+    \caption{Personal center}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{res_avatar1.png}
+    \caption{Before chaning avatar}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_avatar2.png}
+    \caption{After chaning avatar}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_name1.png}
+    \caption{Before chaning name}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_name2.png}
+    \caption{After chaning name}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_movie1.png}
+    \caption{Movie list page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_movie2.png}
+    \caption{Movie detail page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_movie3.png}
+    \caption{Movie detail page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_movie4.png}
+    \caption{Movie detail page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_actor1.png}
+    \caption{Actor list page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_actor2.png}
+    \caption{Actor detail page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_dir1.png}
+    \caption{Director list page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_actor2.png}
+    \caption{Director detail page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search1.png}
+    \caption{Movie search page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search2.png}
+    \caption{Search movie by name}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search3.png}
+    \caption{Filter movie by release date}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search4.png}
+    \caption{Filter movie by rate}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search5.png}
+    \caption{Filter movie by genres}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search6.png}
+    \caption{Order movie by release date}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search7.png}
+    \caption{Order movie by rate}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search8.png}
+    \caption{Actor search page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_search9.png}
+    \caption{User search page}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_comment1.png}
+    \caption{Comment list}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_comment2.png}
+    \caption{Add comment}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_comment3.png}
+    \caption{Comment before deleting user account}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_delete1.png}
+    \caption{Delete user account}
+    \end{figure}
+    
+    \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{res_delete2.png}
+    \caption{Comment after deleting user account}
+    \end{figure}
 \end{CJK*}
 \end{document}
