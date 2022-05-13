@@ -56,19 +56,23 @@ In this section, we focus on the design of Entity-Relationship Model,
 the reduction from ER diagram into relational schemas, constraint and index.
 
 \subsection{Entity-Relationship Model}
-As shown in the \hyperref[ERD]{ER digram}, there are 6 entities and 5 relationships. 
-\paragraph{Entity ``movies''}
-To store id, name, cover url, introduction, release year and genres of a movie, where genres is a multivariate attribute. Identified by id. 
-\paragraph{Entity ``directors''}
-To store id, name, photo url, introduction and birth date of a director. This entity has a one-to-many relationship ``direct'' with the entity ``movies'', which means a director can directs multiple movies and a movie can be directed by only one director in our assumption. Identified by id. 
-\paragraph{Entity ``actors''}
-To store id, name, photo url, introduction and birth date of an actor. An actor can act in multiple movies and a movie can be acted by multiple actors in our assumption. Identified by id. 
-\paragraph{Entity ``users''}
-To store id, name, avatar url, password of a user. A user can comment on multiple movies and a movie can be commented by multiple users in our assumption. Identified by id. 
-\paragraph{Entity ``characters''}
-To store movie id (of the movie where this character appears), actor id (of the actor who acts as this character), id, character name of a character. This entity is a weak entity identified by entity ``movies'' through relationship ``appear'' and entity ``actors'' through relationship ``act as'', and also by its own id, which means a character can be acted by exactly one actor and appear in exactly one movie in our assumption (we treat characters of the same name appearing in multiple movies or acted by multiple actors as multiple different characters for simplicity). Note that since this entity is also identified by its own id, it is allowed that an actor acts as multiple characters in the same movie. 
-\paragraph{Entity ``comments''}
-To store movie id (of the movie commented by this comment), user id (of the user who makes this comment), id, rate (from 0 to 10), content and comment date of a comment. This entity is a weak entity identified by entity ``movies'' and entity ``users'', and also by its own id, which means a comment is on exactly one movie and is made by exactly one user in our assumption. Note that since this entity is also identified by its own id, it is allowed that a user makes multiple comments on the same movie. 
+As shown in the \hyperref[ERD]{ER digram}, there are 5 entities and 3 relationships. 
+\subsubsection{Entities}
+\begin{itemize}
+\item \textbf{Entity ``crew''} The crew participating in shooting movies. Each crew has identifying id, name, photo url, introduction and birth date. The entity ``crew'' is a generalization of entity ``directors'' and ``actors''.
+\begin{itemize}
+\item \textbf{Entity ``directors''} The directors that direct movies. A specification of entity ``crew''. Each director has the same attributes as crew. 
+\item \textbf{Entity ``actors''} The actors that act in movies. A specification of entity ``crew''. Each actor has the same attributes as crew. 
+\end{itemize}
+\item \textbf{Entity ``users''} The users of our movie website. Each user has identifying id, name, avatar url, password. 
+\item \textbf{Entity ``movies''} The movies information. Each movie has identifying id, name, cover url, introduction, release year and genres, where genres is a multivalued attribute.
+\end{itemize}
+\subsubsection{Relationships}
+\begin{itemize}
+\item \textbf{Relationship ``direct''} Directors direct movies. A many-to-one relationship between entity ``movies'' and ``directors'', which means a director can direct multiple movies while a movie can only be directed by one director, in our assumption. 
+\item \textbf{Relationship ``act''} Actors act movies. A many-to-many relationship between entity ``movies'' and ``actors''. An actor acts in a movie as a character with attribute character name. 
+\item \textbf{Relationship ``comment''} Users comment movies. A many-to-many relationship between entity ``movies'' and ``users''. A user comments a movie by a comment with attributes comment date, rate and content. 
+\end{itemize}
 
 \begin{figure}[h]
 \centering
@@ -81,10 +85,11 @@ To store movie id (of the movie commented by this comment), user id (of the user
 As shown in the \hyperref[RelationalSchema]{relational schema digram}, there are 7 schemas. \\\\
 The following reductions are made:
 \begin{itemize}
-\item The attribute ``genres'' in entity ``movies'' is reduced to schema ``genres'' with attributes ``genres\_name'' and ``movie\_id'' as a foreign key, both of which forms a primary key to make sure no redundant genres of a movie.
-\item The relationship ``direct'' between entity ``movies'' and ``directors'' is reduced to attribute ``director\_id''as a foreign key in schema ``movies'' so that a movie is directed by exactly one director. 
-\item All attributes identifying the entity are reduced to primary keys.
-\item ``movie\_id'', ``actor\_id'' of entity ``characters'', ``movie\_id'', ``user\_id'' of entity ``comments'' are reduced to foreign keys in their schemas referencing their corresponding identifying strong entities. 
+\item The attribute ``genres'' in entity ``movies'' is reduced to schema ``genres'' with attributes ``genres\_name'' and ``movie\_id'' as a foreign key referencing ``id'' of ``movies''. Both of the attributes forms a primary key to make sure no redundant genres of a movie.
+\item The relationship ``direct'' is reduced to attribute ``director\_id''as a foreign key referencing ``movies'' for the many-to-one relationship. 
+\item The relationship ``act'' is reduced to schema ``characters''. Except for attribute ``character\_name'', extra attributes ``movie\_id'' as a foreign key referencing ``movies'' and ``actor\_id'' as a foreign key referencing ``actors'' are added for the many-to-many relationship. Attribute ``id'' is also added to allow an actor to act as multiple characters in the same movie. 
+\item The relationship ``comment'' is reduced to schema ``comments''. Except for attributes ``comment\_date'', ``rate'' and ``content'', extra attributes ``movie\_id'' as a foreign key referencing ``movies'' and ``user\_id'' as a foreign key referencing ``users'' are added for the many-to-many relationship. Attribute ``id'' is also added to allow a user to make multiple comments on the same movies. 
+\item All identifying ``id'' are reduced to the primary keys. 
 \end{itemize}
 
 \begin{figure}[h]
