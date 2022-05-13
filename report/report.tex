@@ -138,7 +138,7 @@ The frontend of our project is constructed using \textbf{\textit{\href{https://a
 \begin{figure}[htbp]
     \centering
     \label{moviePage}
-    \includegraphics[width=0.8\textwidth]{website.png}
+    \includegraphics[width=0.4\textwidth]{website.png}
     \caption{Movie page of the website}
 \end{figure}
 
@@ -149,7 +149,7 @@ The query functions in our database are written in javascript language. They can
 We use the \textbf{\href{https://expressjs.com}{express}} library to provide APIs for frontend users. All the routers are written in the \textbf{router/index.js}. Whenever users access certain page, it will match a router in the file, which triggers the corresponding handler function. For example, after log in, the user will see the \textit{Movie} page, which contains a list of movies in the database. When user click on any of the movie poser , the frontend will request for page \underline{./movie/detail/$<$movie\_id$>$}, matching a router in index.js (line 26). The router then calls the corresponding handler function, in this case, the \textit{getMovieDetail()} function in \textbf{movie.js}, which directs the user to the corresponding movie detail page.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{sqlconnect.png}
+    \includegraphics[width=0.4\textwidth]{sqlconnect.png}
     \caption{Database connection flowchart}
 \end{figure}
 \paragraph{Access Control by jsonwebtoken}
@@ -182,7 +182,7 @@ The detailed process is shown in this \hyperref[crawler]{flowchart}:\par
 \begin{figure}[h]
     \label{crawler}
     \centering
-    \includegraphics[width=0.8\textwidth]{crawler_flowchart.png}
+    \includegraphics[width=0.4\textwidth]{crawler_flowchart.png}
     \caption{Web crawler flowchart}
 \end{figure}
 
@@ -271,66 +271,26 @@ In our system, a user account can be deleted, while the comments on movies he ma
 \end{minipage}
 \end{figure}
 
-\paragraph{Detail information} To show detailed information of movies, actors and directors, we need to join several tables. \textbf{Actors} table is joined with the \textbf{characters} table to get all characters played by an actor, while \textbf{directors} table is joined with \textbf{movies} table to select all movies directed by the director. For the detail page of movies, 4 table joins are needed to acquire all necessary data. \textbf{Movies} table is joined with \textbf{characters} table to get all characters in a specific movie. Joining the \textbf{directors} table is also necessary to find the director of a specific movie. All comments and genres of the movie are obtained by joining the \textbf{movies} table with the \textbf{comments} table and \textbf{genres} table, respectively.
+\paragraph{Detail information} To show detailed information of movies, actors and directors, we need to join several tables. \textbf{Actors} table is joined with the \textbf{characters} table to get all characters played by an actor, while \textbf{directors} table is joined with \textbf{movies} table to select all movies directed by the director. For the detail page of movies, 4 table joins are needed to acquire all necessary data. \textbf{Movies} table is joined with \textbf{characters} table to get all characters in a specific movie. Joining the \textbf{directors} table is also necessary to find the director of a specific movie. All comments and genres of the movie are obtained by joining the \textbf{movies} table with the \textbf{comments} table and \textbf{genres} table, respectively. Figure 16 displays the query used to generate actor details:
 
 \begin{figure}[htbp]
-\centering
-\begin{minipage}[t]{0.45\textwidth}
 \centering
 \includegraphics[width=6cm]{a_detail.png}
 \caption{Actor detail}
-\end{minipage}
-\begin{minipage}[t]{0.45\textwidth}
-\centering
-\includegraphics[width=6cm]{d_detail.png}
-\caption{Director detail}
-\end{minipage}
 \end{figure}
-
-\begin{figure}[htbp]
-\centering
-\begin{minipage}[t]{0.45\textwidth}
-\centering
-\includegraphics[width=6cm]{m_detail_char.png}
-\caption{Character information of movies}
-\end{minipage}
-\begin{minipage}[t]{0.45\textwidth}
-\centering
-\includegraphics[width=6cm]{m_detail_dir.png}
-\caption{Director information of movies}
-\end{minipage}
-\end{figure}
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=6cm]{m_detail_com.png}
-\caption{Comments of movies}
-\end{figure}
-
 
 \paragraph{Search movies}
 Movies can be searched using their names. Aside from directly searching, we also support filtering movies by their release time, movie rate and movie genres. We also added support for ordering (in ascending or descending order) the result by name, release year and rating.
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{m_search.png}
+\includegraphics[width=0.4\textwidth]{m_search.png}
 \caption{Movies search}
 \end{figure}
-
 \paragraph{Search actors}
 Similar to movies, actors are searched by their name, and filtered by their birth date. Also, ordering is supported on the birth date and name.
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{a_search.png}
-\caption{Actors search}
-\end{figure}
-
 \paragraph{Search user}
 For user searching, only name search is supported.
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{u_search.png}
-\caption{Users search}
-\end{figure}
+
 
 \subsubsection{Comments}
 \paragraph{List comments}
@@ -340,29 +300,15 @@ Join the \textbf{comments} table and the \textbf{users} table to match the sende
     \includegraphics[width=0.4\textwidth]{comment.png}
     \caption{Comments list}
 \end{figure}
-
 \paragraph{Delete comments} 
 Comments deletion is achieved by deleting corresponding tuples comment table.
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=6cm]{del_com.png}
-\caption{Delete comments}
-\end{figure}
-
 \paragraph{Add comments} 
 Comment addition is achieved by inserting to the comment table.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.6\textwidth]{add_comm.png}
-    \caption{Add comments}
-\end{figure}
 
-\newpage
-\newpage
 \subsection{Data Analysis}
 \subsubsection{Recommendation System with Restricted Boltzmann Machines}
 
-In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM, neighborhood. We reproduce \hyperref[RBM]{the model proposed by Hinton} in this project to do recommendation. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling.
+In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM, neighborhood. We reproduce \hyperref[RBM]{the model proposed by Hinton} in this project to do recommendation. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling. The notions for the following procedure can be found in \href{rbm}{figure 27}.
 \begin{enumerate}
     \item Acquire the visible movies ratings $ \bm{V} $ of the user, each $ \bm{v} $ is $ K $ binary vector where $ \bm{v}^k = 1 $ if the rating is $ k $, otherwise 0.
     \item Sample the hidden units $ \bm{h} $ to binary numbers by probability given by \\ $ p(h_j = 1 | \bm{V}, \bm{r}) = \sigma(c_j + \sum_{i = 1}^m \sum_{k = 1}^K v_i^k W_{ij}^k + \sum_{i = 1}^M r_i D_{ij}) $, where $ \sigma(x) = \frac{1}{1 + e^{-x}}  $.
@@ -378,6 +324,7 @@ In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successf
 \centering
 \includegraphics[width=6cm]{conditionalRBM.png}
 \caption{Conditional RBM}
+\label{rbm}
 \end{minipage}
 \begin{minipage}[t]{0.45\textwidth}
 \centering
