@@ -307,7 +307,7 @@ Comment addition is achieved by inserting it into the comment table.
 \subsection{Data Analysis}
 \subsubsection{Recommendation System with Restricted Boltzmann Machines}
 
-In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to the Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM and neighborhood. We reproduce \hyperref[RBM]{the model proposed by Hinton} in this project to do recommendations. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling. The notions for the following procedure can be found in \href{rbm}{figure 27}.
+In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to the Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM and neighborhood. We reproduce \hyperref[RBM]{the model proposed by Hinton} in this project to do recommendations. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling. The notions for the following procedure can be found in \href{rbm}{the model}.
 \begin{enumerate}
     \item Acquire the visible movie ratings $ \bm{V} $ of the user, each $ \bm{v} $ is $ K $ binary vector where $ \bm{v}^k = 1 $ if the rating is $ k $, otherwise 0.
     \item Sample the hidden units $ \bm{h} $ to binary numbers by probability given by \\ $ p(h_j = 1 | \bm{V}, \bm{r}) = \sigma(c_j + \sum_{i = 1}^m \sum_{k = 1}^K v_i^k W_{ij}^k + \sum_{i = 1}^M r_i D_{ij}) $, where $ \sigma(x) = \frac{1}{1 + e^{-x}}  $.
@@ -332,7 +332,7 @@ In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successf
 \end{minipage}
 \end{figure}
 
-\hyperref[RBM]{Figure 28} shows the evolution of Root Mean Squared Error (RMSE) during training. We achieve an RMSE of 1.04. Every time the user enters the \textbf{Me} page on our website, the system will automatically predict the ratings overall movies and recommend the top 8 movies to the user in \textbf{Guess you like} module. An example on the webpage is shown in \hyperref[recommend]{figure 29}.
+\hyperref[RBM]{Figure above} shows the evolution of Root Mean Squared Error (RMSE) during training. We achieve an RMSE of 1.04. Every time the user enters the \textbf{Me} page on our website, the system will automatically predict the ratings overall movies and recommend the top 8 movies to the user in \textbf{Guess you like} module. An example on the webpage is shown in \hyperref[recommend]{figure below}.
 
 \begin{figure}[h]
     \centering
