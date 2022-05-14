@@ -50,7 +50,7 @@
 \section{Introduction}
 \paragraph{}As an art and commercial work, movies have become pursuits of many people and generated tremendous value. Currently, there are two types of online movie platforms. On the one hand, platforms including Rotten Tomatoes and Douban gives people rich information regarding movies. On the other hand, sites like Netflix offers precise, personalized recommendation to users. Such a recommendation strategy allows users to discover more films they enjoy and attracts more users to the platform.
 \paragraph{}However, currently, no site combines the strengths of the mentioned movie sites. Besides, existing popular movie websites are full of quarrels and controversies from the perspective of the community environment. The movie recommendations are influenced deeply by the advertising, not the quality of films. Therefore, to satisfy the real requirements of movie lovers, we built a movie database called \textbf{\href{http://10.20.9.99:3000}{Rotten Potatoes}}, based on which, users can talk about their reviews of the movie freely. It also offers plenty of searching functions and personalized recommendations from the platform. 
-\paragraph{}We use python packages \textbf{\href{https://docs.python-requests.org/en/latest/}{Requests}} and \textbf{\href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{BeautifulSoup}} to obtain the required data from IMDB, store it in a MySQL database. Then we build our searching functions and personalized moive recommendations on those data. We also build a user-friendly web using \textbf{\href{https://aisuda.bce.baidu.com/amis/zh-CN/docs/index}{amis}} as the frontend and \textbf{\href{https://expressjs.com}{express}} as the backend.
+\paragraph{}We use python packages \textbf{\href{https://docs.python-requests.org/en/latest/}{Requests}} and \textbf{\href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{BeautifulSoup}} to obtain the required data from IMDB, store it in a MySQL database. Then we build our searching functions and personalized movie recommendations on those data. We also build a user-friendly web using \textbf{\href{https://aisuda.bce.baidu.com/amis/zh-CN/docs/index}{amis}} as the frontend and \textbf{\href{https://expressjs.com}{express}} as the backend.
 \section{Design}
 In this section, we focus on the design of the Entity-Relationship Model, 
 the reduction from ER diagram into relational schemas, constraints and index.
@@ -145,7 +145,7 @@ The frontend of our project is constructed using \textbf{\textit{\href{https://a
 \paragraph{Connect to MySQL in Nodejs}
 The query functions in our database are written in javascript language. They can be found in the corresponding files in the \textbf{services} folder. To maximize reusability, we wrote a template query function in \textbf{query.js} using the \textit{mysql} module of Node.JS. The template function will first access the \textbf{.env} file for database configuration(e.g., the port on which the MySQL server is running, the logging username and password). Then, instead of establishing and closing connections to the database on every execution, the template creates a connection pool. Requests from the frontend will pass the query as a rest parameter to the template function, which will then issue the query and return the results (and errors, if any) back to the frontend.
 \paragraph{Provide API by Express Router}
-We use the \textbf{\href{https://expressjs.com}{express}} library to provide APIs for frontend users. All the routers are written in the \textbf{router/index.js}. Whenever users access a certain page, it will match a router in the file, which triggers the corresponding handler function. For example, after logging in, the user will see the \textit{Movie} page, which contains a list of movies in the database. When the user clicks on any of the movie poser , the frontend will request for page \underline{./movie/detail/$<$movie\_id$>$}, matching a router in index.js (line 26). The router then calls the corresponding handler function, in this case, the \textit{getMovieDetail()} function in \textbf{movie.js}, which directs the user to the corresponding movie detail page.
+We use the \textbf{\href{https://expressjs.com}{express}} library to provide APIs for frontend users. All the routers are written in the \textbf{router/index.js}. Whenever users access a certain page, it will match a router in the file, which triggers the corresponding handler function. For example, after logging in, the user will see the \textit{Movie} page, which contains a list of movies in the database. When the user clicks on any of the movie poser, the frontend will request for page \underline{./movie/detail/$<$movie\_id$>$}, matching a router in index.js (line 26). The router then calls the corresponding handler function, in this case, the \textit{getMovieDetail()} function in \textbf{movie.js}, which directs the user to the corresponding movie detail page.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{sqlconnect.png}
@@ -153,23 +153,23 @@ We use the \textbf{\href{https://expressjs.com}{express}} library to provide API
 \end{figure}
 \paragraph{Access Control by jsonwebtoken}
 \label{sec:access}
-Base on \textbf{\href{https://www.npmjs.com/package/jsonwebtoken}{jsonwebtoken}} package, in \textbf{auth/auth.js} using the key in \textbf{.env} file \textbf{SECRET\_KEY} we implemented 2 functions \textit{signToken} and \textit{verifyToken}, by which, in \textbf{services/auth.js}, the routing function \textit{login} returns a token to frontend and the middleware function \textit{auth} check whether the token from frontend is correct and not outdated.
+Based on \textbf{\href{https://www.npmjs.com/package/jsonwebtoken}{jsonwebtoken}} package, in \textbf{auth/auth.js} using the key in \textbf{.env} file \textbf{SECRET\_KEY} we implemented 2 functions \textit{signToken} and \textit{verifyToken}, by which, in \textbf{services/auth.js}, the routing function \textit{login} returns a token to frontend and the middleware function \textit{auth} checks whether the token from frontend is correct and not outdated.
 
 \subsection{Web Crawler}
 \subsubsection{Basic Workflow}
-To populate our database with real-world data, we wrote a web crawler to scrap information from IMDB's Top 250 Movie Chart. The crawler is written in Python. It uses the \textbf{\href{https://docs.python-requests.org/en/latest/}{Requests}} library to send https requests. The desired fields are acquired through parsing the page using \textbf{\href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{BeautifulSoup}} library.
+To populate our database with real-world data, we wrote a web crawler to scrap information from IMDB's Top 250 Movie Chart. The crawler is written in Python. It uses the \textbf{\href{https://docs.python-requests.org/en/latest/}{Requests}} library to send HTTPS requests. The desired fields are acquired through parsing the page using \textbf{\href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{BeautifulSoup}} library.
 The detailed process is shown in this \hyperref[crawler]{flowchart}:\par
 
 \begin{enumerate}
     \item Access the Top 250 Chart, where all the URLs to the detailed movie pages are located
-    \item Traverse through the chart. For every movie of the chart:
+    \item Traverse through the chart. For every movie on the chart:
     \begin{enumerate}
         \item Access the detailed movie page, where information regarding the movie can be found.
         \item From the detailed movie page, we access the casting information.\\ For the director:
         \begin{itemize}
             \item For directors yet to be recorded, access the detailed director page, where information regarding the director can be found.
         \end{itemize}
-        For the actors/actresses who casted in this movie:
+        For the actors/actresses who cast in this movie:
         \begin{itemize}
             \item Access the detailed actor/actress page and find detailed information if their details are yet to be recorded.
         \end{itemize}
@@ -188,15 +188,15 @@ The detailed process is shown in this \hyperref[crawler]{flowchart}:\par
 \subsubsection{Encountered Problems and Solutions}
 During the scrapping process, we encountered some issues.
 \begin{itemize}
-    \item The same director or actor/actress can participate in different movies. Therefore, we keep a mapping relationship and check wheter we have record the same person's information. This step is done through hashing the person's name, which takes O(1) complexity.
-    \item We do not have access to each user's password, so we randomly generate a password for each user we scrapped from IMDB. The password is a random combination 5 to 10 numbers and characters.
-    \item Some actors' birth date cannot be achieved from their detailed page. We leave them as NULL.
-    \item The gender of the movie stars is not explicitely listed on their detail page. However, by seeking their role in the movie (i.e, actor/actress), we can acquire their gender.
+    \item The same director or actor/actress can participate in different movies. Therefore, we keep a mapping relationship and check whether we have recorded the same person's information. This step is done through hashing the person's name, which takes O(1) complexity.
+    \item We do not have access to each user's password, so we randomly generate a password for each user we scrapped from IMDB. The password is a random combination of 5 to 10 numbers and characters.
+    \item Some actors' birth dates cannot be achieved from their detailed page. We leave them as NULL.
+    \item The gender of the movie stars is not explicitly listed on their detail page. However, by seeking their role in the movie (i.e, actor/actress), we can acquire their gender.
 \end{itemize}
 \subsection{Sample Queries}
 \subsubsection{User account \& the Portal}
 \paragraph{User registration}
-When a user try to create his own account,he need to specify his user name. In our system, every user must have a unique account name. Therefore, before granting a registration, we will first query the inputted user name in the \textbf{users} table. If the name already exists, the registration will not be accepted and the user should input a new user name. Otherwise, user name as well as user password will be inserted to the user table, with a user ID generated automatically.
+When a user tries to create his own account, he needs to specify his user name. In our system, every user must have a unique account name. Therefore, before granting a registration, we will first query the inputted user name in the \textbf{users} table. If the name already exists, the registration will not be accepted and the user should input a new user name. Otherwise, the user name, as well as user password, will be inserted into the user table, with a user ID generated automatically.
 
 
 
@@ -204,7 +204,7 @@ When a user try to create his own account,he need to specify his user name. In o
 
 
 \paragraph{User login}
-When a user login, password will be queried from the user table, with user name as the search key. Then, the correct password will be checked using jsonwebtoken, as mentioned in the \hyperref[sec:access]{access control section}
+When a user log in, password will be queried from the user table, with the user name as the search key. Then, the correct password will be checked using jsonwebtoken, as mentioned in the \hyperref[sec:access]{access control section}
 
 \begin{figure}[htbp]
     \centering
@@ -244,7 +244,7 @@ User can modify his avatar, user name and password. This is achieved by updating
 \end{figure}
 
 \paragraph{Delete user}
-In our system, a user account can be deleted, while the comments on movies he made will be kept even after the account is deleted.This is achieved by associating the comments to a padding user before deleting the user account.
+In our system, a user account can be deleted, while the comments on movies he made will be kept even after the account is deleted. This is achieved by associating the comments to a padding user before deleting the user account.
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.3\textwidth]{user_del.png}
@@ -253,7 +253,7 @@ In our system, a user account can be deleted, while the comments on movies he ma
 
 
 \subsubsection{CRUD on movies, actors and directors}
-\paragraph{Information listing}Movies, actors and directors is listed on our web page. Basic information is selected from the corresponding table.
+\paragraph{Information listing}Movies, actors and directors are listed on our web page. Basic information is selected from the corresponding table.
 \begin{figure}[htbp]
 \centering
 \begin{minipage}{0.32\textwidth}
@@ -270,7 +270,7 @@ In our system, a user account can be deleted, while the comments on movies he ma
 \end{minipage}
 \end{figure}
 
-\paragraph{Detail information} To show detailed information of movies, actors and directors, we need to join several tables. \textbf{Actors} table is joined with the \textbf{characters} table to get all characters played by an actor, while \textbf{directors} table is joined with \textbf{movies} table to select all movies directed by the director. For the detail page of movies, 4 table joins are needed to acquire all necessary data. \textbf{Movies} table is joined with \textbf{characters} table to get all characters in a specific movie. Joining the \textbf{directors} table is also necessary to find the director of a specific movie. All comments and genres of the movie are obtained by joining the \textbf{movies} table with the \textbf{comments} table and \textbf{genres} table, respectively. Figure 16 displays the query used to generate actor details:
+\paragraph{Detail information} To show detailed information	 movies, actors and directors, we need to join several tables. \textbf{Actors} table is joined with the \textbf{characters} table to get all characters played by an actor, while \textbf{directors} table is joined with \textbf{movies} table to select all movies directed by the director. For the detail page of movies, 4 table joins are needed to acquire all necessary data. \textbf{Movies} table is joined with \textbf{characters} table to get all characters in a specific movie. Joining the \textbf{directors} table is also necessary to find the director of a specific movie. All comments and genres of the movie are obtained by joining the \textbf{movies} table with the \textbf{comments} table and \textbf{genres} table, respectively. Figure 16 displays the query used to generate actor details:
 
 \begin{figure}[htbp]
 \centering
@@ -302,12 +302,12 @@ Join the \textbf{comments} table and the \textbf{users} table to match the sende
 \paragraph{Delete comments} 
 Comments deletion is achieved by deleting the corresponding tuples comment table.
 \paragraph{Add comments} 
-Comment addition is achieved by inserting into the comment table.
+Comment addition is achieved by inserting it into the comment table.
 
 \subsection{Data Analysis}
 \subsubsection{Recommendation System with Restricted Boltzmann Machines}
 
-In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to the Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM and neighborhood. We reproduce \hyperref[RBM]{the model proposed by Hinton} in this project to do recommendation. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling. The notions for the following procedure can be found in \href{rbm}{figure 27}.
+In 2007, Hinton showed that Restricted Boltzmann Machines (RBMs) can be successfully applied to the Netflix dataset and do personalized movie recommendations (Hinton et al., 2007). This paper was given in a DDA course project, but that project requires only the basic RBM without biases, conditional RBM and neighborhood. We reproduce \hyperref[RBM]{the model proposed by Hinton} in this project to do recommendations. We use Contrastive Divergence (CD) to approximate the maximum likelihood of the parameters by Gibbs sampling. The notions for the following procedure can be found in \href{rbm}{figure 27}.
 \begin{enumerate}
     \item Acquire the visible movie ratings $ \bm{V} $ of the user, each $ \bm{v} $ is $ K $ binary vector where $ \bm{v}^k = 1 $ if the rating is $ k $, otherwise 0.
     \item Sample the hidden units $ \bm{h} $ to binary numbers by probability given by \\ $ p(h_j = 1 | \bm{V}, \bm{r}) = \sigma(c_j + \sum_{i = 1}^m \sum_{k = 1}^K v_i^k W_{ij}^k + \sum_{i = 1}^M r_i D_{ij}) $, where $ \sigma(x) = \frac{1}{1 + e^{-x}}  $.
@@ -355,8 +355,8 @@ For example, \textit{The Godfather: part II} has a high similarity($ 0.9999 $) w
 \section{Result}
 The website can be accessed through URL \href{http://10.20.9.99:3000}{http://10.20.9.99:3000}. This server can only be accessed within the CUHK(SZ) campus network. In case of access failure, please contact our group member Tianhao SHI (120090472), who is in charge of server maintenance. You can also find the source code on our \href{https://github.com/warin2020/rotten-potatoes}{Github repository}. Snapshots of our website can be found in the appendix.
 \section{Conclusion}
-\paragraph{} In this project, we build a movie database based on large-scale data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every schema in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for the moives, casts or other users using name,  time information, rate(only movies) and genres(only movies) as the keyword.
-\paragraph{} In order to improve user experience and replace the complex database operations with a few simple mouse clicks from users, we build a user-friendly website. Based on that, abundant \textbf{personalized interaction behaviors} can be achieved, which serves our users more conveniently. We hold an integral process of account management for users. Users can add comments to a movie and rate it as well as discover their appreciated reviews or users.
+\paragraph{} In this project, we build a movie database based on large-scale data collected from \textbf{IMDB}. Additional attention is paid to assure a \textbf{BCNF} form is kept for every schema in our database, thus the redundancy part is eliminated. We also \textbf{implement useful functions} for our users to search for the movies, casts or other users using name,  time information, rate(only movies) and genres(only movies) as the keyword.
+\paragraph{}To improve user experience and replace the complex database operations with a few simple mouse clicks from users, we build a user-friendly website. Based on that, abundant \textbf{personalized interaction behaviors} can be achieved, which serves our users more conveniently. We hold an integral process of account management for users. Users can add comments to a movie and rate it as well as discover their appreciated reviews or users.
 \paragraph{} It is common for a movie database to recommend movies that the users have a potential interest in. However, how to make a personalized recommendation list of high quality is always a problem. We use a lot of techniques in the data analysis to satisfy the needs of users. We build a \textbf{Restricted Boltzmann Machines}  with \textbf{Neighbourhood model} and get gratifying results.
 \section{Self Evaluation}
 In this part, we evaluate the advantages and disadvantages of our project.
@@ -378,7 +378,7 @@ In this part, we evaluate the advantages and disadvantages of our project.
 \section{Contribution}
 Each of us contributed 20\% to the whole project.
 \begin{itemize}
-    \item 郑时飞
+    \item 郑时飞 Web Craweler, Create table, relationship and webpage about directors
     \item 朱伯源
     \item 李易
     \item 施天昊:    Web Crawler, Sorting queries, Server Deployment and Maintenence
