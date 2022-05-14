@@ -848,6 +848,7 @@ INPUT .\report.toc
 INPUT report.toc
 INPUT report.toc
 OUTPUT report.toc
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1095.tfm
 INPUT .\graphics\\er.png
 INPUT .\graphics\\er.png
 INPUT graphics\\er.png
@@ -855,7 +856,6 @@ INPUT .\graphics\\er.png
 INPUT .\graphics\\er.png
 INPUT .\graphics\\er.png
 INPUT .\graphics\\er.png
-INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1095.tfm
 INPUT .\graphics\\schema.png
 INPUT .\graphics\\schema.png
 INPUT graphics\\schema.png
@@ -864,13 +864,6 @@ INPUT .\graphics\\schema.png
 INPUT .\graphics\\schema.png
 INPUT .\graphics\\schema.png
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbxti10.tfm
-INPUT .\graphics\\website.png
-INPUT .\graphics\\website.png
-INPUT graphics\\website.png
-INPUT .\graphics\\website.png
-INPUT .\graphics\\website.png
-INPUT .\graphics\\website.png
-INPUT .\graphics\\website.png
 INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
 INPUT .\graphics\\sqlconnect.png
 INPUT .\graphics\\sqlconnect.png
@@ -998,6 +991,15 @@ INPUT .\graphics\\recommendation.png
 INPUT .\graphics\\recommendation.png
 INPUT .\graphics\\recommendation.png
 INPUT .\graphics\\recommendation.png
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu90.tfm
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu65.tfm
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu98.tfm
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu67.tfm
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu4f.tfm
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu6e.tfm
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu66.tfm
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu59.tfm
+INPUT C:\Users\ObserveX\AppData\Local\Programs\MiKTeX\fonts\tfm\arphic\gbsnu\gbsnu6c.tfm
 INPUT .\graphics\\reg.png
 INPUT .\graphics\\reg.png
 INPUT graphics\\reg.png

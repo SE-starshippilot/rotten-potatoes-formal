@@ -77,7 +77,7 @@ As shown in the \hyperref[ERD]{ER digram}, there are 5 entities and 3 relationsh
 \begin{figure}[h]
 \centering
 \label{ERD}
-\includegraphics[width=0.8\textwidth]{er.png}
+\includegraphics[width=0.5\textwidth]{er.png}
 \caption{ER Diagram}
 \end{figure}
 
@@ -95,7 +95,7 @@ The following reductions are made:
 \begin{figure}[h]
 \centering
 \label{RelationalSchema}
-\includegraphics[width=0.8\textwidth]{schema.png}
+\includegraphics[width=0.6\textwidth]{schema.png}
 \caption{Relational Schema Diagram}
 \end{figure}
 
@@ -138,14 +138,8 @@ The frontend of our project is constructed using \textbf{\textit{\href{https://a
     \item Me: a portal for users to edit their information. Including updating avatar, name, password. This page also contains a list of movies recommended to the user.
     \item Search: to search for movies/actors/user, we implemented three different pages. The details will be discussed in \textbf{Sample Queries} section.
 \end{itemize}
-\par Since our application is user-oriented, the UI of our website is very concise and user-friendly. A \hyperref[moviePage]{screenshot} of the movie page of our website:\par
+\par Since our application is user-oriented, the UI of our website is very concise and user-friendly. Screenshots of our UI can be found in the appendix.
 
-\begin{figure}[htbp]
-    \centering
-    \label{moviePage}
-    \includegraphics[width=0.4\textwidth]{website.png}
-    \caption{Movie page of the website}
-\end{figure}
 
 \subsection{Backend}
 \paragraph{Connect to MySQL in Nodejs}
@@ -206,29 +200,29 @@ When a user try to create his own account,he need to specify his user name. In o
 
 
 
-\begin{figure}[htbp]
-\centering
-\begin{minipage}[t]{0.45\textwidth}
-\centering
-\includegraphics[width=6cm]{reg_ver.png}
-\caption{User registration verification}
-\end{minipage}
-\begin{minipage}[t]{0.45\textwidth}
-\centering
-\includegraphics[width=6cm]{reg_ins.png}
-\caption{User registration verification insert}
-\end{minipage}
-\end{figure}
+
 
 
 \paragraph{User login}
 When a user login, password will be queried from the user table, with user name as the search key. Then, the correct password will be checked using jsonwebtoken, as mentioned in the \hyperref[sec:access]{access control section}
 
-
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.45\textwidth]{login.png}
+    \begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=6cm]{reg_ver.png}
+    \caption{User registration verification}
+    \end{minipage}
+    \begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=6cm]{reg_ins.png}
+    \caption{User registration verification insert}
+    \end{minipage}
+    \begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=6cm]{login.png}
     \caption{User login}
+    \end{minipage}  
 \end{figure}
 
 \paragraph{The Portal}
@@ -383,6 +377,13 @@ In this part, we evaluate the advantages and disadvantages of our project.
 
 \section{Contribution}
 Each of us contributed to 20\% to the whole project.
+\begin{itemize}
+    \item 郑时飞
+    \item 朱伯源
+    \item 李易
+    \item 施天昊:    Web Crawler, Sorting queries, Server Deployment and Maintenence
+    \item 汪明杰
+\end{itemize}
 \section{References}
 Salakhutdinov, R., Mnih, A., \& Hinton, G. (2007). Restricted boltzmann machines for collaborative filtering. Proceedings of the 24th International Conference on Machine Learning - ICML '07. \href{https://doi.org/10.1145/1273496.1273596}{https://doi.org/10.1145/1273496.1273596}
 \newpage
