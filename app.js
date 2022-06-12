@@ -16,6 +16,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/sdk', express.static(path.join(__dirname, 'node_modules', 'amis', 'sdk')))
 
 app.use('/api', router)
 
