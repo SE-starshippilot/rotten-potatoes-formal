@@ -29,7 +29,7 @@ const addCommentToMovie = async(req, res, next) => {
 const delete_comment = async(req, res, next) => {
     try{
         let comment_id = req.params.id
-        await query(`delete from comments where id ='${comment_id}'`)
+        await query(`delete from comments where id=?`, comment_id)
         res.json({
             status: 0,
             msg: 'delete comments sucessfullt'

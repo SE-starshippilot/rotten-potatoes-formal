@@ -1,11 +1,14 @@
 const express = require('express')
 const multer = require('multer')
-const auth = require('../services/auth')
-const user = require('../services/user')
-const movie = require('../services/movie')
-const actor = require('../services/actor')
-const comment = require('../services/comment')
-const director =require('../services/director')
+const { 
+    auth,
+    user,
+    movie,
+    actor,
+    comment,
+    director 
+} = require('../services')
+
 const router = express.Router()
 const upload = multer({ dest: './public/images' })
 
