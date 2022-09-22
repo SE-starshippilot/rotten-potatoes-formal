@@ -12,7 +12,7 @@ jobs:
       - name: SetNodeVersion
         uses: actions/setup0node@v2
         with:
-          npde-version: '14'
+          node-version: '16'
       - name: NodeCheck
         run: node -v
       - name: InstallAndBuild
